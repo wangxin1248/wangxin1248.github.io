@@ -1,6 +1,6 @@
 # Welcome to Jekyll!
 
-# Website settings
+# 网站配置
 title: pipxia
 description: wangxin1248's blog,use Jekyll and github pages.
 keywords: pipxia,wangxin1248,blog,Jekyll,github
@@ -48,7 +48,7 @@ gio:  # if you wanna this feature, go to https://www.growingio.com/ to get your 
   # id:
 
 ## donation
-donation: on  # type 'on'/'off' to choice display donation button at post page or not
+donation: off  # type 'on'/'off' to choice display donation button at post page or not
 
 ## carousels
 index_carousel: on  # index page carousel switch
