@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/normalize.css"/>
+  <link rel="stylesheet" href="/assets/css/bulma.css"/>
+  <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <title>
+    
+      hello &middot; pipxia
+    
+  </title>
+
+</head>
+
+
+<!-- Google analytics -->
+
+
+<body>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+        <h1 class="title">
+          <!-- 网站顶部提示信息 -->
+          <span class="typewrite" data-period="2000" data-type='[ "Hello,World","你好，世界","こんにちは世界","안녕하세요 세계","Bonjour le monde","Привет мир"]'>
+            <span class="wrap"></span>
+          </span>
+        </h1>
+      <h4 class="subtitle" id="quote">
+      </h4>
+    </div>
+  </div>
+</section>
+
+<div class="main-container">
+  <div class="tile is-ancestor is-vertical">
+
+
+    <nav class="nav has-shadow">
+
+      <div class="nav-left">
+
+        <a href="/" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-home" aria-hidden="true" title="Homepage"></i>
+          </span>
+        </a>
+
+        <a href="https://github.com/wangxin1248" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-github" aria-hidden="true" title="Github"></i>
+          </span>
+        </a>
+
+        <div class="nav-item" id="searchFieldNav">
+          <div class="field has-addons">
+            <p class="control">
+              <input class="input is-small" type="text" placeholder="Find an article" id="search-text">
+            </p>
+            <p class="control">
+              <a class="button is-dark is-small" onclick="searchHandler();">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-right nav-menu" id='nav-menu'>
+        <a href="/archive" class="nav-item">Archive</a>
+        <a href="/tags" class="nav-item">Tags</a>
+      </div>
+
+      <span class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+    </nav>
+
+    <div class="tile is-parent">
+      <div class="tile is-8 is-child main">
+
+        <div class="box">
+    <h1 class="post-title">hello</h1>
+    <hr/>
+    <div class="content"><span class="post-text"><ul class="posts">
+    
+    <li class="post">
+        <small>28 Jul 2017</small>
+        <small><a style="color:grey" href="/life/2017/07/usevpn.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/life/2017/07/usevpn.html">教育网环境下实现免费上网</a>
+        <p class="nice-text">没错，本教程就是教你免费上网的。 嗯，当然是有前提滴…… 前提 如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。 目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。 原理 本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。 准备条件 服务器提供商 搭建服务器的VPS使用的是bandwagonhost，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。 并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网…… 具体服务器的购买和使用请自行百度 服务器系统 VPS所搭载的系统是CentOS64位 VPN介绍 所使用的VPN是SoftEther VPN SoftEtherVPN是由日本筑波大学的登大遊在硕士论文中提出的开源、跨平台、多重协议的虚拟专用网方案，是专门为穿过防火墙而设计的。我们可以用它在自己的VPS上搭建一个简单的VPN来使用。 服务器端搭建 下载解压 首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。 32位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz 64位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz 以上为截止发布本文时的最新版本，建议从SoftEther官方网站获取最新版本。 安装启动 解压下载的文件 tar -zxvf softether-vpnserver-*.tar.gz 将解压的文件移动到/usr/local下 mv vpnserver /usr/local 进入解压目录 cd /usr/local/vpnserver 启动安装脚本 ./.install.sh SoftEther VPN Server (Ver 4.22, Build 9630, Intel... <a href="/life/2017/07/usevpn.html">Read more!</a></p>
+    </li>
+    
+</ul>
+
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = 'nagekar';
+
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function () {
+        var s = document.createElement('script'); s.async = true;
+        s.type = 'text/javascript';
+        s.src = '//' + disqus_shortname + '.disqus.com/count.js';
+        (document.getElementsByTagName('HEAD')[0] || document.getElementsByTagName('BODY')[0]).appendChild(s);
+    }());
+</script></span></div>
+</div>
+
+
+      </div>
+
+      <div class="tile is-4 is-child">
+        <div class="tile is-parent is-vertical sidebar">
+
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recent Posts
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                  
+                  <li><a href="/life/2017/07/usevpn.html">
+                    教育网环境下实现免费上网
+                  </a></li>
+                  
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Sponsored
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <img src="/assets/images/Dust_Bunny.jpg"/>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recommended Websites
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                    <li>
+                      <a href="www.pipxia.com">pipxia</a>
+                    </li>
+                    <li>
+                      <a href="www.bilibili.com">BiliBili</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Some rights reserved.
+      </p>
+      <p>
+        Made with <a href="https://github.com/wangxin1248">wangxin1248</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/wangxin1248">
+          <i class="fa fa-github" title="Github"></i>
+        </a>
+        <a class="icon" href="https://weibo.com/wangxin1248">
+          <i class="fa fa-weibo" title="Weibo"></i>
+        </a>
+        <a class="icon" href="mailto:wangxin1248@gmail.com">
+          <i class="fa fa-envelope" title="Email"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- js -->
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/typewriter.js"></script>
+</body>
+</html>

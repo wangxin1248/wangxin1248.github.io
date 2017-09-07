@@ -1,0 +1,329 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ 
+ <title>pipxia</title>
+ <link href="https://www.pipxia.com/atom.xml" rel="self"/>
+ <link href="https://www.pipxia.com"/>
+ <updated>2017-09-07T11:37:59+08:00</updated>
+ <id>https://www.pipxia.com</id>
+ <author>
+   <name>wangxin1248</name>
+   <email>wangxin1248@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>教育网环境下实现免费上网</title>
+   <link href="https://www.pipxia.com/life/2017/07/usevpn.html"/>
+   <updated>2017-07-28T00:00:00+08:00</updated>
+   <id>https://www.pipxia.com/life/2017/07/usevpn</id>
+   <content type="html">&lt;p&gt;没错，本教程就是教你免费上网的。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/01.jpg&quot; alt=&quot;vpnsetup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;嗯，当然是有前提滴……&lt;/p&gt;
+
+&lt;h1 id=&quot;前提&quot;&gt;前提&lt;/h1&gt;
+&lt;p&gt;如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。
+目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。&lt;/p&gt;
+
+&lt;h1 id=&quot;原理&quot;&gt;原理&lt;/h1&gt;
+&lt;p&gt;本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。&lt;/p&gt;
+
+&lt;h1 id=&quot;准备条件&quot;&gt;准备条件&lt;/h1&gt;
+
+&lt;h3 id=&quot;服务器提供商&quot;&gt;服务器提供商&lt;/h3&gt;
+&lt;p&gt;搭建服务器的VPS使用的是&lt;a href=&quot;https://bandwagonhost.com/&quot;&gt;bandwagonhost&lt;/a&gt;，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。
+并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……
+具体服务器的购买和使用请自行百度&lt;/p&gt;
+
+&lt;h3 id=&quot;服务器系统&quot;&gt;服务器系统&lt;/h3&gt;
+&lt;p&gt;VPS所搭载的系统是&lt;a href=&quot;https://www.centos.org/&quot; title=&quot;CentOS&quot;&gt;CentOS64位&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;vpn介绍&quot;&gt;VPN介绍&lt;/h3&gt;
+&lt;p&gt;所使用的VPN是SoftEther VPN
+&lt;a href=&quot;https://www.softether.org/&quot; title=&quot;SoftEtherVPN&quot;&gt;SoftEtherVPN&lt;/a&gt;是由日本筑波大学的登大遊在硕士论文中提出的开源、跨平台、多重协议的虚拟专用网方案，是专门为穿过防火墙而设计的。我们可以用它在自己的VPS上搭建一个简单的VPN来使用。&lt;/p&gt;
+
+&lt;h2 id=&quot;服务器端搭建&quot;&gt;服务器端搭建&lt;/h2&gt;
+&lt;h3 id=&quot;下载解压&quot;&gt;下载解压&lt;/h3&gt;
+&lt;p&gt;首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。&lt;/p&gt;
+
+&lt;p&gt;32位系统&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;64位系统&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;以上为截止发布本文时的最新版本，建议从&lt;a href=&quot;&quot;&gt;SoftEther&lt;/a&gt;官方网站获取最新版本。&lt;/p&gt;
+
+&lt;h3 id=&quot;安装启动&quot;&gt;安装启动&lt;/h3&gt;
+
+&lt;p&gt;解压下载的文件&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -zxvf softether-vpnserver-*.tar.gz
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;将解压的文件移动到&lt;strong&gt;/usr/local&lt;/strong&gt;下&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv vpnserver /usr/local
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;进入解压目录&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /usr/local/vpnserver
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;启动安装脚本&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./.install.sh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
+Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Do you want to read the License Agreement for this software ?&lt;/p&gt;
+
+  &lt;p&gt;1.Yes&lt;/p&gt;
+
+  &lt;p&gt;2.No&lt;/p&gt;
+
+  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这里询问你是否阅读License，输入1&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Did you read and understand the License Agreement ?&lt;/p&gt;
+
+  &lt;p&gt;(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)&lt;/p&gt;
+
+  &lt;p&gt;1.Yes&lt;/p&gt;
+
+  &lt;p&gt;2.No&lt;/p&gt;
+
+  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;询问你是否读懂了，输入1&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Did you agree the License Agreement ?&lt;/p&gt;
+
+  &lt;p&gt;1.Agree&lt;/p&gt;
+
+  &lt;p&gt;2.Do Not Agree&lt;/p&gt;
+
+  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;问你同不同意，继续输入1&lt;/p&gt;
+
+&lt;p&gt;接下来便会开始安装，假如遇到gcc命令无法识别，使用&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum install gcc
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;命令安装，接下来重新执行安装命令。&lt;/p&gt;
+
+&lt;p&gt;如果没有异常则说明安装成功，执行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver start
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;启动服务&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver stop
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;停止服务。&lt;/p&gt;
+
+&lt;h3 id=&quot;服务器端配置&quot;&gt;服务器端配置&lt;/h3&gt;
+
+&lt;p&gt;启动成功后我们需要设置远程登录密码以便本地管理服务。
+运行&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpncmd
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;进入VPN的命令行：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;vpncmd command - SoftEther VPN Command Line Management Utility&lt;/p&gt;
+
+  &lt;p&gt;SoftEther VPN Command Line Management Utility (vpncmd command)&lt;/p&gt;
+
+  &lt;p&gt;Version 4.22 Build 9634 (English)&lt;/p&gt;
+
+  &lt;p&gt;Compiled 2016/11/27 21:59:35 by yagi at pc30
+Copyright (c) SoftEther VPN Project. All Rights Reserved.&lt;/p&gt;
+
+  &lt;p&gt;By using vpncmd program, the following can be achieved.&lt;/p&gt;
+
+  &lt;p&gt;1.Management of VPN Server or VPN Bridge&lt;/p&gt;
+
+  &lt;p&gt;2.Management of VPN Client&lt;/p&gt;
+
+  &lt;p&gt;3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)&lt;/p&gt;
+
+  &lt;p&gt;Select 1, 2 or 3:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这里我们选择1，然后出现：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.&lt;/p&gt;
+
+  &lt;p&gt;By specifying according to the format ‘host name:port number’, you can also specify the port number.
+(When the port number is unspecified, 443 is used.)&lt;/p&gt;
+
+  &lt;p&gt;If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).&lt;/p&gt;
+
+  &lt;p&gt;Hostname of IP Address of Destination:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这里需要选择地址和端口。由于这台VPS已经搭建了一个网站，用了SSL占用了443端口，所以默认的443端口是用不了了，所以一定要改。我改用了5555端口，所以在这里输入localhost:5555，然后出现：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
+If connecting by server admin mode, please press Enter without inputting anything.
+Specify Virtual Hub Name:&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这里就是指定一个虚拟HUB名字，用默认的直接回车就行&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Connection has been established with VPN Server “localhost” (port 5555).&lt;/p&gt;
+
+  &lt;p&gt;You have administrator privileges for the entire VPN Server.&lt;/p&gt;
+
+  &lt;p&gt;VPN Server&amp;gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这时我们需要输入&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ServerPasswordSet
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;命令设置远程管理密码&lt;/p&gt;
+
+&lt;p&gt;输入设定的密码，确认密码后就可以通过Windows版的SoftEther VPN Server Manager远程管理了。&lt;/p&gt;
+
+&lt;h2 id=&quot;vpn管理&quot;&gt;VPN管理&lt;/h2&gt;
+
+&lt;p&gt;首先下载并安装&lt;a href=&quot;http://softether-download.com/en.aspx&quot; title=&quot;SoftEther VPN Server Manager&quot;&gt;SoftEther VPN Server Manager&lt;/a&gt;，其实只用到了管理工具：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnsetup.png&quot; alt=&quot;vpnsetup&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;安装之后运行它：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnnew.png&quot; alt=&quot;vpnnew&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在这里点&lt;strong&gt;新建&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnset.png&quot; alt=&quot;vpnset&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpneasy.png&quot; alt=&quot;vpneasy&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里在第一个&lt;strong&gt;远程连接&lt;/strong&gt;选择然后下一步即可，虚拟HUB名像之前一样默认就好。&lt;/p&gt;
+
+&lt;p&gt;然后会弹出一个动态DNS功能的窗口，由于不能确定它给的域名是不是被墙了，我们就不去用它，把这个窗口关了就行了。&lt;/p&gt;
+
+&lt;p&gt;之后会有一个协议设置的窗口：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnl2tp.png&quot; alt=&quot;vpnl2tp&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里把启用&lt;strong&gt;L2TP&lt;/strong&gt;挑上钩，下面设置一个&lt;strong&gt;IPsec预共享密钥&lt;/strong&gt;就行了。&lt;/p&gt;
+
+&lt;p&gt;之后又会弹出一个&lt;strong&gt;VPN Azure Cloud&lt;/strong&gt;服务的窗口，感觉没什么用，禁用了就行了。即使有用以后也可以再启用。&lt;/p&gt;
+
+&lt;p&gt;接下来要新建用户：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnuser.png&quot; alt=&quot;vpnuser&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;其中用户名是必填的，验证类型选密码验证就行，然后在右侧设置用户密码&lt;/p&gt;
+
+&lt;p&gt;之后回到管理界面，点管理虚拟HUB：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnmanager.png&quot; alt=&quot;vpnmanager&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnhub.png&quot; alt=&quot;vpnhub&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这里也可以继续添加新用户。点&lt;strong&gt;虚拟NAT和虚拟DHCP服务器&lt;/strong&gt;，弹出窗口：&lt;/p&gt;
+
+&lt;p&gt;![vpnvirtual]/assets/images/2017-06/vpnvirtual.png)&lt;/p&gt;
+
+&lt;p&gt;在里面启用&lt;strong&gt;SecureNAT&lt;/strong&gt;并点&lt;strong&gt;SecureNAT&lt;/strong&gt;配置：&lt;/p&gt;
+
+&lt;p&gt;![vpnnat]/assets/images/2017-06/vpnnat.png)&lt;/p&gt;
+
+&lt;p&gt;注意DNS要改为&lt;strong&gt;8.8.8.8&lt;/strong&gt;和&lt;strong&gt;8.8.4.4&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;这里就算配置完毕。然后顺便生成一下&lt;strong&gt;OpenVPN&lt;/strong&gt;的配置文件，点&lt;strong&gt;OpenVPN / MS-SSTP Setting&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnopen.png&quot; alt=&quot;vpnopen&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后点击新窗口中部的按钮生成配置文件：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnovpn.png&quot; alt=&quot;vpnovpn&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;打开导出的压缩包会看到里面有两个&lt;strong&gt;.ovpn&lt;/strong&gt;文件，一般我们要用到&lt;strong&gt;*_openvpn_remote_access_l3.ovpn&lt;/strong&gt;这个文件，因为我们是通过IPv4地址管理的VPN，所以这个配置文件里的&lt;strong&gt;remote&lt;/strong&gt;一项会是IPv4地址，如果需要使用IPv6的VPN就将其替换为相应的IPv6地址即可。&lt;/p&gt;
+
+&lt;h2 id=&quot;连接vpn&quot;&gt;连接VPN&lt;/h2&gt;
+&lt;h3 id=&quot;windows连接&quot;&gt;WINDOWS连接&lt;/h3&gt;
+&lt;p&gt;首先到&lt;strong&gt;网络和共享中心&lt;/strong&gt;里新建一个网络连接:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/intent.PNG&quot; alt=&quot;intent&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;选择连接到工作区 。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpn.PNG&quot; alt=&quot;vpn&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;连接VPN&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/host.PNG&quot; alt=&quot;host&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;然后在地址栏里填上服务器地址或域名（&lt;strong&gt;这里填写对应VPS的IPV6地址&lt;/strong&gt;）。配置完成后打开&lt;strong&gt;更改适配器设置&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/info.PNG&quot; alt=&quot;info&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;打开VPN的属性&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/security.PNG&quot; alt=&quot;security&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;strong&gt;安全&lt;/strong&gt;选项卡里将&lt;strong&gt;VPN类型&lt;/strong&gt;改为&lt;strong&gt;L2TP&lt;/strong&gt;，然后点高级设置：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/key.PNG&quot; alt=&quot;key&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在里面选上使用预共享密钥并把之前设置的密钥填进去。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnconnect.PNG&quot; alt=&quot;vpnconnect&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;之后在VPN连接里填入服务器地址，用户名和密码填进去就可以连上了。&lt;/p&gt;
+
+&lt;p&gt;Windows10自带的VPN支持IPV6，只要按照上面的方面将域名改为IPV6的地址就可以使用IPV6流量&lt;/p&gt;
+
+&lt;p&gt;接下来，享受美好的网络世界吧…..&lt;/p&gt;
+</content>
+ </entry>
+ 
+ 
+</feed>

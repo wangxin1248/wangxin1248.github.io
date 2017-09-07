@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/normalize.css"/>
+  <link rel="stylesheet" href="/assets/css/bulma.css"/>
+  <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+
+  <title>
+    
+      教育网环境下实现免费上网 &middot; pipxia
+    
+  </title>
+
+</head>
+
+
+<!-- Google analytics -->
+
+
+<body>
+
+<section class="hero is-dark">
+  <div class="hero-body">
+    <div class="container">
+        <h1 class="title">
+          <!-- 网站顶部提示信息 -->
+          <span class="typewrite" data-period="2000" data-type='[ "Hello,World","你好，世界","こんにちは世界","안녕하세요 세계","Bonjour le monde","Привет мир"]'>
+            <span class="wrap"></span>
+          </span>
+        </h1>
+      <h4 class="subtitle" id="quote">
+      </h4>
+    </div>
+  </div>
+</section>
+
+<div class="main-container">
+  <div class="tile is-ancestor is-vertical">
+
+
+    <nav class="nav has-shadow">
+
+      <div class="nav-left">
+
+        <a href="/" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-home" aria-hidden="true" title="Homepage"></i>
+          </span>
+        </a>
+
+        <a href="https://github.com/wangxin1248" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-github" aria-hidden="true" title="Github"></i>
+          </span>
+        </a>
+
+        <div class="nav-item" id="searchFieldNav">
+          <div class="field has-addons">
+            <p class="control">
+              <input class="input is-small" type="text" placeholder="Find an article" id="search-text">
+            </p>
+            <p class="control">
+              <a class="button is-dark is-small" onclick="searchHandler();">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-right nav-menu" id='nav-menu'>
+        <a href="/archive" class="nav-item">Archive</a>
+        <a href="/tags" class="nav-item">Tags</a>
+      </div>
+
+      <span class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+    </nav>
+
+    <div class="tile is-parent">
+      <div class="tile is-8 is-child main">
+
+        <div class="box">
+    <h1 class="post-title">教育网环境下实现免费上网</h1>
+    <span class="post-meta">28 July, 2017. It was a Friday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><p>没错，本教程就是教你免费上网的。</p>
+
+<p><img src="/assets/images/2017-06/01.jpg" alt="vpnsetup" /></p>
+
+<p>嗯，当然是有前提滴……</p>
+
+<h1 id="前提">前提</h1>
+<p>如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。
+目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。</p>
+
+<h1 id="原理">原理</h1>
+<p>本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。</p>
+
+<h1 id="准备条件">准备条件</h1>
+
+<h3 id="服务器提供商">服务器提供商</h3>
+<p>搭建服务器的VPS使用的是<a href="https://bandwagonhost.com/">bandwagonhost</a>，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。
+并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……
+具体服务器的购买和使用请自行百度</p>
+
+<h3 id="服务器系统">服务器系统</h3>
+<p>VPS所搭载的系统是<a href="https://www.centos.org/" title="CentOS">CentOS64位</a></p>
+
+<h3 id="vpn介绍">VPN介绍</h3>
+<p>所使用的VPN是SoftEther VPN
+<a href="https://www.softether.org/" title="SoftEtherVPN">SoftEtherVPN</a>是由日本筑波大学的登大遊在硕士论文中提出的开源、跨平台、多重协议的虚拟专用网方案，是专门为穿过防火墙而设计的。我们可以用它在自己的VPS上搭建一个简单的VPN来使用。</p>
+
+<h2 id="服务器端搭建">服务器端搭建</h2>
+<h3 id="下载解压">下载解压</h3>
+<p>首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。</p>
+
+<p>32位系统</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
+</code></pre>
+</div>
+
+<p>64位系统</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+</code></pre>
+</div>
+
+<p>以上为截止发布本文时的最新版本，建议从<a href="">SoftEther</a>官方网站获取最新版本。</p>
+
+<h3 id="安装启动">安装启动</h3>
+
+<p>解压下载的文件</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>tar -zxvf softether-vpnserver-*.tar.gz
+</code></pre>
+</div>
+
+<p>将解压的文件移动到<strong>/usr/local</strong>下</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>mv vpnserver /usr/local
+</code></pre>
+</div>
+
+<p>进入解压目录</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>cd /usr/local/vpnserver
+</code></pre>
+</div>
+
+<p>启动安装脚本</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./.install.sh
+</code></pre>
+</div>
+
+<blockquote>
+  <p>SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
+Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.</p>
+</blockquote>
+
+<blockquote>
+  <p>Do you want to read the License Agreement for this software ?</p>
+
+  <p>1.Yes</p>
+
+  <p>2.No</p>
+
+  <p>Please choose one of above number:</p>
+</blockquote>
+
+<p>这里询问你是否阅读License，输入1</p>
+
+<blockquote>
+  <p>Did you read and understand the License Agreement ?</p>
+
+  <p>(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)</p>
+
+  <p>1.Yes</p>
+
+  <p>2.No</p>
+
+  <p>Please choose one of above number:</p>
+</blockquote>
+
+<p>询问你是否读懂了，输入1</p>
+
+<blockquote>
+  <p>Did you agree the License Agreement ?</p>
+
+  <p>1.Agree</p>
+
+  <p>2.Do Not Agree</p>
+
+  <p>Please choose one of above number:</p>
+</blockquote>
+
+<p>问你同不同意，继续输入1</p>
+
+<p>接下来便会开始安装，假如遇到gcc命令无法识别，使用</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>yum install gcc
+</code></pre>
+</div>
+
+<p>命令安装，接下来重新执行安装命令。</p>
+
+<p>如果没有异常则说明安装成功，执行</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./vpnserver start
+</code></pre>
+</div>
+
+<p>启动服务</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./vpnserver stop
+</code></pre>
+</div>
+
+<p>停止服务。</p>
+
+<h3 id="服务器端配置">服务器端配置</h3>
+
+<p>启动成功后我们需要设置远程登录密码以便本地管理服务。
+运行</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>./vpncmd
+</code></pre>
+</div>
+
+<p>进入VPN的命令行：</p>
+
+<blockquote>
+  <p>vpncmd command - SoftEther VPN Command Line Management Utility</p>
+
+  <p>SoftEther VPN Command Line Management Utility (vpncmd command)</p>
+
+  <p>Version 4.22 Build 9634 (English)</p>
+
+  <p>Compiled 2016/11/27 21:59:35 by yagi at pc30
+Copyright (c) SoftEther VPN Project. All Rights Reserved.</p>
+
+  <p>By using vpncmd program, the following can be achieved.</p>
+
+  <p>1.Management of VPN Server or VPN Bridge</p>
+
+  <p>2.Management of VPN Client</p>
+
+  <p>3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)</p>
+
+  <p>Select 1, 2 or 3:</p>
+</blockquote>
+
+<p>这里我们选择1，然后出现：</p>
+
+<blockquote>
+  <p>Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.</p>
+
+  <p>By specifying according to the format ‘host name:port number’, you can also specify the port number.
+(When the port number is unspecified, 443 is used.)</p>
+
+  <p>If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).</p>
+
+  <p>Hostname of IP Address of Destination:</p>
+</blockquote>
+
+<p>这里需要选择地址和端口。由于这台VPS已经搭建了一个网站，用了SSL占用了443端口，所以默认的443端口是用不了了，所以一定要改。我改用了5555端口，所以在这里输入localhost:5555，然后出现：</p>
+
+<blockquote>
+  <p>If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
+If connecting by server admin mode, please press Enter without inputting anything.
+Specify Virtual Hub Name:</p>
+</blockquote>
+
+<p>这里就是指定一个虚拟HUB名字，用默认的直接回车就行</p>
+<blockquote>
+  <p>Connection has been established with VPN Server “localhost” (port 5555).</p>
+
+  <p>You have administrator privileges for the entire VPN Server.</p>
+
+  <p>VPN Server&gt;</p>
+</blockquote>
+
+<p>这时我们需要输入</p>
+
+<div class="highlighter-rouge"><pre class="highlight"><code>ServerPasswordSet
+</code></pre>
+</div>
+
+<p>命令设置远程管理密码</p>
+
+<p>输入设定的密码，确认密码后就可以通过Windows版的SoftEther VPN Server Manager远程管理了。</p>
+
+<h2 id="vpn管理">VPN管理</h2>
+
+<p>首先下载并安装<a href="http://softether-download.com/en.aspx" title="SoftEther VPN Server Manager">SoftEther VPN Server Manager</a>，其实只用到了管理工具：</p>
+
+<p><img src="/assets/images/2017-06/vpnsetup.png" alt="vpnsetup" /></p>
+
+<p>安装之后运行它：</p>
+
+<p><img src="/assets/images/2017-06/vpnnew.png" alt="vpnnew" /></p>
+
+<p>在这里点<strong>新建</strong>：</p>
+
+<p><img src="/assets/images/2017-06/vpnset.png" alt="vpnset" /></p>
+
+<p>Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：</p>
+
+<p><img src="/assets/images/2017-06/vpneasy.png" alt="vpneasy" /></p>
+
+<p>这里在第一个<strong>远程连接</strong>选择然后下一步即可，虚拟HUB名像之前一样默认就好。</p>
+
+<p>然后会弹出一个动态DNS功能的窗口，由于不能确定它给的域名是不是被墙了，我们就不去用它，把这个窗口关了就行了。</p>
+
+<p>之后会有一个协议设置的窗口：</p>
+
+<p><img src="/assets/images/2017-06/vpnl2tp.png" alt="vpnl2tp" /></p>
+
+<p>这里把启用<strong>L2TP</strong>挑上钩，下面设置一个<strong>IPsec预共享密钥</strong>就行了。</p>
+
+<p>之后又会弹出一个<strong>VPN Azure Cloud</strong>服务的窗口，感觉没什么用，禁用了就行了。即使有用以后也可以再启用。</p>
+
+<p>接下来要新建用户：</p>
+
+<p><img src="/assets/images/2017-06/vpnuser.png" alt="vpnuser" /></p>
+
+<p>其中用户名是必填的，验证类型选密码验证就行，然后在右侧设置用户密码</p>
+
+<p>之后回到管理界面，点管理虚拟HUB：</p>
+
+<p><img src="/assets/images/2017-06/vpnmanager.png" alt="vpnmanager" /></p>
+
+<p><img src="/assets/images/2017-06/vpnhub.png" alt="vpnhub" /></p>
+
+<p>这里也可以继续添加新用户。点<strong>虚拟NAT和虚拟DHCP服务器</strong>，弹出窗口：</p>
+
+<p>![vpnvirtual]/assets/images/2017-06/vpnvirtual.png)</p>
+
+<p>在里面启用<strong>SecureNAT</strong>并点<strong>SecureNAT</strong>配置：</p>
+
+<p>![vpnnat]/assets/images/2017-06/vpnnat.png)</p>
+
+<p>注意DNS要改为<strong>8.8.8.8</strong>和<strong>8.8.4.4</strong>。</p>
+
+<p>这里就算配置完毕。然后顺便生成一下<strong>OpenVPN</strong>的配置文件，点<strong>OpenVPN / MS-SSTP Setting</strong>：</p>
+
+<p><img src="/assets/images/2017-06/vpnopen.png" alt="vpnopen" /></p>
+
+<p>然后点击新窗口中部的按钮生成配置文件：</p>
+
+<p><img src="/assets/images/2017-06/vpnovpn.png" alt="vpnovpn" /></p>
+
+<p>打开导出的压缩包会看到里面有两个<strong>.ovpn</strong>文件，一般我们要用到<strong>*_openvpn_remote_access_l3.ovpn</strong>这个文件，因为我们是通过IPv4地址管理的VPN，所以这个配置文件里的<strong>remote</strong>一项会是IPv4地址，如果需要使用IPv6的VPN就将其替换为相应的IPv6地址即可。</p>
+
+<h2 id="连接vpn">连接VPN</h2>
+<h3 id="windows连接">WINDOWS连接</h3>
+<p>首先到<strong>网络和共享中心</strong>里新建一个网络连接:</p>
+
+<p><img src="/assets/images/2017-06/intent.PNG" alt="intent" /></p>
+
+<p>选择连接到工作区 。</p>
+
+<p><img src="/assets/images/2017-06/vpn.PNG" alt="vpn" /></p>
+
+<p>连接VPN</p>
+
+<p><img src="/assets/images/2017-06/host.PNG" alt="host" /></p>
+
+<p>然后在地址栏里填上服务器地址或域名（<strong>这里填写对应VPS的IPV6地址</strong>）。配置完成后打开<strong>更改适配器设置</strong>：</p>
+
+<p><img src="/assets/images/2017-06/info.PNG" alt="info" /></p>
+
+<p>打开VPN的属性</p>
+
+<p><img src="/assets/images/2017-06/security.PNG" alt="security" /></p>
+
+<p>在<strong>安全</strong>选项卡里将<strong>VPN类型</strong>改为<strong>L2TP</strong>，然后点高级设置：</p>
+
+<p><img src="/assets/images/2017-06/key.PNG" alt="key" /></p>
+
+<p>在里面选上使用预共享密钥并把之前设置的密钥填进去。</p>
+
+<p><img src="/assets/images/2017-06/vpnconnect.PNG" alt="vpnconnect" /></p>
+
+<p>之后在VPN连接里填入服务器地址，用户名和密码填进去就可以连上了。</p>
+
+<p>Windows10自带的VPN支持IPV6，只要按照上面的方面将域名改为IPV6的地址就可以使用IPV6流量</p>
+
+<p>接下来，享受美好的网络世界吧…..</p>
+</span>
+</div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'pipxia'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+      </div>
+
+      <div class="tile is-4 is-child">
+        <div class="tile is-parent is-vertical sidebar">
+
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recent Posts
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                  
+                  <li><a href="/life/2017/07/usevpn.html">
+                    教育网环境下实现免费上网
+                  </a></li>
+                  
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Sponsored
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <img src="/assets/images/Dust_Bunny.jpg"/>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recommended Websites
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                    <li>
+                      <a href="www.pipxia.com">pipxia</a>
+                    </li>
+                    <li>
+                      <a href="www.bilibili.com">BiliBili</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Some rights reserved.
+      </p>
+      <p>
+        Made with <a href="https://github.com/wangxin1248">wangxin1248</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/wangxin1248">
+          <i class="fa fa-github" title="Github"></i>
+        </a>
+        <a class="icon" href="https://weibo.com/wangxin1248">
+          <i class="fa fa-weibo" title="Weibo"></i>
+        </a>
+        <a class="icon" href="mailto:wangxin1248@gmail.com">
+          <i class="fa fa-envelope" title="Email"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- js -->
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/typewriter.js"></script>
+</body>
+</html>
