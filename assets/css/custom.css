@@ -14,7 +14,7 @@
 
 /* 调整界面宽度 */
 .main-container {
-    max-width: 2000px;
+    max-width: 100%;
     margin: 0 auto;
     padding-left: 2%;
     padding-right: 2%;
@@ -78,6 +78,7 @@ h1.title > span {
 
 .post-text {
     font-family: "Open Sans", sans-serif;
+    max-width: 100%;
 }
 
 .post-text > p {
