@@ -39,11 +39,11 @@ section {
 
 
  /* 定义界面标题属性 */
-/* h1 {
+h1 {
   font-size: 2em;
   margin: 0.67em 0;
-} */
-h1{ 
+}
+/* h1{ 
   display: block;
   font-size: 2em;
   margin-top: 0.67em;
@@ -96,7 +96,7 @@ h6 {
   margin-left: 0;
   margin-right: 0;
   font-weight: bold;
-}
+} */
 /* Grouping content
    ========================================================================== */
 
