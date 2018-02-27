@@ -86,7 +86,7 @@ JB :
    # analytics
     ga:  # if you wanna this feature, go to https://www.google.com/analytics/ to get your configuration; if not, comment following line.
        id: UA-101239613-1
-       host: wangxin1248.com
+       host: http://wangxin1248.com
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
