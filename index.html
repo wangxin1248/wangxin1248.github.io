@@ -5,16 +5,18 @@ title: just do it!
 <!-- 分页功能实现 -->
 {% if paginator.total_pages > 1 %}
     <!-- 开启分页换页功能 -->
+    <ul class="posts">
     {% for post in paginator.posts %}
-        <a href="{{ post.url }}">
-            {{ 
-                <small>{{ post.date | date_to_string }}</small>
-        <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
-        <br>
-        <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-        <p class="nice-text">{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a></p>
-             }}</a>
+        <li class="post">
+            <small>{{ post.date | date_to_string }}</small>
+            <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
+            <br>
+            <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+            <p class="nice-text">{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a></p>
+        </li>
     {% endfor %}
+    </ul>
+    
     <!-- 上一页跳转 -->
     {% if paginator.previous_page %}
     <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"上一页</a>
