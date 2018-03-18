@@ -12,31 +12,31 @@ title: just do it!
             <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
             <br>
             <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-            <p class="nice-text">{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a></p>
+            <p class="nice-text">{{ post.desc }} 
+            <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a>
+            </p>
         </li>
     {% endfor %}
     </ul>
-    
-    <!-- 上一页跳转 -->
-    {% if paginator.previous_page %}
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"上一页</a>
-    {% endif %}
-    <!-- 遍历中间的页 -->
-    {% for page in (1..paginator.total_pages) %}
-    {% if page == paginator.page %}
-      <span class="active">{{ page }}</span>
-    {% elsif page == 1 %}
-      <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-    {% else %}
-      <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-    {% endif %}
-    {% endfor %}
-    <!-- 下一页跳转 -->
-    {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页</a>
-    {% endif %}
 {% endif %}
-
+<!-- 上一页跳转 -->
+{% if paginator.previous_page %}
+    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}"上一页</a>
+{% endif %}
+<!-- 遍历中间的页 -->
+{% for page in (1..paginator.total_pages) %}
+    {% if page == paginator.page %}
+        <span class="active">{{ page }}</span>
+    {% elsif page == 1 %}
+        <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
+    {% else %}
+        <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+    {% endif %}
+{% endfor %}
+<!-- 下一页跳转 -->
+{% if paginator.next_page %}
+    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页</a>
+{% endif %}
 <!-- <ul class="posts">
     {% for post in site.posts %}
     <li class="post">
