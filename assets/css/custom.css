@@ -12,9 +12,9 @@
     font-style: normal;
 }
 
-/* 调整界面宽度 */
+/* 调整主界面宽度 */
 .main-container {
-    max-width: 1000px;
+    max-width: 2000px;
     margin: 0 auto;
     padding-left: 2%;
     padding-right: 2%;
