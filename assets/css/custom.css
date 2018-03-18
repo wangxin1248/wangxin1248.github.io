@@ -14,7 +14,7 @@
 
 /* 调整主界面宽度 */
 .main-container {
-    max-width: 100%;
+    max-width: 80%;
     margin: 0 auto;
     padding-left: 2%;
     padding-right: 2%;
@@ -22,7 +22,7 @@
 /* 调整界面宽度 */
 .container {
     text-align: center;
-    max-width: 80%;
+    max-width: 70%;
 }
 
 /* for mobile screens otherwise it messes up the nav*/
