@@ -8,7 +8,6 @@ title: just do it!
     <ul class="posts">
     {% for post in paginator.posts %}
         <li class="post">
-            <!-- 首页显示内容 -->
             <small>{{ post.date | date_to_string }}</small>
             <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
             <br>
