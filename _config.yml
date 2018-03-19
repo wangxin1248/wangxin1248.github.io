@@ -25,7 +25,7 @@ author :
 # Else if you are pushing to username.github.io, replace with your username.
 # Finally if you are pushing to a GitHub project page, include the project name at the end.
 #
-production_url : http://wangxin1248.com
+production_url : https://wangxin1248.com
 
 # All Jekyll-Bootstrap specific configurations are namespaced into this hash
 #
@@ -86,7 +86,7 @@ JB :
    # analytics
     ga:  # if you wanna this feature, go to https://www.google.com/analytics/ to get your configuration; if not, comment following line.
        id: UA-101239613-1
-       host: http://wangxin1248.com
+       host: https://wangxin1248.com
    
   # Settings for analytics helper
   # Set 'provider' to the analytics provider you want to use.
@@ -115,6 +115,3 @@ JB :
   # 开启分页功能
 paginate: 8
 paginate_path: "page:num"
-# 使用https进行访问
-url: https://www.wangxin1248.com
-enforce_ssl: www.wangxin1248.com
