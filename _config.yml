@@ -116,12 +116,8 @@ JB :
 paginate: 8
 paginate_path: "page:num"
 # 使用代码高亮
-highlighter: pygments
-markdown: redcarpet
-redcarpet:
-  extensions:
-    - fenced_code_blocks
-    - no_intra_emphasis
-    - strikethrough
-    - autolink
-    - tables
+highlighter: rouge
+markdown: kramdown
+kramdown:
+    input: GFM
+highlighter: rouge
