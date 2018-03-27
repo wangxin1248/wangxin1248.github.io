@@ -107,6 +107,9 @@
                     {% assign categories_list = site.categories %}  
                     {% include JB/categories_list %}
                   </ul>
+                  {% for categories in site.categories %} 
+                  <h2 hidden class="nice-title" id="{{ categories[0] }}-ref">{{ categories[0] }}</h2>
+                  {% endfor %}
                 </div>
               </div>
             </div>
