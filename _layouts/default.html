@@ -107,13 +107,6 @@
                     {% assign categories_list = site.categories %}  
                     {% include JB/categories_list %}
                   </ul>
-                  {% for categories in site.categories %} 
-                    <h2 class="nice-title" id="{{ categories[0] }}-ref">{{ categories[0] }}</h2>
-                      <ul>
-                        {% assign pages_list = categories[1] %}  
-                        {% include JB/pages_list %}
-                      </ul>
-                  {% endfor %}
                 </div>
               </div>
             </div>
