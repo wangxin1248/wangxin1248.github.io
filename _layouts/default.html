@@ -72,6 +72,7 @@
 
       <div class="nav-right nav-menu" id='nav-menu'>
         <a href="/archive" class="nav-item">Archive</a>
+        <a href="/categories" class="nav-item">categories</a>
         <a href="/tags" class="nav-item">Tags</a>
       </div>
 
@@ -107,9 +108,6 @@
                     {% assign categories_list = site.categories %}  
                     {% include JB/categories_list %}
                   </ul>
-                  {% for categories in site.categories %} 
-                  <h2 hidden class="nice-title" id="{{ categories[0] }}-ref">{{ categories[0] }}</h2>
-                  {% endfor %}
                 </div>
               </div>
             </div>
@@ -126,7 +124,7 @@
               </header>
               <div class="card-content">
                 <div class="content nice-text">
-                  <img src="{{ site.baseurl }}/assets/images/Dust_Bunny.jpg"/>
+                  <img src="{{ site.baseurl }}/assets/images/icon.png"/>
                 </div>
               </div>
             </div>
