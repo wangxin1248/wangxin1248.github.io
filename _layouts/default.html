@@ -88,6 +88,7 @@
 
       </div>
 
+      <!-- 文章分类 -->
       <div class="tile is-4 is-child">
         <div class="tile is-parent is-vertical sidebar">
 
@@ -96,15 +97,16 @@
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title nice-title">
-                  Recent Posts
+                Article classification
                 </p>
               </header>
               <div class="card-content">
                 <div class="content nice-text">
                   <ul>
-                  {% for post in site.posts limit:3 %}
+                  <!-- {% for post in site.posts limit:3 %} -->
+                  {% for post in site.posts %}
                   <li><a href="{{ post.url }}">
-                    {{ post.title }}
+                    {{ post.categories }}
                   </a></li>
                   {% endfor %}
                   </ul>
@@ -113,6 +115,7 @@
             </div>
           </div>
 
+          <!-- 个人头像 -->
           <div class="tile is-child widget">
 
             <div class="card">
@@ -130,6 +133,7 @@
 
           </div>
 
+          <!-- 推荐网站部分 -->
           <div class="tile is-child widget">
             <div class="card">
               <header class="card-header">
@@ -141,10 +145,16 @@
                 <div class="content nice-text">
                   <ul>
                     <li>
-                      <!-- <a href="www.pipxia.com">pipxia</a> -->
+                      <a href="#">resume</a>
                     </li>
                     <li>
-                      <!-- <a href="www.bilibili.com">BiliBili</a> -->
+                      <a href="https://leetcode.com/">leetcode</a>
+                    </li>
+                    <li>
+                      <a href="http://blog.csdn.net/icarus_wang/">csdn blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT home</a>
                     </li>
                   </ul>
                 </div>
@@ -165,7 +175,7 @@
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        Copyright (C) wangxin1248.com, All Rights Reserved.
+        Copyright (C) wangxin1248, All Rights Reserved.
       </p>
       <p>
         Made with <a href="https://github.com/wangxin1248">wangxin</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
