@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title:  "macOS中安装python3"
 date:  2018-04-13
 desc: "本文主要介绍如何在macOS中通过Homebrew安装python3"

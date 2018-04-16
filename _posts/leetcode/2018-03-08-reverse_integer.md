@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: page
 title:  "LeetCode题目7.Reverse Integer"
 date:  2018-03-08
 desc: "LeetCode刷题之题目7.Reverse Integer"
