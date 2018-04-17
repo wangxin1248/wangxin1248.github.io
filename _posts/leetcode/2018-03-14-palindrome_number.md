@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title:  "LeetCode题目9.Palindrome Numbers"
 date:  2018-03-14
 desc: "LeetCode刷题之题目9.Palindrome Numbers"
