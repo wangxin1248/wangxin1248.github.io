@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: post
 title:  "Ubuntu16.04服务器安装shadowsocks"
 date:  2018-04-16
 desc: "搬瓦工vps ubuntu16.04系统下安装shadowsocks并配置相关属性"
