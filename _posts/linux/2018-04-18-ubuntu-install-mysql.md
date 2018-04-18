@@ -42,9 +42,9 @@ sudo netstat -tap | grep mysql
 
 ### mysqld服务操作命令
 
-启动mysqld服务: sudo /etc/init.d/mysql start
-停止mysqld服务: sudo /etc/init.d/mysql stop
-启动mysqld服务: sudo /etc/init.d/mysql restart
+- 启动mysqld服务: sudo /etc/init.d/mysql start
+- 停止mysqld服务: sudo /etc/init.d/mysql stop
+- 启动mysqld服务: sudo /etc/init.d/mysql restart
 
 ## 配置mysql远程连接
 
