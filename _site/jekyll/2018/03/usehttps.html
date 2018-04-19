@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      设置GitHub个人主页为https访问 &middot; wangxin
     
   </title>
 
@@ -110,13 +110,90 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">设置GitHub个人主页为https访问</h1>
+    <span class="post-meta">19 March, 2018. It was a Monday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="使用github的github-pages的功能可以免费搭建博客或者托管网页但是访问方式默认是http的如果需要使用安全的https进行访问则需要进行相应的设置来实现安全的访问">使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，如果需要使用安全的https进行访问，则需要进行相应的设置来实现安全的访问</h1>
+
+<p>使用Jekyll搭建的博客已经差不多，也换上了自己的域名，但是在使用Chrome访问网站的时候没有小绿标总是感觉很别扭。上网一搜，原来不用去申请什么key来实现加密传输，只需要将自己的域名托管到cloudflare即可，具体的实现如下：</p>
+
+<h2 id="github建立的博客访问可以通过githubio也可以通过自定义的域名进行访问">GitHub建立的博客访问可以通过github.io也可以通过自定义的域名进行访问</h2>
+
+<h2 id="使用githubio域名时的设置">使用github.io域名时的设置</h2>
+
+<ul>
+  <li>进入github pages对应的仓库首界面</li>
+  <li>点击Settings，进入这个仓库的设置界面</li>
+  <li>找到GitHub Pages配置栏，勾选Enforce HTTPS</li>
+</ul>
+
+<p>这样，通过github.io域名进行访问是便是安全的https协议</p>
+
+<h2 id="使用自定义域名的设置">使用自定义域名的设置</h2>
+<p>当在仓库的Settings中设置过Custom domain时，是无法勾选Enforce HTTPS的。 这里，变得使用cloudflare来托管域名了。</p>
+
+<p>首先打开cloudflare的官网<a href="https://support.cloudflare.com/">点这里</a></p>
+
+<p>点击登录，如果没有帐号，则新建一个帐号。</p>
+
+<p>点击Add Website新增一个网站，注意需要输入你的自定义域名
+<img src="/assets/images/2018-03/addsite.PNG" alt="添加网站" /></p>
+
+<p>选择NEXT
+<img src="/assets/images/2018-03/next.PNG" alt="添加网站" /></p>
+
+<p>选择对应的套餐，一般个人网站使用免费的套餐就够用了
+<img src="/assets/images/2018-03/选择套餐.PNG" alt="选择套餐" /></p>
+
+<p>接下来会自动获取域名下的DNS解析记录，直接continue即可。</p>
+
+<p>接下来会让你去修改DNS对应的解析域名服务器
+<img src="/assets/images/2018-03/域名服务器.PNG" alt="域名服务器" /></p>
+
+<h3 id="cloudflare的设置完成接下来需要到原域名的托管处修改dns的域名服务器我使用的是阿里云万网下的域名解析这里以万网的为例">cloudflare的设置完成，接下来需要到原域名的托管处修改DNS的域名服务器，我使用的是阿里云万网下的域名解析，这里以万网的为例：</h3>
+
+<p>打开万网的域名控制台，进入域名的基本管理，点击DNS修改
+<img src="/assets/images/2018-03/自定义DNS.PNG" alt="域名服务器" /></p>
+
+<p>在DNS修改界面将原先的DNS域名服务器修改成刚才cloudflare设置的。</p>
+
+<p>设置完成之后回到cloudflare的管理界面，等待几分钟等域名解析生效，可以看到当前域名的状态为Active
+<img src="/assets/images/2018-03/域名状态.PNG" alt="域名状态" /></p>
+
+<p>接下来设置SSL的状态为Flexible（注意，这里只能设置为Flexible，Full要求在服务器上有对应密钥，GitHub pages不支持。）
+<img src="/assets/images/2018-03/SSL.PNG" alt="SSL" /></p>
+
+<p>并将always use https 选项打开
+<img src="/assets/images/2018-03/always.PNG" alt="always use https" /></p>
+
+<p>接下来就是等待https证书的制作完成，稍后打开你的网站，看一下，是不是小绿锁完美的展现了呢。</p>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

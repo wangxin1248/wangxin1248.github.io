@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      LeetCode题目167. Two Sum II - Input array is sorted &middot; wangxin
     
   </title>
 
@@ -110,13 +110,87 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">LeetCode题目167. Two Sum II - Input array is sorted</h1>
+    <span class="post-meta">27 February, 2018. It was a Tuesday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="leetcode刷题之题目167-two-sum-ii---input-array-is-sorted">LeetCode刷题之题目167. Two Sum II - Input array is sorted</h1>
+
+<h2 id="description">Description</h2>
+
+<p>Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.</p>
+
+<p>The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.</p>
+
+<p>You may assume that each input would have exactly one solution and you may not use the same element twice.</p>
+
+<p>Input: numbers={2, 7, 11, 15}, target=9
+Output: index1=1, index2=2</p>
+
+<h2 id="思路">思路</h2>
+
+<p>这道题相比较于Two Sum那道题来说主要是添加了数组有序这一重要的条件。</p>
+
+<p>那么按照上一道的代码去运行会发现最后一个测试用例会超时，而最后一个测试用例中给的数组非常大，这样的话使用双重遍历便效率太低了。</p>
+
+<p>那么重点就是根据题目所给的有序这个条件来解题了。</p>
+
+<p>假如数组是[1,2,3,4,5,6,7,8,9]，那么要找和为8的两个数的角标，可能的条件有1+7;2+6;两种
+可以发现：所找的两个数是一个从前面找一个从后面找，最后找出所有的结果</p>
+
+<p>那么我们可以设置两个指针分别指向数组第一个元素和最后一个元素，然后比较之和和所求值的大小，之和大于所求值则表示所加的数过大需要减小，就把尾指针–；而之和小于所求值的话表示所加的数国小需要增加，就把头指针++；当之和等于所求值的时候返回当前的头指针和尾指针的角标。</p>
+
+<p>注意返回的格式是一个数组，并且是元素的位置而非角标，所以得把角标加一并存放到数组中去。</p>
+
+<h2 id="java求解的代码">Java求解的代码</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span><span class="o">[]</span> <span class="nf">twoSum</span><span class="o">(</span><span class="kt">int</span><span class="o">[]</span> <span class="n">num</span><span class="o">,</span> <span class="kt">int</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+        <span class="kt">int</span><span class="o">[]</span> <span class="n">indice</span> <span class="o">=</span> <span class="k">new</span> <span class="kt">int</span><span class="o">[</span><span class="mi">2</span><span class="o">];</span>
+        <span class="k">if</span> <span class="o">(</span><span class="n">num</span> <span class="o">==</span> <span class="kc">null</span> <span class="o">||</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">&lt;</span> <span class="mi">2</span><span class="o">)</span> <span class="k">return</span> <span class="n">indice</span><span class="o">;</span>
+        <span class="kt">int</span> <span class="n">left</span> <span class="o">=</span> <span class="mi">0</span><span class="o">,</span> <span class="n">right</span> <span class="o">=</span> <span class="n">num</span><span class="o">.</span><span class="na">length</span> <span class="o">-</span> <span class="mi">1</span><span class="o">;</span>
+        <span class="k">while</span> <span class="o">(</span><span class="n">left</span> <span class="o">&lt;</span> <span class="n">right</span><span class="o">)</span> <span class="o">{</span>
+            <span class="kt">int</span> <span class="n">v</span> <span class="o">=</span> <span class="n">num</span><span class="o">[</span><span class="n">left</span><span class="o">]</span> <span class="o">+</span> <span class="n">num</span><span class="o">[</span><span class="n">right</span><span class="o">];</span>
+            <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">==</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">indice</span><span class="o">[</span><span class="mi">0</span><span class="o">]</span> <span class="o">=</span> <span class="n">left</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="n">indice</span><span class="o">[</span><span class="mi">1</span><span class="o">]</span> <span class="o">=</span> <span class="n">right</span> <span class="o">+</span> <span class="mi">1</span><span class="o">;</span>
+                <span class="k">break</span><span class="o">;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(</span><span class="n">v</span> <span class="o">&gt;</span> <span class="n">target</span><span class="o">)</span> <span class="o">{</span>
+                <span class="n">right</span> <span class="o">--;</span>
+            <span class="o">}</span> <span class="k">else</span> <span class="o">{</span>
+                <span class="n">left</span> <span class="o">++;</span>
+            <span class="o">}</span>
+        <span class="o">}</span>
+        <span class="k">return</span> <span class="n">indice</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

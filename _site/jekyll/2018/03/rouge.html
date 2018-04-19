@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      Jekyll博客代码块语法高亮设置 &middot; wangxin
     
   </title>
 
@@ -110,13 +110,78 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">Jekyll博客代码块语法高亮设置</h1>
+    <span class="post-meta">20 March, 2018. It was a Tuesday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="使用jekyll搭建的博客发现编写代码的时候无法实现语法高亮现通过rouge模块生成对应语法高亮css来实现代码快语法高亮">使用jekyll搭建的博客，发现编写代码的时候无法实现语法高亮，现通过rouge模块生成对应语法高亮CSS来实现代码快语法高亮</h1>
+
+<p>首先电脑上得安装Ruby，具体安装过程请自行搜索</p>
+
+<h2 id="1安装rouge">1.安装rouge</h2>
+
+<p>首先使用gem安装rouge、kramdown</p>
+
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>gem install kramdown
+gem install rouge
+</code></pre></div></div>
+
+<h2 id="2配置_configyml文件">2.配置_config.yml文件</h2>
+
+<p>在_config.yml文件中添加如下代码：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+</code></pre></div></div>
+
+<h2 id="3生成rouge-css">3.生成rouge css</h2>
+
+<p>安装rouge 后，就可以用附带的 rougify 工具来生成多种高亮主题的CSS文件，个人比较喜欢monokai.sublime 主题.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>rougify style monokai.sublime &gt; syntax.css
+</code></pre></div></div>
+
+<h2 id="4使用rouge">4.使用rouge</h2>
+
+<p>将上述生成的syntax.css文件拷到博客对应的css目录下,在网站的HTML代码的&lt;head&gt;标签内加载</p>
+<div class="language-html highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">&lt;link</span> <span class="na">rel=</span><span class="s">"stylesheet"</span> <span class="na">href=</span><span class="s">"/assets/css/syntax.css"</span><span class="nt">&gt;</span>
+</code></pre></div></div>
+
+<h2 id="5修改rouge">5.修改rouge</h2>
+
+<p>打开网站浏览效果发现代码块的背景为浅色背景，且代码的字体过小。修改刚才的syntax.css文件，在最后面加上：</p>
+<div class="language-css highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="nt">pre</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s2">'highlight'</span><span class="o">]</span> <span class="p">{</span><span class="nl">background-color</span><span class="p">:</span><span class="m">#272822</span><span class="p">;}</span>
+<span class="nt">pre</span><span class="o">[</span><span class="nt">class</span><span class="o">=</span><span class="s2">'highlight'</span><span class="o">]</span> <span class="p">{</span><span class="nl">font-size</span><span class="p">:</span> <span class="m">1em</span><span class="p">;}</span>
+</code></pre></div></div>
+
+<h2 id="注意如果不是本地调试网站而是发布到github直接浏览的话需要等待一段时间来加载css样式文件所有改动之后不会立即生效请耐心等待">注意：如果不是本地调试网站而是发布到GitHub直接浏览的话，需要等待一段时间来加载CSS样式文件，所有改动之后不会立即生效，请耐心等待。</h2>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

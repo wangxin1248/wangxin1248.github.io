@@ -11,24 +11,33 @@
   <link rel="stylesheet" href="/assets/css/normalize.css"/>
   <link rel="stylesheet" href="/assets/css/bulma.css"/>
   <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 
   <!-- Icons -->
-  <link rel="shortcut icon" href="/assets/images/icon.png">
+  <link rel="shortcut icon" href="/assets/images/icon-xin.png">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
+  
   <title>
     
-      hello &middot; pipxia
+      just do it! &middot; wangxin
     
   </title>
 
 </head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101239613-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-101239613-1');
+</script>
 
 <!-- Google analytics -->
 
@@ -36,7 +45,7 @@
 <body>
 
 <section class="hero is-dark">
-  <div class="hero-body">
+  <div class="hero-body" >
     <div class="container">
         <h1 class="title">
           <!-- 网站顶部提示信息 -->
@@ -87,6 +96,7 @@
 
       <div class="nav-right nav-menu" id='nav-menu'>
         <a href="/archive" class="nav-item">Archive</a>
+        <a href="/categories" class="nav-item">categories</a>
         <a href="/tags" class="nav-item">Tags</a>
       </div>
 
@@ -100,20 +110,349 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">hello</h1>
+    <h1 class="post-title">just do it!</h1>
     <hr/>
-    <div class="content"><span class="post-text"><ul class="posts">
+    <div class="content"><span class="post-text"><!-- 分页功能实现 -->
+
+
+
+<div align="center">
+    <!-- 上一页跳转 -->
+    
+    <!-- 遍历中间的页 -->
+        
+    <!-- 下一页跳转 -->
+    
+</div>
+
+<!-- <ul class="posts">
+    
+    <li class="post">
+        <small>19 Apr 2018</small>
+        <small><a style="color:grey" href="/linux/2018/04/linux-adduser.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/linux/2018/04/linux-adduser.html">linux服务器中添加一个用户并赋予相应权限</a>
+        <p class="nice-text">linux服务器中添加一个用户并赋予相应权限 在unix/linux中添加用户账号可以使用adduser或者useradd命令，因为adduser命令时指向useradd命令的一个链接。因此，这两个命令的使用格式完全一样。 接下来便使用useradd命令来添加一个新的用户到服务器中，注意：以下的代码得以root用户的身份进行 创建用户账号 sudo useradd 用户名 -m -d /home/用户名 命令参数： -d： 指定用户登录系统时的主目录，如果不使用该参数，系统自动在/home目录下建立与用户名同名的目录为主目录。 -m： 自动建立目录 -g： 指定组名称 说明 linux每个用户都要有一个主目录，主目录就是第一次登录系统，用户默认的当前目录。 每一个用户必须有一个主目录，所以用useradd创建用户的时候，一定得给用户指定一个主目录。 用户的主目录一般要在根目录的home目录下，用户的主目录和用户名是相同的。 如果创建用户的时候不指定组名，那么系统会自动创建一个和用户名一样的组名。 设置用户密码 passwd 用户名 在unix/linux中，超级用户可以使用passwd命令为普通用户设置或修改用户口令。用户也可以直接使用该命令来修改自己的口令，而无需在命令的后面使用用户名。 为创建的用户添加sudo权限 新创建的用户，默认不能使用sudo，需要进行相应的设置 sudo usermod -a -G adm 用户名 sudo usermod -a -G sudo 用户名 命令参数： -a： 用来指定这个用户默认的用户组 -G： 一般配合‘-a’来完成其他组的添加 切换到用户为新创建的用户 su - 用户名 命令参数：... <a href="/linux/2018/04/linux-adduser.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>18 Apr 2018</small>
+        <small><a style="color:grey" href="/linux/2018/04/ubuntu-install-mysql.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/linux/2018/04/ubuntu-install-mysql.html">Ubuntu16.04服务器安装mysql数据库并配置远程连接</a>
+        <p class="nice-text">在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库并配置远程连接 安装mysql 安装之前首先需要更新系统的软件源 sudo apt-get update 更新完之后便可以安装mysql服务器和客户端了 sudo apt-get install mysql-server mysql-client libmysqlclient-dev 在安装过程中会提示是否确认安装 属于y确认安装 接下来会提示输入相关的root密码 以上3个软件包安装完成后，使用如下命令查询是否安装成功： sudo netstat -tap | grep mysql 查询结果如下图所示，表示安装成功。 安装完成之后便可以进行登录mysql数据库 mysqld服务操作命令 启动mysqld服务: sudo /etc/init.d/mysql start 停止mysqld服务: sudo /etc/init.d/mysql stop 启动mysqld服务: sudo /etc/init.d/mysql restart 配置mysql远程连接 编辑mysql配置文件，把其中bind-address = 127.0.0.1注释了 sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 使用root进入mysql命令行，执行如下2个命令 grant all... <a href="/linux/2018/04/ubuntu-install-mysql.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>17 Apr 2018</small>
+        <small><a style="color:grey" href="/linux/2018/04/ubuntu-set-chinese-language.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/linux/2018/04/ubuntu-set-chinese-language.html">linux服务器设置语言环境为支持中文</a>
+        <p class="nice-text">linux服务器设置语言环境为支持中文
+
+最近想在Linux服务器中进行开发工作，但在编辑文件时发现不能输入中文，在文件中输入的中文会变成乱码。在网上找了好久之后发现来下面这种方法可以很简单的设置服务器支持中文。
+
+本教程是在Ubuntu16.04 服务器版本下实验成功，理论上所有的服务器都支持这样设置。
+
+安装语言包
+
+修改locale.gen文件
+sudo vim /etc/locale.gen
+
+将文件中的zh_CN.GBK GBK zh_CN.UTF8 UTF8的注释去掉
+
+下载语言
+sudo locale-gen
+
+
+这样设置之后服务器便可以正常使用中文进行输入了。
+ <a href="/linux/2018/04/ubuntu-set-chinese-language.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>16 Apr 2018</small>
+        <small><a style="color:grey" href="/linux/2018/04/ubuntu-install-shadowsocks.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/linux/2018/04/ubuntu-install-shadowsocks.html">Ubuntu16.04服务器安装shadowsocks</a>
+        <p class="nice-text">UBUNTU 16.04服务器上搭建SHADOWSOCKS服务 最近购买了搬瓦工的vps，想着搭个梯子用来在国外看些最新技术资料，现将搭建过程分享给大家。 本教程仅供教育和科学使用，勿进行其他用途。 shadowsocks 服务器安装 首先更新软件源 sudo apt-get update 然后安装 PIP 环境 sudo apt-get install python-pip 接下来直接安装shadowsocks sudo pip install shadowsocks 运行 shadowsocks 服务器 创建shadowsocks配置文件 使用如下命令创建并打开配置文件 sudo vi /etc/shadowsocks.json 在打开的界面里，输入i进入编辑模式，输入如下内容： { “server”:“server_ip”, “server_port”:443, “local_address”: “127.0.0.1”, “local_port”:1080, “password”:“password”, “timeout”:300, “method”:“rc4-md5” } 编辑完成后按esc并输入：x 退出编辑 其中各个字段的含义如下： server 服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址... <a href="/linux/2018/04/ubuntu-install-shadowsocks.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>13 Apr 2018</small>
+        <small><a style="color:grey" href="/life/2018/04/mac-install-python.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/life/2018/04/mac-install-python.html">macOS中安装python3</a>
+        <p class="nice-text">macOS中安装python3
+在最新的macOS系统中已经默认安装了python2，但目前python3处于主流地位，许多新的项目已经使用python3进行开发了。于是便得需要在macOS中安装python3.
+
+在macOS中安装python3得需要通过Homebrew来进行安装。
+Homebrew
+Homebrew是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，相当于linux下的apt-get、yum神器
+
+Homebrew可以在Mac上安装一些OS X没有的UNIX工具，Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。
+Homebrew官网：https://brew.sh/
+Homebrew安装
+在macOS的终端中输入如下的命令来安装Homebrew
+ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+
+安装万完之后查看安装的版本
+ brew --version
+
+正确显示版本号便是安装成功
+
+通过Homebrew来安装python3
+安装好Homebrew之后便可以来安装python3了，使用如下的命令来进行安装：
+ brew install python3
+
+安装完成之后输入如下的命令查看安装的版本号
+ python3 --version
+
+正确显示版本号即为安装成功。
+ <a href="/life/2018/04/mac-install-python.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>20 Mar 2018</small>
+        <small><a style="color:grey" href="/jekyll/2018/03/rouge.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/jekyll/2018/03/rouge.html">Jekyll博客代码块语法高亮设置</a>
+        <p class="nice-text">使用jekyll搭建的博客，发现编写代码的时候无法实现语法高亮，现通过rouge模块生成对应语法高亮CSS来实现代码快语法高亮
+
+首先电脑上得安装Ruby，具体安装过程请自行搜索
+
+1.安装rouge
+
+首先使用gem安装rouge、kramdown
+
+gem install kramdown
+gem install rouge
+
+
+2.配置_config.yml文件
+
+在_config.yml文件中添加如下代码：
+highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+
+
+3.生成rouge css
+
+安装rouge 后，就可以用附带的 rougify 工具来生成多种高亮主题的CSS文件，个人比较喜欢monokai.sublime 主题.
+rougify style monokai.sublime &gt; syntax.css
+
+
+4.使用rouge
+
+将上述生成的syntax.css文件拷到博客对应的css目录下,在网站的HTML代码的&lt;head&gt;标签内加载
+&lt;link rel="stylesheet" href="/assets/css/syntax.css"&gt;
+
+
+5.修改rouge
+
+打开网站浏览效果发现代码块的背景为浅色背景，且代码的字体过小。修改刚才的syntax.css文件，在最后面加上：
+pre[class='highlight'] {background-color:#272822;}
+pre[class='highlight'] {font-size: 1em;}
+
+
+注意：如果不是本地调试网站而是发布到GitHub直接浏览的话，需要等待一段时间来加载CSS样式文件，所有改动之后不会立即生效，请耐心等待。
+ <a href="/jekyll/2018/03/rouge.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>19 Mar 2018</small>
+        <small><a style="color:grey" href="/jekyll/2018/03/usehttps.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/jekyll/2018/03/usehttps.html">设置GitHub个人主页为https访问</a>
+        <p class="nice-text">使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，如果需要使用安全的https进行访问，则需要进行相应的设置来实现安全的访问
+
+使用Jekyll搭建的博客已经差不多，也换上了自己的域名，但是在使用Chrome访问网站的时候没有小绿标总是感觉很别扭。上网一搜，原来不用去申请什么key来实现加密传输，只需要将自己的域名托管到cloudflare即可，具体的实现如下：
+
+GitHub建立的博客访问可以通过github.io也可以通过自定义的域名进行访问
+
+使用github.io域名时的设置
+
+
+  进入github pages对应的仓库首界面
+  点击Settings，进入这个仓库的设置界面
+  找到GitHub Pages配置栏，勾选Enforce HTTPS
+
+
+这样，通过github.io域名进行访问是便是安全的https协议
+
+使用自定义域名的设置
+当在仓库的Settings中设置过Custom domain时，是无法勾选Enforce HTTPS的。 这里，变得使用cloudflare来托管域名了。
+
+首先打开cloudflare的官网点这里
+
+点击登录，如果没有帐号，则新建一个帐号。
+
+点击Add Website新增一个网站，注意需要输入你的自定义域名
+
+
+选择NEXT
+
+
+选择对应的套餐，一般个人网站使用免费的套餐就够用了
+
+
+接下来会自动获取域名下的DNS解析记录，直接continue即可。
+
+接下来会让你去修改DNS对应的解析域名服务器
+
+
+cloudflare的设置完成，接下来需要到原域名的托管处修改DNS的域名服务器，我使用的是阿里云万网下的域名解析，这里以万网的为例：
+
+打开万网的域名控制台，进入域名的基本管理，点击DNS修改
+
+
+在DNS修改界面将原先的DNS域名服务器修改成刚才cloudflare设置的。
+
+设置完成之后回到cloudflare的管理界面，等待几分钟等域名解析生效，可以看到当前域名的状态为Active
+
+
+接下来设置SSL的状态为Flexible（注意，这里只能设置为Flexible，Full要求在服务器上有对应密钥，GitHub pages不支持。）
+
+
+并将always use https 选项打开
+
+
+接下来就是等待https证书的制作完成，稍后打开你的网站，看一下，是不是小绿锁完美的展现了呢。
+ <a href="/jekyll/2018/03/usehttps.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>18 Mar 2018</small>
+        <small><a style="color:grey" href="/java/2018/03/mystack.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/java/2018/03/mystack.html">使用java设计实现顺序栈的基本结构</a>
+        <p class="nice-text">使用java设计实现顺序栈的基本结构，并且使用自定义的栈结构实现输入一个字符串来判断()以及[]是否匹配 基本栈结构介绍 顺序栈是一种FILO的结构，根据顺序栈的特性可以通过数组来实现顺序栈的相关操作。 使用一个头指针来作为数组存储元素的标识，当存入元素时头指针++既实现压栈操作。 当取出一个元素时，直接返回当前头指针所对应的元素，并将头指针指为空，指针–既实现出栈操作。 获取栈顶元素时直接返回当前指针所指向的元素。 当然，在压栈时得判断栈是否满，否则会出现上溢的情况；与此同时出栈以及获取栈顶元素时得判断栈是否为空，否则会出现下溢的情况。 实现思路 利用一个泛型数组来存储指定泛型类型的数据，并且使用一个头指针来对所存元素的位置进行指向，读取元素时想应的头指针都应变化。 代码实现 首先先来编写一个栈的接口，声明对于的操作函数： interface IStack&lt;T&gt;{ // 出栈 public T pop(); // 入栈 public void push(T element)throws Exception; // 获取栈顶元素 public T top()throws Exception; // 栈判空 public boolean isEmpty(); // 栈判溢 public boolean isFull(); // 获取当前栈中所存元素的长度 public int getLength(); // 清空栈 public void... <a href="/java/2018/03/mystack.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>18 Mar 2018</small>
+        <small><a style="color:grey" href="/java/2018/03/8code.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/java/2018/03/8code.html">ACM题目：连阴雨</a>
+        <p class="nice-text">ACM题目：连阴雨求解其实思路讲解，附上解答代码，欢迎大家留言讨论 要求 时限：1000ms 内存限制：10000K  总时限：3000ms 描述 因为连续的降雨，我们学校操场上出现了许多水坑，现在需要统计一共有多少个水坑。 题目输入为一个N譓 (1 &lt;= N &lt;= 100; 1 &lt;= M &lt;= 100)的图，(‘W’) 代表积水，(‘.’)代表干燥。 一处积水我们认为和它周围的八个方向相邻，相邻的积水构成一个水坑。 需要输出一个数字，表示一共有多少个互不相邻的水坑。 输入 第一行：两个正整数n和m。 第二行到第n+1行：输入操场信息，每一点的状态只可能是’W’ 或者’.’。 输出 输出一个正整数，表示不相邻的水坑的数目。   输入样例 10 12 W........WW. .WWW.....WWW ....WW...WW. .........WW. .........W.. ..W......W.. .W.W.....WW. W.W.W.....W. .W.W......W. ..W.......W. 输出样例 3 思路 本题是深度优先搜索应用的一道题，属于最大联通块问题。 首先建立对应的n行m列的二维数组来存储对应的水坑，再建立与之相同大小的二维数组，用来保存数组的访问信息。 接下来遍历二维数组，当当前位置的元素未被访问并且其值为W时，将当前位置标记为已经访问过了。接着使用深度优先遍历搜索以当前点为中心的八个位置，当这八个位置里有满足未被访问的元素并且值为W的，使用深度优先遍历该节点的八个位置。 这样递归下去，就会将一个水坑的所有元素都便利到，这样的一次深度遍历会找到一个水坑，进行几次深度遍历就会得到几个水坑。所以，水坑的次数和深度搜索的次数保持一致。 这样，便可以通过编程来解决这道问题。 java代码 public class Question17 { // 全局变量，保存输入的数据 static int m,n; static char a[][]; static int... <a href="/java/2018/03/8code.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>14 Mar 2018</small>
+        <small><a style="color:grey" href="/leetcode/2018/03/palindrome_number.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/leetcode/2018/03/palindrome_number.html">LeetCode题目9.Palindrome Numbers</a>
+        <p class="nice-text">LeetCode刷题之题目9.Palindrome Numbers Description Determine whether an integer is a palindrome. Do this without extra space. Some hints Could negative integers be palindromes? (ie, -1) If you are thinking of converting the integer to string, note the restriction of using extra space. You could also try reversing an integer. However, if... <a href="/leetcode/2018/03/palindrome_number.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>08 Mar 2018</small>
+        <small><a style="color:grey" href="/leetcode/2018/03/reverse_integer.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/leetcode/2018/03/reverse_integer.html">LeetCode题目7.Reverse Integer</a>
+        <p class="nice-text">LeetCode刷题之题目7.Reverse Integer Description Given a 32-bit signed integer, reverse digits of an integer. Example 1: Input: 123 Output: 321 Example 2: Input: -123 Output: -321 Example 3: Input: 120 Output: 21 Note Assume we are dealing with an environment which could only hold integers within the 32-bit signed integer range.... <a href="/leetcode/2018/03/reverse_integer.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>05 Mar 2018</small>
+        <small><a style="color:grey" href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-2.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-2.html">python学习笔记基础篇-python基础知识(1)</a>
+        <p class="nice-text">python学习笔记记录之基础篇，学习如何使用python输出Hello World，以及一些python的简单操作。 在学习一门语言之前，按照惯例先实现Hello World的输出 在Ubuntu的命令行中输入python进入python的交互模式，然后输入如下的代码，回车执行： print("Hello World") 恭喜你，python入门的第一步就结束了。 1.python交互模式 在安装了Linux之后，可以直接在shell中对python的语法进行测试，这样当在程序中遇到不了解具体使用方式的函数时可以直接在shell中进行测试。 根据所安装的python版本不用，进入交互模式的方法有所不同。这里以python3为例： 在Ubuntu的终端中输入： python3 这样就进入到了python交互模式，可以在这里执行相应的python代码 还有一种交互模式，其功能较python自带的强大且支持命令，那就是ipython3 在Ubuntu系统中输入 sudo apt-get install ipython3 来安装ipython3 接下来输入 ipython3 来进行ipython3的交互模式，在交互模式中输入ls命令来显示当前文件夹下的文件，并执行hello world程序。 2.注释 在python程序中是以#开头来注释代码的，#是进行单行注释 想要进行多行注释，则得使用一对’'’或者一对”"”来进行。 #这是python程序中的单行注释 """ 这是python程序中的多行注释 """ ''' 这是python程序中的多行注释 ''' 以上方式都可以进行python程序注释，可以根据需要进行使用。 注意： 在python2中出现中文注释是会报错的，需要在程序开头指定编码格式： #-*- coding:utf-8 -*- 3.变量 变量：用来存储数据的一个容器 python中不需要指定具体变量的格式，而是根据右边所附值的类型确定变量的格式，python中变量定义的格式为： 变量名 = 变量值 eg: #定义了一个变量，变量名为score，里面存储的数为100 score... <a href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-2.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>05 Mar 2018</small>
+        <small><a style="color:grey" href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-1.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-1.html">python学习笔记基础篇-认识python</a>
+        <p class="nice-text">python学习笔记记录之基础篇，首先先来认识下什么是python，以及python具有什么样的特点
+
+1.python程序运行过程
+
+使用python语言编写的程序要经过python解释器的解释才能在操作系统上运行。
+
+
+
+python语言编写的程序不需要编译成二进制代码，可以直接从源代码运行程序。在计算机内部，python解释器把源代码转换为字节码的中间形式，然后把它翻译成计算机使用的机器语言并运行。
+
+所以说：python程序是一门边解释边执行的语言。
+
+2.python的优缺点
+
+优点：
+
+
+  简单，python是一种代表简单主义思想的语言
+  易学
+  免费开源
+  高层语言，无需考虑底层实现
+  可移植性，可以移植在许多平台上
+  解释性
+  面向对象，python既支持面向过程的编码，也支持面向对象的编码。
+  可扩展性，python可以调用其它语言
+  丰富的库
+  规范的代码
+
+
+缺点：
+
+  运行效率不高，有速度要求的可以使用c++编写关键部分
+  国内市场较小
+  中文资料匮乏
+  架构选择太多
+
+
+3.python的应用场景
+
+
+  web开发
+  操作系统管理、服务器运维的自动化脚本
+  科学计算
+  桌面软件
+  服务器软件
+  游戏
+  构思实现，产品早期原型和迭代
+
+
+链接：
+
+  python官网:https://www.python.org/
+  python环境搭建：http://www.runoob.com/python/python-install.html
+
+ <a href="/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-1.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>27 Feb 2018</small>
+        <small><a style="color:grey" href="/leetcode/2018/02/twosum2.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/leetcode/2018/02/twosum2.html">LeetCode题目167. Two Sum II - Input array is sorted</a>
+        <p class="nice-text">LeetCode刷题之题目167. Two Sum II - Input array is sorted Description Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number. The function twoSum should return indices of the two numbers such that they add up... <a href="/leetcode/2018/02/twosum2.html">Read more!</a></p>
+    </li>
+    
+    <li class="post">
+        <small>18 Feb 2018</small>
+        <small><a style="color:grey" href="/leetcode/2018/02/twosum.html#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="/leetcode/2018/02/twosum.html">LeetCode题目1. Two Sum</a>
+        <p class="nice-text">开始LeetCode刷题之路，首先进行题目1. Two Sum的求解 Description Given an array of integers, return indices of the two numbers such that they add up to a specific target. You may assume that each input would have exactly one solution, and you may not use the same element twice. Example: Given nums = [2, 7,... <a href="/leetcode/2018/02/twosum.html">Read more!</a></p>
+    </li>
     
     <li class="post">
         <small>28 Jul 2017</small>
         <small><a style="color:grey" href="/life/2017/07/usevpn.html#disqus_thread"></a></small>
         <br>
         <a class="nice-title" href="/life/2017/07/usevpn.html">教育网环境下实现免费上网</a>
-        <p class="nice-text">没错，本教程就是教你免费上网的。 嗯，当然是有前提滴…… 前提 如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。 目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。 原理 本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。 准备条件 服务器提供商 搭建服务器的VPS使用的是bandwagonhost，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。 并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网…… 具体服务器的购买和使用请自行百度 服务器系统 VPS所搭载的系统是CentOS64位 VPN介绍 所使用的VPN是SoftEther VPN SoftEtherVPN是由日本筑波大学的登大遊在硕士论文中提出的开源、跨平台、多重协议的虚拟专用网方案，是专门为穿过防火墙而设计的。我们可以用它在自己的VPS上搭建一个简单的VPN来使用。 服务器端搭建 下载解压 首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。 32位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz 64位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz 以上为截止发布本文时的最新版本，建议从SoftEther官方网站获取最新版本。 安装启动 解压下载的文件 tar -zxvf softether-vpnserver-*.tar.gz 将解压的文件移动到/usr/local下 mv vpnserver /usr/local 进入解压目录 cd /usr/local/vpnserver 启动安装脚本 ./.install.sh SoftEther VPN Server (Ver 4.22, Build 9630, Intel... <a href="/life/2017/07/usevpn.html">Read more!</a></p>
+        <p class="nice-text">在教育网的环境下使用SoftEtherVPN搭建VPN服务器，通过VPN服务器的相关配置实现在教育网环境下免费使用网络 没错，本教程就是教你免费上网的。 嗯，当然是有前提滴…… 前提 如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。 目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。 原理 本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。 这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。 准备条件 服务器提供商 搭建服务器的VPS使用的是bandwagonhost，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。 并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网…… 具体服务器的购买和使用请自行百度 服务器系统 VPS所搭载的系统是CentOS64位 VPN介绍 所使用的VPN是SoftEther VPN SoftEtherVPN是由日本筑波大学的登大遊在硕士论文中提出的开源、跨平台、多重协议的虚拟专用网方案，是专门为穿过防火墙而设计的。我们可以用它在自己的VPS上搭建一个简单的VPN来使用。 服务器端搭建 下载解压 首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。 32位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz 64位系统 wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz 以上为截止发布本文时的最新版本，建议从SoftEther官方网站获取最新版本。 安装启动 解压下载的文件 tar -zxvf softether-vpnserver-*.tar.gz 将解压的文件移动到/usr/local下 mv vpnserver /usr/local 进入解压目录 cd /usr/local/vpnserver 启动安装脚本 ./.install.sh 接下来显示 SoftEther VPN Server (Ver 4.22,... <a href="/life/2017/07/usevpn.html">Read more!</a></p>
     </li>
     
-</ul>
+</ul> -->
 
+
+<!-- 多说评论功能 -->
 <script type="text/javascript">
     /* * * CONFIGURATION VARIABLES * * */
     var disqus_shortname = 'nagekar';
@@ -134,30 +473,8 @@
       <div class="tile is-4 is-child">
         <div class="tile is-parent is-vertical sidebar">
 
+          <!-- 个人头像 -->
           <div class="tile is-child widget">
-
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title nice-title">
-                  Recent Posts
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content nice-text">
-                  <ul>
-                  
-                  <li><a href="/life/2017/07/usevpn.html">
-                    教育网环境下实现免费上网
-                  </a></li>
-                  
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tile is-child widget">
-
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title nice-title">
@@ -166,13 +483,64 @@
               </header>
               <div class="card-content">
                 <div class="content nice-text">
-                  <img src="/assets/images/Dust_Bunny.jpg"/>
+                    <a href="/resume.html"><img src="/assets/images/web_hi_res_512.png"/></a>
                 </div>
               </div>
             </div>
+          </div>
+          <!-- 文章分类 -->
+          <div class="tile is-child widget">
 
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                Article classification
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  
+                  <ul class="categories_box inline">
+                      
+                    
+
+
+  
+     
+    	<li><a href="/categories#Life-ref">
+    		Life <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#leetcode-ref">
+    		leetcode <span>4</span>
+    	</a></li>
+     
+    	<li><a href="/categories#python-ref">
+    		python <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#java-ref">
+    		java <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#jekyll-ref">
+    		jekyll <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#linux-ref">
+    		linux <span>4</span>
+    	</a></li>
+    
+  
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <!-- 推荐网站部分 -->
           <div class="tile is-child widget">
             <div class="card">
               <header class="card-header">
@@ -184,10 +552,13 @@
                 <div class="content nice-text">
                   <ul>
                     <li>
-                      <a href="www.pipxia.com">pipxia</a>
+                      <a href="https://leetcode.com/">leetcode</a>
                     </li>
                     <li>
-                      <a href="www.bilibili.com">BiliBili</a>
+                      <a href="http://blog.csdn.net/icarus_wang/">csdn blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT home</a>
                     </li>
                   </ul>
                 </div>
@@ -208,10 +579,10 @@
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        Some rights reserved.
+        Copyright (C) wangxin1248, All Rights Reserved.
       </p>
       <p>
-        Made with <a href="https://github.com/wangxin1248">wangxin1248</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+        Made with <a href="/resume.html">wangxin</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
       </p>
       <p>
         <a class="icon" href="https://github.com/wangxin1248">

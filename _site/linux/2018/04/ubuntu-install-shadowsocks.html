@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      Ubuntu16.04服务器安装shadowsocks &middot; wangxin
     
   </title>
 
@@ -110,13 +110,135 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">Ubuntu16.04服务器安装shadowsocks</h1>
+    <span class="post-meta">16 April, 2018. It was a Monday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="ubuntu-1604服务器上搭建shadowsocks服务">UBUNTU 16.04服务器上搭建SHADOWSOCKS服务</h1>
+<p>最近购买了搬瓦工的vps，想着搭个梯子用来在国外看些最新技术资料，现将搭建过程分享给大家。
+本教程仅供教育和科学使用，勿进行其他用途。</p>
+
+<h2 id="shadowsocks-服务器安装">shadowsocks 服务器安装</h2>
+
+<p>首先更新软件源</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+</code></pre></div></div>
+
+<p>然后安装 PIP 环境</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install python-pip
+</code></pre></div></div>
+
+<p>接下来直接安装shadowsocks</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo pip install shadowsocks
+</code></pre></div></div>
+
+<h2 id="运行-shadowsocks-服务器">运行 shadowsocks 服务器</h2>
+
+<h3 id="创建shadowsocks配置文件">创建shadowsocks配置文件</h3>
+
+<p>使用如下命令创建并打开配置文件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/shadowsocks.json
+</code></pre></div></div>
+
+<p>在打开的界面里，输入i进入编辑模式，输入如下内容：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+“server”:“server_ip”,
+“server_port”:443,
+“local_address”: “127.0.0.1”,
+“local_port”:1080,
+“password”:“password”,
+“timeout”:300,
+“method”:“rc4-md5”
+}
+</code></pre></div></div>
+
+<p>编辑完成后按esc并输入：x 退出编辑
+其中各个字段的含义如下：</p>
+<blockquote>
+  <ul>
+    <li>server	服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址</li>
+    <li>server_port	服务器端口</li>
+    <li>local_port	本地端端口</li>
+    <li>password	用来加密的密码</li>
+    <li>timeout	超时时间（秒）</li>
+    <li>method	加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″, 等等。</li>
+  </ul>
+</blockquote>
+
+<p>加密方式推荐使用rc4-md5，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看 issue。</p>
+
+<p>如果需要配置多个用户，可以按照下面的配置修改配置文件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>{
+“server”:“server_ip”,
+“port_password”: {
+“端口1”: “密码1”,
+“端口2”: “密码2”
+},
+“timeout”:300,
+“method”:“rc4-md5”,
+“fast_open”: false
+}
+</code></pre></div></div>
+
+<p>创建完成后，给文件相应的权限</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo chmod 755 /etc/shadowsocks.json
+</code></pre></div></div>
+
+<p>安装所需的软件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt–get install python–m2crypto
+</code></pre></div></div>
+
+<p>设置配置文件在后台运行</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo ssserver -c /etc/shadowsocks.json -d start
+</code></pre></div></div>
+
+<h3 id="配置shadowsocks开机自启动">配置shadowsocks开机自启动</h3>
+<p>编辑 /etc/rc.local 文件</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/rc.local
+</code></pre></div></div>
+
+<p>在 exit 0 这一行的上边加入如下</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/usr/local/bin/ssserver –c /etc/shadowsocks.json
+</code></pre></div></div>
+
+<p>到此配置完成。重启服务器后，ss会自动启动。</p>
+
+<h2 id="安装和配置shadowsocks客户端">安装和配置shadowsocks客户端</h2>
+<ul>
+  <li>Android版下载地址：<a href="https://github.com/shadowsocks/shadowsocks-android/releases/download/v4.5.6/shadowsocks--universal-4.5.6.apk">点击下载</a></li>
+  <li>ios版下载地址：<a href="https://www.25pp.com/ios/detail_1923429/">点击下载</a></li>
+  <li>Windows版下载地址：<a href="https://github.com/shadowsocks/shadowsocks-windows/releases/download/4.0.9/Shadowsocks-4.0.9.zip">点击下载</a></li>
+  <li>macOS版下载地址：<a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.7.1/ShadowsocksX-NG.1.7.1.zip">点击下载</a></li>
+  <li>linux版下载地址：<a href="https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation">点击查看</a></li>
+</ul>
+
+<p>将上面配置文件中的ip地址、端口号、密码、加密方式填写到客户端点击连接即可。</p>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

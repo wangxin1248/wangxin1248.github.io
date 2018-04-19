@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      macOS中安装python3 &middot; wangxin
     
   </title>
 
@@ -110,13 +110,62 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">macOS中安装python3</h1>
+    <span class="post-meta">13 April, 2018. It was a Friday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="macos中安装python3">macOS中安装python3</h1>
+<p>在最新的macOS系统中已经默认安装了python2，但目前python3处于主流地位，许多新的项目已经使用python3进行开发了。于是便得需要在macOS中安装python3.</p>
+
+<p>在macOS中安装python3得需要通过Homebrew来进行安装。</p>
+<h2 id="homebrew">Homebrew</h2>
+<p>Homebrew是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，相当于linux下的apt-get、yum神器</p>
+
+<p>Homebrew可以在Mac上安装一些OS X没有的UNIX工具，Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。
+Homebrew官网：<a href="https://brew.sh/">https://brew.sh/</a></p>
+<h3 id="homebrew安装">Homebrew安装</h3>
+<p>在macOS的终端中输入如下的命令来安装Homebrew</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+</code></pre></div></div>
+<p>安装万完之后查看安装的版本</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> brew --version
+</code></pre></div></div>
+<p>正确显示版本号便是安装成功</p>
+
+<h2 id="通过homebrew来安装python3">通过Homebrew来安装python3</h2>
+<p>安装好Homebrew之后便可以来安装python3了，使用如下的命令来进行安装：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> brew install python3
+</code></pre></div></div>
+<p>安装完成之后输入如下的命令查看安装的版本号</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code> python3 --version
+</code></pre></div></div>
+<p>正确显示版本号即为安装成功。</p>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

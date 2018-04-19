@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/normalize.css"/>
+  <link rel="stylesheet" href="/assets/css/bulma.css"/>
+  <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="/assets/images/icon-xin.png">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <title>
+    
+      使用java设计实现顺序栈的基本结构 &middot; wangxin
+    
+  </title>
+
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101239613-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-101239613-1');
+</script>
+
+<!-- Google analytics -->
+
+
+<body>
+
+<section class="hero is-dark">
+  <div class="hero-body" >
+    <div class="container">
+        <h1 class="title">
+          <!-- 网站顶部提示信息 -->
+          <span class="typewrite" data-period="2000" data-type='[ "Hello,World","你好，世界","こんにちは世界","안녕하세요 세계","Bonjour le monde","Привет мир"]'>
+            <span class="wrap"></span>
+          </span>
+        </h1>
+      <h4 class="subtitle" id="quote">
+      </h4>
+    </div>
+  </div>
+</section>
+
+<div class="main-container">
+  <div class="tile is-ancestor is-vertical">
+
+
+    <nav class="nav has-shadow">
+
+      <div class="nav-left">
+
+        <a href="/" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-home" aria-hidden="true" title="Homepage"></i>
+          </span>
+        </a>
+
+        <a href="https://github.com/wangxin1248" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-github" aria-hidden="true" title="Github"></i>
+          </span>
+        </a>
+
+        <div class="nav-item" id="searchFieldNav">
+          <div class="field has-addons">
+            <p class="control">
+              <input class="input is-small" type="text" placeholder="Find an article" id="search-text">
+            </p>
+            <p class="control">
+              <a class="button is-dark is-small" onclick="searchHandler();">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-right nav-menu" id='nav-menu'>
+        <a href="/archive" class="nav-item">Archive</a>
+        <a href="/categories" class="nav-item">categories</a>
+        <a href="/tags" class="nav-item">Tags</a>
+      </div>
+
+      <span class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+    </nav>
+
+    <div class="tile is-parent">
+      <div class="tile is-8 is-child main">
+
+        <div class="box">
+    <h1 class="post-title">使用java设计实现顺序栈的基本结构</h1>
+    <span class="post-meta">18 March, 2018. It was a Sunday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="使用java设计实现顺序栈的基本结构并且使用自定义的栈结构实现输入一个字符串来判断以及是否匹配">使用java设计实现顺序栈的基本结构，并且使用自定义的栈结构实现输入一个字符串来判断()以及[]是否匹配</h1>
+
+<h3 id="基本栈结构介绍">基本栈结构介绍</h3>
+<p>顺序栈是一种FILO的结构，根据顺序栈的特性可以通过数组来实现顺序栈的相关操作。</p>
+
+<p>使用一个头指针来作为数组存储元素的标识，当存入元素时头指针++既实现压栈操作。</p>
+
+<p>当取出一个元素时，直接返回当前头指针所对应的元素，并将头指针指为空，指针–既实现出栈操作。</p>
+
+<p>获取栈顶元素时直接返回当前指针所指向的元素。</p>
+
+<p>当然，在压栈时得判断栈是否满，否则会出现上溢的情况；与此同时出栈以及获取栈顶元素时得判断栈是否为空，否则会出现下溢的情况。</p>
+
+<h3 id="实现思路">实现思路</h3>
+<p>利用一个泛型数组来存储指定泛型类型的数据，并且使用一个头指针来对所存元素的位置进行指向，读取元素时想应的头指针都应变化。</p>
+
+<h3 id="代码实现">代码实现</h3>
+<p>首先先来编写一个栈的接口，声明对于的操作函数：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">interface</span> <span class="nc">IStack</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;{</span>
+	<span class="c1">// 出栈</span>
+	<span class="kd">public</span> <span class="n">T</span> <span class="nf">pop</span><span class="o">();</span>
+	<span class="c1">// 入栈</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">T</span> <span class="n">element</span><span class="o">)</span><span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+	<span class="c1">// 获取栈顶元素</span>
+	<span class="kd">public</span> <span class="n">T</span> <span class="nf">top</span><span class="o">()</span><span class="kd">throws</span> <span class="n">Exception</span><span class="o">;</span>
+	<span class="c1">// 栈判空</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">();</span>
+	<span class="c1">// 栈判溢</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isFull</span><span class="o">();</span>
+	<span class="c1">// 获取当前栈中所存元素的长度</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getLength</span><span class="o">();</span>
+	<span class="c1">// 清空栈</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmpty</span><span class="o">();</span>
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>定义顺序栈类实现定义的栈接口：</p>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">ArrayStack</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span> <span class="kd">implements</span> <span class="n">IStack</span><span class="o">{</span>
+	<span class="c1">// 栈默认大小</span>
+	<span class="kd">private</span> <span class="kd">final</span>  <span class="kt">int</span> <span class="n">DEFAULT_SIZE</span> <span class="o">=</span> <span class="mi">3</span><span class="o">;</span>
+	<span class="c1">// 栈最大值</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">max_size</span><span class="o">;</span>
+	<span class="c1">// 栈数组</span>
+	<span class="kd">private</span> <span class="n">T</span><span class="o">[]</span> <span class="n">arrayObj</span><span class="o">;</span>
+	<span class="c1">// 栈顶指针，初试默认指向-1</span>
+	<span class="kd">private</span> <span class="kt">int</span> <span class="n">top</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+	
+	<span class="cm">/**
+	 * 默认构造函数
+	 */</span>
+	<span class="kd">public</span> <span class="nf">ArrayStack</span><span class="o">(){</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">max_size</span> <span class="o">=</span> <span class="n">DEFAULT_SIZE</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">arrayObj</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span><span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">max_size</span><span class="o">];</span>
+		<span class="n">top</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+	<span class="o">}</span>
+	
+	<span class="cm">/**
+	 * 带初始值的构造函数
+	 * @param size
+	 */</span>
+	<span class="kd">public</span> <span class="nf">ArrayStack</span><span class="o">(</span><span class="kt">int</span> <span class="n">size</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">max_size</span> <span class="o">=</span> <span class="n">size</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">arrayObj</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span><span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="k">this</span><span class="o">.</span><span class="na">max_size</span><span class="o">];</span>
+		<span class="n">top</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+	<span class="o">}</span>
+	<span class="cm">/**
+	 * 出栈
+	 * 首先判断栈是否为空，不为空则将top指针下的元素返回，并且将该位置清空，top指针--
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">pop</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"栈为空！"</span><span class="o">);</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="n">T</span> <span class="n">result</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="n">arrayObj</span><span class="o">[</span><span class="n">top</span><span class="o">];</span>
+		<span class="n">arrayObj</span><span class="o">[</span><span class="n">top</span><span class="o">]</span> <span class="o">=</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="n">top</span><span class="o">--;</span>
+		<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 入栈，首先判断入栈的元素是否为空，不为空则入栈成功
+	 * 在判断栈是否满，栈满则无法入栈（也可实现为栈满则扩展栈空间），栈不满的情况下将元素存入数组，top++
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">push</span><span class="o">(</span><span class="n">Object</span> <span class="n">element</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">element</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">throw</span> <span class="k">new</span> <span class="nf">Exception</span><span class="o">(</span><span class="s">"入栈的元素不能为空"</span><span class="o">);</span>
+		<span class="o">}</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">isFull</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"栈满了！"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="k">this</span><span class="o">.</span><span class="na">arrayObj</span><span class="o">[++</span><span class="n">top</span><span class="o">]</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">)</span><span class="n">element</span><span class="o">;</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 获取栈顶元素，首先判断栈是否为空，栈为空的话则抛出异常
+	 * 栈不为空的话则返回当前top指针下的内容
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="n">Object</span> <span class="nf">top</span><span class="o">()</span> <span class="kd">throws</span> <span class="n">Exception</span><span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"栈为空！"</span><span class="o">);</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">arrayObj</span><span class="o">[</span><span class="n">top</span><span class="o">];</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 栈判空
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isEmpty</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">top</span> <span class="o">==</span> <span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 栈判溢
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">isFull</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">top</span> <span class="o">==</span> <span class="n">arrayObj</span><span class="o">.</span><span class="na">length</span><span class="o">-</span><span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 获取当前栈中所存元素的长度
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">getLength</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// TODO Auto-generated method stub</span>
+		<span class="k">return</span> <span class="k">this</span><span class="o">.</span><span class="na">top</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="cm">/**
+	 * 清空栈
+	 */</span>
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setEmpty</span><span class="o">()</span> <span class="o">{</span>
+		<span class="c1">// 将数组置空</span>
+		<span class="n">Arrays</span><span class="o">.</span><span class="na">fill</span><span class="o">(</span><span class="n">arrayObj</span><span class="o">,</span> <span class="kc">null</span><span class="o">);</span>
+		
+		<span class="c1">// 指针归位</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">top</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">max_size</span> <span class="o">=</span> <span class="k">this</span><span class="o">.</span><span class="na">DEFAULT_SIZE</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">arrayObj</span> <span class="o">=</span> <span class="o">(</span><span class="n">T</span><span class="o">[])</span><span class="k">new</span> <span class="n">Object</span><span class="o">[</span><span class="n">max_size</span><span class="o">];</span>
+	<span class="o">}</span>
+	
+<span class="o">}</span>
+</code></pre></div></div>
+
+<p>此时，栈结构已经定义好了，接下来利用自定义的栈结构来实现括号的匹配判断</p>
+
+<h3 id="括号匹配思路">括号匹配思路</h3>
+
+<p>对输入的字符串的单个字符进行判断：</p>
+
+<blockquote>
+  <p><strong>如果栈为空则入栈，</strong></p>
+
+  <p><strong>如果栈不为空则判断栈顶元素是否与当前元素匹配，</strong></p>
+
+  <p><strong>匹配则栈顶元素出栈，不匹配则入栈</strong></p>
+
+  <p><strong>最后栈为空则小括号匹配，栈不为空则不匹配</strong></p>
+</blockquote>
+
+<h3 id="代码">代码</h3>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Question8</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="n">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="kd">throws</span> <span class="n">Exception</span> <span class="o">{</span>
+		<span class="n">ArrayStack</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;</span> <span class="n">stack</span> <span class="o">=</span><span class="kc">null</span><span class="o">;</span>
+		<span class="c1">// 使用Scanner获取用户输入</span>
+		<span class="n">Scanner</span> <span class="n">scanner</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Scanner</span><span class="o">(</span><span class="n">System</span><span class="o">.</span><span class="na">in</span><span class="o">);</span>
+		<span class="c1">// 获取用户输入的内容</span>
+		<span class="n">String</span> <span class="n">str</span> <span class="o">=</span> <span class="n">scanner</span><span class="o">.</span><span class="na">next</span><span class="o">();</span>
+		<span class="c1">// 关闭输入流</span>
+		<span class="n">scanner</span><span class="o">.</span><span class="na">close</span><span class="o">();</span>
+		<span class="k">if</span><span class="o">(</span><span class="kc">null</span> <span class="o">==</span> <span class="n">str</span><span class="o">||</span><span class="n">str</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="s">""</span><span class="o">))</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"输入错误!!!"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="c1">// 如果输入的是奇数则证明不匹配</span>
+			<span class="k">if</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">()%</span><span class="mi">2</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="o">{</span>
+				<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"不匹配"</span><span class="o">);</span>
+			<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+				<span class="c1">// 创建自定义的栈对象</span>
+				<span class="n">stack</span> <span class="o">=</span> <span class="k">new</span> <span class="n">ArrayStack</span><span class="o">&lt;</span><span class="n">Character</span><span class="o">&gt;(</span><span class="mi">100</span><span class="o">);</span>
+				<span class="c1">// 对字符串中的单个字符进行判断</span>
+				<span class="k">for</span><span class="o">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="o">;</span><span class="n">i</span><span class="o">&lt;</span><span class="n">str</span><span class="o">.</span><span class="na">length</span><span class="o">();</span><span class="n">i</span><span class="o">++)</span> <span class="o">{</span>
+					<span class="c1">// 当栈为空时，将当前字符压入栈中</span>
+					<span class="k">if</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+						<span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+					<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+						<span class="c1">// 栈不空时，获取栈顶元素并与当前字符进行匹配，匹配成功则当前执行出栈，匹配不成功则入栈</span>
+						<span class="k">if</span><span class="o">((</span><span class="kt">char</span><span class="o">)(</span><span class="n">stack</span><span class="o">.</span><span class="na">top</span><span class="o">())==</span><span class="sc">'('</span><span class="o">&amp;&amp;</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)==</span><span class="sc">')'</span><span class="o">||(</span><span class="kt">char</span><span class="o">)(</span><span class="n">stack</span><span class="o">.</span><span class="na">top</span><span class="o">())==</span><span class="sc">'['</span><span class="o">&amp;&amp;</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">)==</span><span class="sc">']'</span><span class="o">)</span> <span class="o">{</span>
+							<span class="n">stack</span><span class="o">.</span><span class="na">pop</span><span class="o">();</span>
+						<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+							<span class="n">stack</span><span class="o">.</span><span class="na">push</span><span class="o">(</span><span class="n">str</span><span class="o">.</span><span class="na">charAt</span><span class="o">(</span><span class="n">i</span><span class="o">));</span>
+						<span class="o">}</span>
+					<span class="o">}</span>
+				<span class="o">}</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">if</span><span class="o">(</span><span class="n">stack</span><span class="o">.</span><span class="na">isEmpty</span><span class="o">())</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"匹配成功"</span><span class="o">);</span>
+		<span class="o">}</span><span class="k">else</span> <span class="o">{</span>
+			<span class="n">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="s">"匹配失败"</span><span class="o">);</span>
+		<span class="o">}</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+</span>
+</div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+      </div>
+
+      <div class="tile is-4 is-child">
+        <div class="tile is-parent is-vertical sidebar">
+
+          <!-- 个人头像 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Sponsored
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                    <a href="/resume.html"><img src="/assets/images/web_hi_res_512.png"/></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 文章分类 -->
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                Article classification
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  
+                  <ul class="categories_box inline">
+                      
+                    
+
+
+  
+     
+    	<li><a href="/categories#Life-ref">
+    		Life <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#leetcode-ref">
+    		leetcode <span>4</span>
+    	</a></li>
+     
+    	<li><a href="/categories#python-ref">
+    		python <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#java-ref">
+    		java <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#jekyll-ref">
+    		jekyll <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#linux-ref">
+    		linux <span>4</span>
+    	</a></li>
+    
+  
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 推荐网站部分 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recommended Websites
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                    <li>
+                      <a href="https://leetcode.com/">leetcode</a>
+                    </li>
+                    <li>
+                      <a href="http://blog.csdn.net/icarus_wang/">csdn blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT home</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Copyright (C) wangxin1248, All Rights Reserved.
+      </p>
+      <p>
+        Made with <a href="/resume.html">wangxin</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/wangxin1248">
+          <i class="fa fa-github" title="Github"></i>
+        </a>
+        <a class="icon" href="https://weibo.com/wangxin1248">
+          <i class="fa fa-weibo" title="Weibo"></i>
+        </a>
+        <a class="icon" href="mailto:wangxin1248@gmail.com">
+          <i class="fa fa-envelope" title="Email"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- js -->
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/typewriter.js"></script>
+</body>
+</html>

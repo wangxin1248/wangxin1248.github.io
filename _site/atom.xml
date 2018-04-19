@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
- <title>pipxia</title>
- <link href="https://www.pipxia.com/atom.xml" rel="self"/>
- <link href="https://www.pipxia.com"/>
- <updated>2017-09-07T11:37:59+08:00</updated>
- <id>https://www.pipxia.com</id>
+ <title>wangxin</title>
+ <link href="https://wangxin1248.com/atom.xml" rel="self"/>
+ <link href="https://wangxin1248.com"/>
+ <updated>2018-04-19T21:33:26+08:00</updated>
+ <id>https://wangxin1248.com</id>
  <author>
    <name>wangxin1248</name>
    <email>wangxin1248@gmail.com</email>
@@ -13,29 +13,1313 @@
 
  
  <entry>
+   <title>linux服务器中添加一个用户并赋予相应权限</title>
+   <link href="https://wangxin1248.com/linux/2018/04/linux-adduser.html"/>
+   <updated>2018-04-19T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/linux/2018/04/linux-adduser</id>
+   <content type="html">&lt;h1 id=&quot;linux服务器中添加一个用户并赋予相应权限&quot;&gt;linux服务器中添加一个用户并赋予相应权限&lt;/h1&gt;
+
+&lt;p&gt;在unix/linux中添加用户账号可以使用&lt;strong&gt;adduser&lt;/strong&gt;或者&lt;strong&gt;useradd&lt;/strong&gt;命令，因为adduser命令时指向useradd命令的一个链接。因此，这两个命令的使用格式完全一样。&lt;/p&gt;
+
+&lt;p&gt;接下来便使用useradd命令来添加一个新的用户到服务器中，注意：&lt;strong&gt;以下的代码得以root用户的身份进行&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;创建用户账号&quot;&gt;创建用户账号&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo useradd 用户名 -m -d /home/用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;命令参数&quot;&gt;命令参数：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;-d&lt;/strong&gt;：  指定用户登录系统时的主目录，如果不使用该参数，系统自动在/home目录下建立与用户名同名的目录为主目录。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;-m&lt;/strong&gt;：  自动建立目录&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;-g&lt;/strong&gt;：  指定组名称
+    &lt;h3 id=&quot;说明&quot;&gt;说明&lt;/h3&gt;
+    &lt;ol&gt;
+      &lt;li&gt;linux每个用户都要有一个主目录，主目录就是第一次登录系统，用户默认的当前目录。&lt;/li&gt;
+      &lt;li&gt;每一个用户必须有一个主目录，所以用useradd创建用户的时候，一定得给用户指定一个主目录。&lt;/li&gt;
+      &lt;li&gt;用户的主目录一般要在根目录的home目录下，用户的主目录和用户名是相同的。&lt;/li&gt;
+      &lt;li&gt;如果创建用户的时候不指定组名，那么系统会自动创建一个和用户名一样的组名。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;设置用户密码&quot;&gt;设置用户密码&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;passwd 用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;在unix/linux中，超级用户可以使用&lt;strong&gt;passwd&lt;/strong&gt;命令为普通用户设置或修改用户口令。用户也可以直接使用该命令来修改自己的口令，而无需在命令的后面使用用户名。&lt;/p&gt;
+
+&lt;h2 id=&quot;为创建的用户添加sudo权限&quot;&gt;为创建的用户添加sudo权限&lt;/h2&gt;
+&lt;p&gt;新创建的用户，默认不能使用sudo，需要进行相应的设置&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo usermod -a -G adm 用户名
+sudo usermod -a -G sudo 用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;命令参数-1&quot;&gt;命令参数：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;-a&lt;/strong&gt;：  用来指定这个用户默认的用户组&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;-G&lt;/strong&gt;：  一般配合‘-a’来完成其他组的添加&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;切换到用户为新创建的用户&quot;&gt;切换到用户为新创建的用户&lt;/h2&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;su - 用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;命令参数-2&quot;&gt;命令参数：&lt;/h3&gt;
+&lt;p&gt;su和&lt;em&gt;su -&lt;/em&gt;的不同之处在于：&lt;strong&gt;su -&lt;/strong&gt;切换到对应的用户时会将当前的工作目录自动切换到切换后的用户主目录。&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h2 id=&quot;用户账号操作相关命令&quot;&gt;用户账号操作相关命令&lt;/h2&gt;
+
+&lt;h3 id=&quot;删除用户&quot;&gt;删除用户&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;userdel [-r] 用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;userdel 用户名：  删除用户，但不会自动删除用户的主目录&lt;/li&gt;
+  &lt;li&gt;userdel -r 用户名：  删除用户，同时删除用户的主目录&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;切换root用户&quot;&gt;切换root用户&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo -s
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;查看当前登录用户&quot;&gt;查看当前登录用户&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;whoami
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;strong&gt;whoami&lt;/strong&gt;命令用于用户查看当前系统当前账号的用户名。可以通过&lt;strong&gt;cat/etc/passwd&lt;/strong&gt;查看系统用户信息。&lt;/p&gt;
+
+&lt;h3 id=&quot;查看当前服务器登录信息&quot;&gt;查看当前服务器登录信息&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;who
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;who&lt;/strong&gt;命令用来查看当前所有登录系统的用户信息。&lt;/p&gt;
+&lt;h4 id=&quot;常用选项&quot;&gt;常用选项&lt;/h4&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;-m 或 am i&lt;/strong&gt;：  只显示运行who命令的用户名、登录终端和登录时间&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;-q 或 –count&lt;/strong&gt;：  只显示用户的登陆账号和登陆用户的数量&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;-u 或 –heading&lt;/strong&gt;：  显示列标题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;推出登录账号&quot;&gt;推出登录账号&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;exit
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;ul&gt;
+  &lt;li&gt;如果是图形界面，退出当前终端&lt;/li&gt;
+  &lt;li&gt;如果是使用ssh远程登录，退出当前登录账号&lt;/li&gt;
+  &lt;li&gt;如果是切换后的登录用户，退出则返回到上一个登录账号&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;查看有哪些用户组&quot;&gt;查看有哪些用户组&lt;/h3&gt;
+
+&lt;p&gt;方法一：&lt;strong&gt;cat/etc/group&lt;/strong&gt;
+方法二：&lt;strong&gt;groupmod +三次tab键&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;添加组账号&quot;&gt;添加组账号&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;groupadd 组账号
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;删除组账号&quot;&gt;删除组账号&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;groupdel 组账号
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;查看用户在哪些组&quot;&gt;查看用户在哪些组&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;groups 用户名
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ubuntu16.04服务器安装mysql数据库并配置远程连接</title>
+   <link href="https://wangxin1248.com/linux/2018/04/ubuntu-install-mysql.html"/>
+   <updated>2018-04-18T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/linux/2018/04/ubuntu-install-mysql</id>
+   <content type="html">&lt;h1 id=&quot;在搬瓦工的ubuntu1604-vps-中安装mysql数据库并配置远程连接&quot;&gt;在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库并配置远程连接&lt;/h1&gt;
+
+&lt;h2 id=&quot;安装mysql&quot;&gt;安装mysql&lt;/h2&gt;
+
+&lt;p&gt;安装之前首先需要更新系统的软件源&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;更新完之后便可以安装mysql服务器和客户端了&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在安装过程中会提示是否确认安装
+&lt;img src=&quot;/assets/images/2018-04/mysql-install-1.png&quot; alt=&quot;mysql-install-1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;属于y确认安装&lt;/p&gt;
+
+&lt;p&gt;接下来会提示输入相关的root密码
+&lt;img src=&quot;/assets/images/2018-04/mysql-install-2.png&quot; alt=&quot;mysql-install-2&quot; /&gt;
+&lt;img src=&quot;/assets/images/2018-04/mysql-install-3.png&quot; alt=&quot;mysql-install-3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;以上3个软件包安装完成后，使用如下命令查询是否安装成功：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo netstat -tap | grep mysql
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;查询结果如下图所示，表示安装成功。
+&lt;img src=&quot;/assets/images/2018-04/mysql-install-5.png&quot; alt=&quot;mysql-install-5&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;安装完成之后便可以进行登录mysql数据库
+&lt;img src=&quot;/assets/images/2018-04/mysql-install-4.png&quot; alt=&quot;mysql-install-4&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;mysqld服务操作命令&quot;&gt;mysqld服务操作命令&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;启动mysqld服务: sudo /etc/init.d/mysql start&lt;/li&gt;
+  &lt;li&gt;停止mysqld服务: sudo /etc/init.d/mysql stop&lt;/li&gt;
+  &lt;li&gt;启动mysqld服务: sudo /etc/init.d/mysql restart&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;配置mysql远程连接&quot;&gt;配置mysql远程连接&lt;/h2&gt;
+
+&lt;p&gt;编辑mysql配置文件，把其中bind-address = 127.0.0.1注释了&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;使用root进入mysql命令行，执行如下2个命令&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;grant all on *.* to root@'%' identified by 'root用户密码' with grant option;
+flush privileges;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;重启mysql&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/etc/init.d/mysql restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;重启成功后，便可以支持从其他计算机进行远程登录。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>linux服务器设置语言环境为支持中文</title>
+   <link href="https://wangxin1248.com/linux/2018/04/ubuntu-set-chinese-language.html"/>
+   <updated>2018-04-17T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/linux/2018/04/ubuntu-set-chinese-language</id>
+   <content type="html">&lt;h1 id=&quot;linux服务器设置语言环境为支持中文&quot;&gt;linux服务器设置语言环境为支持中文&lt;/h1&gt;
+
+&lt;p&gt;最近想在Linux服务器中进行开发工作，但在编辑文件时发现不能输入中文，在文件中输入的中文会变成乱码。在网上找了好久之后发现来下面这种方法可以很简单的设置服务器支持中文。&lt;/p&gt;
+
+&lt;p&gt;本教程是在Ubuntu16.04 服务器版本下实验成功，理论上所有的服务器都支持这样设置。&lt;/p&gt;
+
+&lt;h2 id=&quot;安装语言包&quot;&gt;安装语言包&lt;/h2&gt;
+
+&lt;h3 id=&quot;修改localegen文件&quot;&gt;修改locale.gen文件&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vim /etc/locale.gen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;将文件中的zh_CN.GBK GBK zh_CN.UTF8 UTF8的注释去掉&lt;/p&gt;
+
+&lt;h3 id=&quot;下载语言&quot;&gt;下载语言&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo locale-gen
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样设置之后服务器便可以正常使用中文进行输入了。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Ubuntu16.04服务器安装shadowsocks</title>
+   <link href="https://wangxin1248.com/linux/2018/04/ubuntu-install-shadowsocks.html"/>
+   <updated>2018-04-16T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/linux/2018/04/ubuntu-install-shadowsocks</id>
+   <content type="html">&lt;h1 id=&quot;ubuntu-1604服务器上搭建shadowsocks服务&quot;&gt;UBUNTU 16.04服务器上搭建SHADOWSOCKS服务&lt;/h1&gt;
+&lt;p&gt;最近购买了搬瓦工的vps，想着搭个梯子用来在国外看些最新技术资料，现将搭建过程分享给大家。
+本教程仅供教育和科学使用，勿进行其他用途。&lt;/p&gt;
+
+&lt;h2 id=&quot;shadowsocks-服务器安装&quot;&gt;shadowsocks 服务器安装&lt;/h2&gt;
+
+&lt;p&gt;首先更新软件源&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get update
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;然后安装 PIP 环境&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt-get install python-pip
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;接下来直接安装shadowsocks&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo pip install shadowsocks
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;运行-shadowsocks-服务器&quot;&gt;运行 shadowsocks 服务器&lt;/h2&gt;
+
+&lt;h3 id=&quot;创建shadowsocks配置文件&quot;&gt;创建shadowsocks配置文件&lt;/h3&gt;
+
+&lt;p&gt;使用如下命令创建并打开配置文件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在打开的界面里，输入i进入编辑模式，输入如下内容：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+“server”:“server_ip”,
+“server_port”:443,
+“local_address”: “127.0.0.1”,
+“local_port”:1080,
+“password”:“password”,
+“timeout”:300,
+“method”:“rc4-md5”
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;编辑完成后按esc并输入：x 退出编辑
+其中各个字段的含义如下：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;server	服务器 IP (IPv4/IPv6)，注意这也将是服务端监听的 IP 地址&lt;/li&gt;
+    &lt;li&gt;server_port	服务器端口&lt;/li&gt;
+    &lt;li&gt;local_port	本地端端口&lt;/li&gt;
+    &lt;li&gt;password	用来加密的密码&lt;/li&gt;
+    &lt;li&gt;timeout	超时时间（秒）&lt;/li&gt;
+    &lt;li&gt;method	加密方法，可选择 “bf-cfb”, “aes-256-cfb”, “des-cfb”, “rc4″, 等等。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;加密方式推荐使用rc4-md5，因为 RC4 比 AES 速度快好几倍，如果用在路由器上会带来显著性能提升。旧的 RC4 加密之所以不安全是因为 Shadowsocks 在每个连接上重复使用 key，没有使用 IV。现在已经重新正确实现，可以放心使用。更多可以看 issue。&lt;/p&gt;
+
+&lt;p&gt;如果需要配置多个用户，可以按照下面的配置修改配置文件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;{
+“server”:“server_ip”,
+“port_password”: {
+“端口1”: “密码1”,
+“端口2”: “密码2”
+},
+“timeout”:300,
+“method”:“rc4-md5”,
+“fast_open”: false
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;创建完成后，给文件相应的权限&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo chmod 755 /etc/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;安装所需的软件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo apt–get install python–m2crypto
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;设置配置文件在后台运行&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ssserver -c /etc/shadowsocks.json -d start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h3 id=&quot;配置shadowsocks开机自启动&quot;&gt;配置shadowsocks开机自启动&lt;/h3&gt;
+&lt;p&gt;编辑 /etc/rc.local 文件&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vi /etc/rc.local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;在 exit 0 这一行的上边加入如下&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;/usr/local/bin/ssserver –c /etc/shadowsocks.json
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;到此配置完成。重启服务器后，ss会自动启动。&lt;/p&gt;
+
+&lt;h2 id=&quot;安装和配置shadowsocks客户端&quot;&gt;安装和配置shadowsocks客户端&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;Android版下载地址：&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-android/releases/download/v4.5.6/shadowsocks--universal-4.5.6.apk&quot;&gt;点击下载&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;ios版下载地址：&lt;a href=&quot;https://www.25pp.com/ios/detail_1923429/&quot;&gt;点击下载&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Windows版下载地址：&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-windows/releases/download/4.0.9/Shadowsocks-4.0.9.zip&quot;&gt;点击下载&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;macOS版下载地址：&lt;a href=&quot;https://github.com/shadowsocks/ShadowsocksX-NG/releases/download/v1.7.1/ShadowsocksX-NG.1.7.1.zip&quot;&gt;点击下载&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;linux版下载地址：&lt;a href=&quot;https://github.com/shadowsocks/shadowsocks-qt5/wiki/Installation&quot;&gt;点击查看&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;将上面配置文件中的ip地址、端口号、密码、加密方式填写到客户端点击连接即可。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>macOS中安装python3</title>
+   <link href="https://wangxin1248.com/life/2018/04/mac-install-python.html"/>
+   <updated>2018-04-13T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/life/2018/04/mac-install-python</id>
+   <content type="html">&lt;h1 id=&quot;macos中安装python3&quot;&gt;macOS中安装python3&lt;/h1&gt;
+&lt;p&gt;在最新的macOS系统中已经默认安装了python2，但目前python3处于主流地位，许多新的项目已经使用python3进行开发了。于是便得需要在macOS中安装python3.&lt;/p&gt;
+
+&lt;p&gt;在macOS中安装python3得需要通过Homebrew来进行安装。&lt;/p&gt;
+&lt;h2 id=&quot;homebrew&quot;&gt;Homebrew&lt;/h2&gt;
+&lt;p&gt;Homebrew是Mac OSX上的软件包管理工具，能在Mac中方便的安装软件或者卸载软件，相当于linux下的apt-get、yum神器&lt;/p&gt;
+
+&lt;p&gt;Homebrew可以在Mac上安装一些OS X没有的UNIX工具，Homebrew将这些工具统统安装到了 /usr/local/Cellar 目录中，并在 /usr/local/bin 中创建符号链接。
+Homebrew官网：&lt;a href=&quot;https://brew.sh/&quot;&gt;https://brew.sh/&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&quot;homebrew安装&quot;&gt;Homebrew安装&lt;/h3&gt;
+&lt;p&gt;在macOS的终端中输入如下的命令来安装Homebrew&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; /usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;安装万完之后查看安装的版本&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; brew --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;正确显示版本号便是安装成功&lt;/p&gt;
+
+&lt;h2 id=&quot;通过homebrew来安装python3&quot;&gt;通过Homebrew来安装python3&lt;/h2&gt;
+&lt;p&gt;安装好Homebrew之后便可以来安装python3了，使用如下的命令来进行安装：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; brew install python3
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;安装完成之后输入如下的命令查看安装的版本号&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt; python3 --version
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;正确显示版本号即为安装成功。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Jekyll博客代码块语法高亮设置</title>
+   <link href="https://wangxin1248.com/jekyll/2018/03/rouge.html"/>
+   <updated>2018-03-20T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/jekyll/2018/03/rouge</id>
+   <content type="html">&lt;h1 id=&quot;使用jekyll搭建的博客发现编写代码的时候无法实现语法高亮现通过rouge模块生成对应语法高亮css来实现代码快语法高亮&quot;&gt;使用jekyll搭建的博客，发现编写代码的时候无法实现语法高亮，现通过rouge模块生成对应语法高亮CSS来实现代码快语法高亮&lt;/h1&gt;
+
+&lt;p&gt;首先电脑上得安装Ruby，具体安装过程请自行搜索&lt;/p&gt;
+
+&lt;h2 id=&quot;1安装rouge&quot;&gt;1.安装rouge&lt;/h2&gt;
+
+&lt;p&gt;首先使用gem安装rouge、kramdown&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;gem install kramdown
+gem install rouge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;2配置_configyml文件&quot;&gt;2.配置_config.yml文件&lt;/h2&gt;
+
+&lt;p&gt;在_config.yml文件中添加如下代码：&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;highlighter: rouge
+markdown: kramdown
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3生成rouge-css&quot;&gt;3.生成rouge css&lt;/h2&gt;
+
+&lt;p&gt;安装rouge 后，就可以用附带的 rougify 工具来生成多种高亮主题的CSS文件，个人比较喜欢monokai.sublime 主题.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;rougify style monokai.sublime &amp;gt; syntax.css
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;4使用rouge&quot;&gt;4.使用rouge&lt;/h2&gt;
+
+&lt;p&gt;将上述生成的syntax.css文件拷到博客对应的css目录下,在网站的HTML代码的&amp;lt;head&amp;gt;标签内加载&lt;/p&gt;
+&lt;div class=&quot;language-html highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;&amp;lt;link&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;rel=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;stylesheet&quot;&lt;/span&gt; &lt;span class=&quot;na&quot;&gt;href=&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;/assets/css/syntax.css&quot;&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;&amp;gt;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;5修改rouge&quot;&gt;5.修改rouge&lt;/h2&gt;
+
+&lt;p&gt;打开网站浏览效果发现代码块的背景为浅色背景，且代码的字体过小。修改刚才的syntax.css文件，在最后面加上：&lt;/p&gt;
+&lt;div class=&quot;language-css highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;nt&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'highlight'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;background-color&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt;&lt;span class=&quot;m&quot;&gt;#272822&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;
+&lt;span class=&quot;nt&quot;&gt;pre&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;nt&quot;&gt;class&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;'highlight'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;{&lt;/span&gt;&lt;span class=&quot;nl&quot;&gt;font-size&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;:&lt;/span&gt; &lt;span class=&quot;m&quot;&gt;1em&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;注意如果不是本地调试网站而是发布到github直接浏览的话需要等待一段时间来加载css样式文件所有改动之后不会立即生效请耐心等待&quot;&gt;注意：如果不是本地调试网站而是发布到GitHub直接浏览的话，需要等待一段时间来加载CSS样式文件，所有改动之后不会立即生效，请耐心等待。&lt;/h2&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>设置GitHub个人主页为https访问</title>
+   <link href="https://wangxin1248.com/jekyll/2018/03/usehttps.html"/>
+   <updated>2018-03-19T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/jekyll/2018/03/usehttps</id>
+   <content type="html">&lt;h1 id=&quot;使用github的github-pages的功能可以免费搭建博客或者托管网页但是访问方式默认是http的如果需要使用安全的https进行访问则需要进行相应的设置来实现安全的访问&quot;&gt;使用Github的Github pages的功能可以免费搭建博客或者托管网页，但是访问方式默认是http的，如果需要使用安全的https进行访问，则需要进行相应的设置来实现安全的访问&lt;/h1&gt;
+
+&lt;p&gt;使用Jekyll搭建的博客已经差不多，也换上了自己的域名，但是在使用Chrome访问网站的时候没有小绿标总是感觉很别扭。上网一搜，原来不用去申请什么key来实现加密传输，只需要将自己的域名托管到cloudflare即可，具体的实现如下：&lt;/p&gt;
+
+&lt;h2 id=&quot;github建立的博客访问可以通过githubio也可以通过自定义的域名进行访问&quot;&gt;GitHub建立的博客访问可以通过github.io也可以通过自定义的域名进行访问&lt;/h2&gt;
+
+&lt;h2 id=&quot;使用githubio域名时的设置&quot;&gt;使用github.io域名时的设置&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;进入github pages对应的仓库首界面&lt;/li&gt;
+  &lt;li&gt;点击Settings，进入这个仓库的设置界面&lt;/li&gt;
+  &lt;li&gt;找到GitHub Pages配置栏，勾选Enforce HTTPS&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这样，通过github.io域名进行访问是便是安全的https协议&lt;/p&gt;
+
+&lt;h2 id=&quot;使用自定义域名的设置&quot;&gt;使用自定义域名的设置&lt;/h2&gt;
+&lt;p&gt;当在仓库的Settings中设置过Custom domain时，是无法勾选Enforce HTTPS的。 这里，变得使用cloudflare来托管域名了。&lt;/p&gt;
+
+&lt;p&gt;首先打开cloudflare的官网&lt;a href=&quot;https://support.cloudflare.com/&quot;&gt;点这里&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;点击登录，如果没有帐号，则新建一个帐号。&lt;/p&gt;
+
+&lt;p&gt;点击Add Website新增一个网站，注意需要输入你的自定义域名
+&lt;img src=&quot;/assets/images/2018-03/addsite.PNG&quot; alt=&quot;添加网站&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;选择NEXT
+&lt;img src=&quot;/assets/images/2018-03/next.PNG&quot; alt=&quot;添加网站&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;选择对应的套餐，一般个人网站使用免费的套餐就够用了
+&lt;img src=&quot;/assets/images/2018-03/选择套餐.PNG&quot; alt=&quot;选择套餐&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下来会自动获取域名下的DNS解析记录，直接continue即可。&lt;/p&gt;
+
+&lt;p&gt;接下来会让你去修改DNS对应的解析域名服务器
+&lt;img src=&quot;/assets/images/2018-03/域名服务器.PNG&quot; alt=&quot;域名服务器&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;cloudflare的设置完成接下来需要到原域名的托管处修改dns的域名服务器我使用的是阿里云万网下的域名解析这里以万网的为例&quot;&gt;cloudflare的设置完成，接下来需要到原域名的托管处修改DNS的域名服务器，我使用的是阿里云万网下的域名解析，这里以万网的为例：&lt;/h3&gt;
+
+&lt;p&gt;打开万网的域名控制台，进入域名的基本管理，点击DNS修改
+&lt;img src=&quot;/assets/images/2018-03/自定义DNS.PNG&quot; alt=&quot;域名服务器&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在DNS修改界面将原先的DNS域名服务器修改成刚才cloudflare设置的。&lt;/p&gt;
+
+&lt;p&gt;设置完成之后回到cloudflare的管理界面，等待几分钟等域名解析生效，可以看到当前域名的状态为Active
+&lt;img src=&quot;/assets/images/2018-03/域名状态.PNG&quot; alt=&quot;域名状态&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下来设置SSL的状态为Flexible（注意，这里只能设置为Flexible，Full要求在服务器上有对应密钥，GitHub pages不支持。）
+&lt;img src=&quot;/assets/images/2018-03/SSL.PNG&quot; alt=&quot;SSL&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;并将always use https 选项打开
+&lt;img src=&quot;/assets/images/2018-03/always.PNG&quot; alt=&quot;always use https&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;接下来就是等待https证书的制作完成，稍后打开你的网站，看一下，是不是小绿锁完美的展现了呢。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>使用java设计实现顺序栈的基本结构</title>
+   <link href="https://wangxin1248.com/java/2018/03/mystack.html"/>
+   <updated>2018-03-18T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/java/2018/03/mystack</id>
+   <content type="html">&lt;h1 id=&quot;使用java设计实现顺序栈的基本结构并且使用自定义的栈结构实现输入一个字符串来判断以及是否匹配&quot;&gt;使用java设计实现顺序栈的基本结构，并且使用自定义的栈结构实现输入一个字符串来判断()以及[]是否匹配&lt;/h1&gt;
+
+&lt;h3 id=&quot;基本栈结构介绍&quot;&gt;基本栈结构介绍&lt;/h3&gt;
+&lt;p&gt;顺序栈是一种FILO的结构，根据顺序栈的特性可以通过数组来实现顺序栈的相关操作。&lt;/p&gt;
+
+&lt;p&gt;使用一个头指针来作为数组存储元素的标识，当存入元素时头指针++既实现压栈操作。&lt;/p&gt;
+
+&lt;p&gt;当取出一个元素时，直接返回当前头指针所对应的元素，并将头指针指为空，指针–既实现出栈操作。&lt;/p&gt;
+
+&lt;p&gt;获取栈顶元素时直接返回当前指针所指向的元素。&lt;/p&gt;
+
+&lt;p&gt;当然，在压栈时得判断栈是否满，否则会出现上溢的情况；与此同时出栈以及获取栈顶元素时得判断栈是否为空，否则会出现下溢的情况。&lt;/p&gt;
+
+&lt;h3 id=&quot;实现思路&quot;&gt;实现思路&lt;/h3&gt;
+&lt;p&gt;利用一个泛型数组来存储指定泛型类型的数据，并且使用一个头指针来对所存元素的位置进行指向，读取元素时想应的头指针都应变化。&lt;/p&gt;
+
+&lt;h3 id=&quot;代码实现&quot;&gt;代码实现&lt;/h3&gt;
+&lt;p&gt;首先先来编写一个栈的接口，声明对于的操作函数：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;interface&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;IStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 出栈&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 入栈&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 获取栈顶元素&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt;&lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈判空&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈判溢&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isFull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 获取当前栈中所存元素的长度&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 清空栈&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+	
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;定义顺序栈类实现定义的栈接口：&lt;/p&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;ArrayStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;implements&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;IStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈默认大小&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;final&lt;/span&gt;  &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_SIZE&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈最大值&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;max_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈数组&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 栈顶指针，初试默认指向-1&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 默认构造函数
+	 */&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArrayStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(){&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;DEFAULT_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arrayObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 带初始值的构造函数
+	 * @param size
+	 */&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;ArrayStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arrayObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 出栈
+	 * 首先判断栈是否为空，不为空则将top指针下的元素返回，并且将该位置清空，top指针--
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;栈为空！&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 入栈，首先判断入栈的元素是否为空，不为空则入栈成功
+	 * 在判断栈是否满，栈满则无法入栈（也可实现为栈满则扩展栈空间），栈不满的情况下将元素存入数组，top++
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;throw&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;入栈的元素不能为空&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isFull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;栈满了！&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[++&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;element&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 获取栈顶元素，首先判断栈是否为空，栈为空的话则抛出异常
+	 * 栈不为空的话则返回当前top指针下的内容
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;栈为空！&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 栈判空
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 栈判溢
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;boolean&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;isFull&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;true&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;false&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 获取当前栈中所存元素的长度
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;getLength&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 清空栈
+	 */&lt;/span&gt;
+	&lt;span class=&quot;nd&quot;&gt;@Override&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;setEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 将数组置空&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;Arrays&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;fill&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;arrayObj&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		
+		&lt;span class=&quot;c1&quot;&gt;// 指针归位&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;top&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;max_size&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;DEFAULT_SIZE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;this&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;arrayObj&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;T&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[])&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Object&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;max_size&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;此时，栈结构已经定义好了，接下来利用自定义的栈结构来实现括号的匹配判断&lt;/p&gt;
+
+&lt;h3 id=&quot;括号匹配思路&quot;&gt;括号匹配思路&lt;/h3&gt;
+
+&lt;p&gt;对输入的字符串的单个字符进行判断：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;如果栈为空则入栈，&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;如果栈不为空则判断栈顶元素是否与当前元素匹配，&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;匹配则栈顶元素出栈，不匹配则入栈&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;最后栈为空则小括号匹配，栈不为空则不匹配&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;代码&quot;&gt;代码&lt;/h3&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Question8&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;throws&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Exception&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;ArrayStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Character&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 使用Scanner获取用户输入&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;Scanner&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 获取用户输入的内容&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 关闭输入流&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;||&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;equals&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;))&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;输入错误!!!&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;c1&quot;&gt;// 如果输入的是奇数则证明不匹配&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;()%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;不匹配&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;c1&quot;&gt;// 创建自定义的栈对象&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;ArrayStack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Character&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+				&lt;span class=&quot;c1&quot;&gt;// 对字符串中的单个字符进行判断&lt;/span&gt;
+				&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+					&lt;span class=&quot;c1&quot;&gt;// 当栈为空时，将当前字符压入栈中&lt;/span&gt;
+					&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+						&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+					&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+						&lt;span class=&quot;c1&quot;&gt;// 栈不空时，获取栈顶元素并与当前字符进行匹配，匹配成功则当前执行出栈，匹配不成功则入栈&lt;/span&gt;
+						&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'('&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;')'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;||(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;top&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'['&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;']'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+							&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;pop&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+						&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+							&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;push&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;));&lt;/span&gt;
+						&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+					&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;stack&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;isEmpty&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;())&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;匹配成功&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;匹配失败&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>ACM题目：连阴雨</title>
+   <link href="https://wangxin1248.com/java/2018/03/8code.html"/>
+   <updated>2018-03-18T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/java/2018/03/8code</id>
+   <content type="html">&lt;h1 id=&quot;acm题目连阴雨求解其实思路讲解附上解答代码欢迎大家留言讨论&quot;&gt;ACM题目：连阴雨求解其实思路讲解，附上解答代码，欢迎大家留言讨论&lt;/h1&gt;
+
+&lt;h3 id=&quot;要求&quot;&gt;要求&lt;/h3&gt;
+&lt;p&gt;时限：1000ms 内存限制：10000K  总时限：3000ms&lt;/p&gt;
+&lt;h3 id=&quot;描述&quot;&gt;描述&lt;/h3&gt;
+&lt;p&gt;因为连续的降雨，我们学校操场上出现了许多水坑，现在需要统计一共有多少个水坑。
+题目输入为一个N譓 (1 &amp;lt;= N &amp;lt;= 100; 1 &amp;lt;= M &amp;lt;= 100)的图，(‘W’) 代表积水，(‘.’)代表干燥。
+一处积水我们认为和它周围的八个方向相邻，相邻的积水构成一个水坑。
+需要输出一个数字，表示一共有多少个互不相邻的水坑。&lt;/p&gt;
+&lt;h3 id=&quot;输入&quot;&gt;输入&lt;/h3&gt;
+&lt;p&gt;第一行：两个正整数n和m。
+第二行到第n+1行：输入操场信息，每一点的状态只可能是’W’ 或者’.’。&lt;/p&gt;
+
+&lt;h3 id=&quot;输出&quot;&gt;输出&lt;/h3&gt;
+&lt;p&gt;输出一个正整数，表示不相邻的水坑的数目。
+ &lt;/p&gt;
+&lt;h3 id=&quot;输入样例&quot;&gt;输入样例&lt;/h3&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;10 12
+W........WW.
+.WWW.....WWW
+....WW...WW.
+.........WW.
+.........W..
+..W......W..
+.W.W.....WW.
+W.W.W.....W.
+.W.W......W.
+..W.......W.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;h3 id=&quot;输出样例&quot;&gt;输出样例&lt;/h3&gt;
+&lt;p&gt;3&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;h3 id=&quot;思路&quot;&gt;思路&lt;/h3&gt;
+&lt;p&gt;本题是&lt;strong&gt;深度优先搜索&lt;/strong&gt;应用的一道题，属于最大联通块问题。&lt;/p&gt;
+
+&lt;p&gt;首先建立对应的n行m列的二维数组来存储对应的水坑，再建立与之相同大小的二维数组，用来保存数组的访问信息。&lt;/p&gt;
+
+&lt;p&gt;接下来遍历二维数组，当当前位置的元素未被访问并且其值为W时，将当前位置标记为已经访问过了。接着使用深度优先遍历搜索以当前点为中心的八个位置，当这八个位置里有满足未被访问的元素并且值为W的，使用深度优先遍历该节点的八个位置。&lt;/p&gt;
+
+&lt;p&gt;这样递归下去，就会将一个水坑的所有元素都便利到，这样的一次深度遍历会找到一个水坑，进行几次深度遍历就会得到几个水坑。所以，水坑的次数和深度搜索的次数保持一致。&lt;/p&gt;
+
+&lt;p&gt;这样，便可以通过编程来解决这道问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;java代码&quot;&gt;java代码&lt;/h3&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Question17&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+
+	&lt;span class=&quot;c1&quot;&gt;// 全局变量，保存输入的数据&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;  &lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[][];&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[][];&lt;/span&gt;
+	&lt;span class=&quot;c1&quot;&gt;// 水坑计数&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+	
+	&lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;main&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;args&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 获取用户的输入&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;Scanner&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;Scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;in&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;nextInt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 输入的信息数组&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 访问信息数组，vis[i][j] = 0表示未被访问&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+		
+		&lt;span class=&quot;c1&quot;&gt;// 接收输入的数组，并将访问数组初始化&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;n&quot;&gt;String&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;next&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;str&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;charAt&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+				&lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 关闭输入流&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;scanner&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;close&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;();&lt;/span&gt;
+		
+		&lt;span class=&quot;c1&quot;&gt;// 对水坑的数据进行判断&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;c1&quot;&gt;// 假如当前ij对应的vis数组值为0表示未被访问且a数组的值为W则进行一次深度优先遍历，计数值加一&lt;/span&gt;
+				&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'W'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+					&lt;span class=&quot;n&quot;&gt;dnf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+					&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		
+		&lt;span class=&quot;c1&quot;&gt;// 输出结果&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;System&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;out&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;println&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+	&lt;span class=&quot;cm&quot;&gt;/**
+	 * 深度优先遍历
+	 * @param a
+	 * @param vis
+	 * @param i
+	 * @param j
+	 */&lt;/span&gt;
+	&lt;span class=&quot;kd&quot;&gt;private&lt;/span&gt; &lt;span class=&quot;kd&quot;&gt;static&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;void&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;dnf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// TODO Auto-generated method stub&lt;/span&gt;
+		&lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+		&lt;span class=&quot;c1&quot;&gt;// 对周围八个点进行判断&lt;/span&gt;
+		&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+			&lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+				&lt;span class=&quot;c1&quot;&gt;// 首先该点不超过数组的最小最大边界，并且该数组未被访问过，且该位置的a数组为w&lt;/span&gt;
+				&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&amp;amp;&amp;amp;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;n&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;=(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&amp;amp;&amp;amp;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;m&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;vis&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]==&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;amp;&amp;amp;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;][&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]==&lt;/span&gt;&lt;span class=&quot;sc&quot;&gt;'W'&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+					&lt;span class=&quot;n&quot;&gt;dnf&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;y&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;);&lt;/span&gt;
+				&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+			&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+		&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+	&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>LeetCode题目9.Palindrome Numbers</title>
+   <link href="https://wangxin1248.com/leetcode/2018/03/palindrome_number.html"/>
+   <updated>2018-03-14T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/leetcode/2018/03/palindrome_number</id>
+   <content type="html">&lt;h1 id=&quot;leetcode刷题之题目9palindrome-numbers&quot;&gt;LeetCode刷题之题目9.Palindrome Numbers&lt;/h1&gt;
+
+&lt;h2 id=&quot;description&quot;&gt;Description&lt;/h2&gt;
+&lt;p&gt;Determine whether an integer is a palindrome. Do this without extra space.&lt;/p&gt;
+&lt;h2 id=&quot;some-hints&quot;&gt;Some hints&lt;/h2&gt;
+&lt;p&gt;Could negative integers be palindromes? (ie, -1)&lt;/p&gt;
+
+&lt;p&gt;If you are thinking of converting the integer to string, note the restriction of using extra space.&lt;/p&gt;
+
+&lt;p&gt;You could also try reversing an integer. However, if you have solved the problem “Reverse Integer”, you know that the reversed integer might overflow. How would you handle such case?&lt;/p&gt;
+
+&lt;p&gt;There is a more generic way of solving this problem.&lt;/p&gt;
+&lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+&lt;p&gt;本题要求在不使用任何额外空间的情况下判断一个数是否是回文数。
+对于回文数来说是该数从正面读以及从反面读数的大小都是一样的，这样的数称为回文数。例如：1111，1221，123321都是回文数。&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>LeetCode题目7.Reverse Integer</title>
+   <link href="https://wangxin1248.com/leetcode/2018/03/reverse_integer.html"/>
+   <updated>2018-03-08T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/leetcode/2018/03/reverse_integer</id>
+   <content type="html">&lt;h1 id=&quot;leetcode刷题之题目7reverse-integer&quot;&gt;LeetCode刷题之题目7.Reverse Integer&lt;/h1&gt;
+
+&lt;h2 id=&quot;description&quot;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;Given a 32-bit signed integer, reverse digits of an integer.&lt;/p&gt;
+
+&lt;p&gt;Example 1:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Input: 123
+Output:  321&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Example 2:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Input: -123
+Output: -321&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Example 3:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Input: 120
+Output: 21&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;note&quot;&gt;Note&lt;/h2&gt;
+
+&lt;p&gt;Assume we are dealing with an environment which could only hold integers within the 32-bit signed integer range. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.&lt;/p&gt;
+
+&lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+
+&lt;p&gt;这道题可以分成两部分来求解，首先是对int型整数进行逆序，接下来就是判断逆序后的数是否超过int型数的范围。&lt;/p&gt;
+
+&lt;h3 id=&quot;第一步逆序&quot;&gt;第一步：逆序&lt;/h3&gt;
+
+&lt;p&gt;对于123这个整数来说，想要对其进行逆序的话，那么首先得获取到3这个个位数，将它乘以10之后加上十位的2。然后将32乘以10再加上百位的1。这样，整数的逆序就完成了。&lt;/p&gt;
+
+&lt;p&gt;那么对于一般的数来说，其基本的操作就是：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;1.获取个位数，将原数除10去掉原个位数
+2.乘10再加上新的个位数&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;用代码来体现就是：&lt;/p&gt;
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;/=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;对于int型整数来说，除10之后便没有小数点之后的了。对应循环的开始条件便是x不为0。&lt;/p&gt;
+
+&lt;h3 id=&quot;第二步判断是否超过int型数范围&quot;&gt;第二步：判断是否超过int型数范围&lt;/h3&gt;
+
+&lt;p&gt;对应int型数来说，其最大值和最小值通过java中的Integer类中的常量可以很方便的得到。&lt;/p&gt;
+
+&lt;p&gt;主要问题是逆序后的数有可能超过int型数，所以对于逆序后的数来说得使用更大范围类型的变量来接收，这里使用long长整型。&lt;/p&gt;
+
+&lt;h2 id=&quot;java求解代码&quot;&gt;java求解代码&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;reverse&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+       &lt;span class=&quot;kt&quot;&gt;long&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;!=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;x&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;/&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MAX_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;Integer&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;MIN_VALUE&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;?&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;:(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;result&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>python学习笔记基础篇-python基础知识(1)</title>
+   <link href="https://wangxin1248.com/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-2.html"/>
+   <updated>2018-03-05T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/python/2018/03/python学习笔记基础篇-2</id>
+   <content type="html">&lt;h1 id=&quot;python学习笔记记录之基础篇学习如何使用python输出hello-world以及一些python的简单操作&quot;&gt;python学习笔记记录之基础篇，学习如何使用python输出Hello World，以及一些python的简单操作。&lt;/h1&gt;
+&lt;p&gt;在学习一门语言之前，按照惯例先实现Hello World的输出&lt;/p&gt;
+
+&lt;p&gt;在Ubuntu的命令行中输入&lt;em&gt;python&lt;/em&gt;进入python的交互模式，然后输入如下的代码，回车执行：&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;Hello World&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;恭喜你，python入门的第一步就结束了。&lt;/p&gt;
+
+&lt;h2 id=&quot;1python交互模式&quot;&gt;1.python交互模式&lt;/h2&gt;
+
+&lt;p&gt;在安装了Linux之后，可以直接在shell中对python的语法进行测试，这样当在程序中遇到不了解具体使用方式的函数时可以直接在shell中进行测试。&lt;/p&gt;
+
+&lt;p&gt;根据所安装的python版本不用，进入交互模式的方法有所不同。这里以python3为例：&lt;/p&gt;
+
+&lt;p&gt;在Ubuntu的终端中输入：&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;python3&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-03/python3交互模式.PNG&quot; alt=&quot;python3交互模式&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;这样就进入到了python交互模式，可以在这里执行相应的python代码&lt;/p&gt;
+
+&lt;p&gt;还有一种交互模式，其功能较python自带的强大且支持命令，那就是ipython3&lt;/p&gt;
+
+&lt;p&gt;在Ubuntu系统中输入&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;sudo apt-get install ipython3&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;来安装ipython3&lt;/p&gt;
+
+&lt;p&gt;接下来输入&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;ipython3&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;来进行ipython3的交互模式，在交互模式中输入ls命令来显示当前文件夹下的文件，并执行hello world程序。
+&lt;img src=&quot;/assets/images/2018-03/ipython3交互模式.PNG&quot; alt=&quot;ipython3交互模式&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2注释&quot;&gt;2.注释&lt;/h2&gt;
+&lt;p&gt;在python程序中是以#开头来注释代码的，#是进行单行注释
+想要进行多行注释，则得使用一对’'’或者一对”&quot;”来进行。&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#这是python程序中的单行注释&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;&quot;&quot;&quot;
+这是python程序中的多行注释
+&quot;&quot;&quot;&lt;/span&gt;
+
+&lt;span class=&quot;s&quot;&gt;'''
+这是python程序中的多行注释
+'''&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;以上方式都可以进行python程序注释，可以根据需要进行使用。&lt;/p&gt;
+
+&lt;h3 id=&quot;注意&quot;&gt;注意：&lt;/h3&gt;
+&lt;p&gt;在python2中出现中文注释是会报错的，需要在程序开头指定编码格式：&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#-*- coding:utf-8 -*-&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;3变量&quot;&gt;3.变量&lt;/h2&gt;
+&lt;p&gt;变量：用来存储数据的一个容器&lt;/p&gt;
+
+&lt;p&gt;python中不需要指定具体变量的格式，而是根据右边所附值的类型确定变量的格式，python中变量定义的格式为：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;变量名 = 变量值&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;eg:&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c&quot;&gt;#定义了一个变量，变量名为score，里面存储的数为100&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;score&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;100&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;4python标准变量类型&quot;&gt;4.python标准变量类型&lt;/h2&gt;
+
+&lt;p&gt;python定义了一些标准的变量类型，用来存储各种类型的数据&lt;/p&gt;
+
+&lt;p&gt;python有五个基本的变量类型：&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;Numbers（数字）&lt;/li&gt;
+  &lt;li&gt;String（字符串）&lt;/li&gt;
+  &lt;li&gt;List（列表）&lt;/li&gt;
+  &lt;li&gt;Tuple（元组）&lt;/li&gt;
+  &lt;li&gt;Dictionary（字典）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;5输入输出&quot;&gt;5.输入输出&lt;/h2&gt;
+&lt;h3 id=&quot;1输入&quot;&gt;(1)输入&lt;/h3&gt;
+
+&lt;p&gt;python中获取键盘输入的数据非常简单&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;user_input = input(“获取从键盘输入的值”)&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;执行上面的代码将会要求用户在键盘上输入内容，并将输入的内容存储在user_input变量中。&lt;/p&gt;
+
+&lt;p&gt;input方法会获取用户在键盘上输入的内容，默认返回类型为String字符串类型。&lt;/p&gt;
+
+&lt;h3 id=&quot;2输出&quot;&gt;(2)输出&lt;/h3&gt;
+&lt;p&gt;在上面的Hello World例子中就已经使用过了python的输出函数print了，在python中使用&lt;strong&gt;print()&lt;/strong&gt;方法将所需打印的内容打印到控制台上。&lt;/p&gt;
+
+&lt;p&gt;在print打印中会有占位符的使用，其使用方法与c语言中的占位符相似。&lt;/p&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#打印age变量中的值，%d为数字型占位符&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;age变量里的值是：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+
+&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wx&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#打印name变量中的值，%s为字符串型占位符&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;姓名是：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;目前常用的占位符也就%d以及%s了。&lt;/p&gt;
+
+&lt;p&gt;要一次打印多个变量中的值的时候,可以按照如下的格式进行：&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;wx&quot;&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;addr&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;s&quot;&gt;&quot;***************&quot;&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;#一次性输出多个变量中的值&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;姓名：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s  年龄：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;d  地址：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;age&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;addr&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;这样便可以实现一次性打印多个变量的值了&lt;/p&gt;
+
+&lt;h3 id=&quot;注意-1&quot;&gt;注意：&lt;/h3&gt;
+
+&lt;p&gt;在python2与python3中input输入不同&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;python2中input输入的是命令（变量），使用raw_input则输入字符串&lt;/li&gt;
+  &lt;li&gt;python3中input输入的是字符串（目前主流使用）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;6练习&quot;&gt;6.练习&lt;/h2&gt;
+
+&lt;p&gt;要求：实现一个名片打印的程序&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;使用input获取必要的信息&lt;/li&gt;
+  &lt;li&gt;使用print来打印名片信息&lt;/li&gt;
+  &lt;li&gt;名片内容包括姓名，性别，手机号，qq号，地址&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;代码：&lt;/p&gt;
+
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;  &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#要求：打印名片&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#要点：&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;3&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#     1.使用input获取必要的信息&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;4&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#     2.使用print来打印名片信息&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#     3.名片信息包括姓名、性别、手机号、QQ号、地址&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;6&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;7&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#程序开始&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;8&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;请输入相关信息，系统将为您生成个性名片&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;mi&quot;&gt;9&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#获取相关信息&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;11&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;name&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;姓名：&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;12&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;性别：&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;13&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;phone_number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;手机号：&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;14&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;address&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;input&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;地址：&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;15&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;16&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#生成个性名片，输出相关信息&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;17&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;======您的名片======&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;18&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;姓名： &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;19&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;--------------------&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;20&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;性别： &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;21&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;--------------------&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;22&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;手机号： &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phone_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;23&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;--------------------&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;24&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;地址： &lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;25&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;--------------------&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;26&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;27&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;28&lt;/span&gt; &lt;span class=&quot;c&quot;&gt;#一次性打印所有变量&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;29&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;您的名片&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;=&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;*&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;5&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+ &lt;span class=&quot;mi&quot;&gt;30&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;print&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;&quot;姓名：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;性别：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;手机号：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&lt;/span&gt;&lt;span class=&quot;se&quot;&gt;\n&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;地址：&lt;/span&gt;&lt;span class=&quot;si&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;s&quot;&gt;s&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;%&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;name&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;sex&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;phone_number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;address&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;执行结果&quot;&gt;执行结果：&lt;/h2&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-03/打印名片.PNG&quot; alt=&quot;打印名片&quot; /&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>python学习笔记基础篇-认识python</title>
+   <link href="https://wangxin1248.com/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-1.html"/>
+   <updated>2018-03-05T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/python/2018/03/python学习笔记基础篇-1</id>
+   <content type="html">&lt;h1 id=&quot;python学习笔记记录之基础篇首先先来认识下什么是python以及python具有什么样的特点&quot;&gt;python学习笔记记录之基础篇，首先先来认识下什么是python，以及python具有什么样的特点&lt;/h1&gt;
+
+&lt;h2 id=&quot;1python程序运行过程&quot;&gt;1.python程序运行过程&lt;/h2&gt;
+
+&lt;p&gt;使用python语言编写的程序要经过python解释器的解释才能在操作系统上运行。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/images/2018-03/python程序运行过程.png&quot; alt=&quot;python程序运行过程&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;python语言编写的程序不需要编译成二进制代码，可以直接从源代码运行程序。在计算机内部，python解释器把源代码转换为字节码的中间形式，然后把它翻译成计算机使用的机器语言并运行。&lt;/p&gt;
+
+&lt;p&gt;所以说：&lt;em&gt;python程序是一门边解释边执行的语言。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;2python的优缺点&quot;&gt;2.python的优缺点&lt;/h2&gt;
+
+&lt;h3 id=&quot;优点&quot;&gt;优点：&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;简单，python是一种代表简单主义思想的语言&lt;/li&gt;
+  &lt;li&gt;易学&lt;/li&gt;
+  &lt;li&gt;免费开源&lt;/li&gt;
+  &lt;li&gt;高层语言，无需考虑底层实现&lt;/li&gt;
+  &lt;li&gt;可移植性，可以移植在许多平台上&lt;/li&gt;
+  &lt;li&gt;解释性&lt;/li&gt;
+  &lt;li&gt;面向对象，python既支持面向过程的编码，也支持面向对象的编码。&lt;/li&gt;
+  &lt;li&gt;可扩展性，python可以调用其它语言&lt;/li&gt;
+  &lt;li&gt;丰富的库&lt;/li&gt;
+  &lt;li&gt;规范的代码&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;缺点&quot;&gt;缺点：&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;运行效率不高，有速度要求的可以使用c++编写关键部分&lt;/li&gt;
+  &lt;li&gt;国内市场较小&lt;/li&gt;
+  &lt;li&gt;中文资料匮乏&lt;/li&gt;
+  &lt;li&gt;架构选择太多&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;3python的应用场景&quot;&gt;3.python的应用场景&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;web开发&lt;/li&gt;
+  &lt;li&gt;操作系统管理、服务器运维的自动化脚本&lt;/li&gt;
+  &lt;li&gt;科学计算&lt;/li&gt;
+  &lt;li&gt;桌面软件&lt;/li&gt;
+  &lt;li&gt;服务器软件&lt;/li&gt;
+  &lt;li&gt;游戏&lt;/li&gt;
+  &lt;li&gt;构思实现，产品早期原型和迭代&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;链接&quot;&gt;链接：&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;python官网:&lt;a href=&quot;https://www.python.org/&quot;&gt;https://www.python.org/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;python环境搭建：&lt;a href=&quot;http://www.runoob.com/python/python-install.html&quot;&gt;http://www.runoob.com/python/python-install.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>LeetCode题目167. Two Sum II - Input array is sorted</title>
+   <link href="https://wangxin1248.com/leetcode/2018/02/twosum2.html"/>
+   <updated>2018-02-27T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/leetcode/2018/02/twosum2</id>
+   <content type="html">&lt;h1 id=&quot;leetcode刷题之题目167-two-sum-ii---input-array-is-sorted&quot;&gt;LeetCode刷题之题目167. Two Sum II - Input array is sorted&lt;/h1&gt;
+
+&lt;h2 id=&quot;description&quot;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;Given an array of integers that is already sorted in ascending order, find two numbers such that they add up to a specific target number.&lt;/p&gt;
+
+&lt;p&gt;The function twoSum should return indices of the two numbers such that they add up to the target, where index1 must be less than index2. Please note that your returned answers (both index1 and index2) are not zero-based.&lt;/p&gt;
+
+&lt;p&gt;You may assume that each input would have exactly one solution and you may not use the same element twice.&lt;/p&gt;
+
+&lt;p&gt;Input: numbers={2, 7, 11, 15}, target=9
+Output: index1=1, index2=2&lt;/p&gt;
+
+&lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+
+&lt;p&gt;这道题相比较于Two Sum那道题来说主要是添加了数组有序这一重要的条件。&lt;/p&gt;
+
+&lt;p&gt;那么按照上一道的代码去运行会发现最后一个测试用例会超时，而最后一个测试用例中给的数组非常大，这样的话使用双重遍历便效率太低了。&lt;/p&gt;
+
+&lt;p&gt;那么重点就是根据题目所给的有序这个条件来解题了。&lt;/p&gt;
+
+&lt;p&gt;假如数组是[1,2,3,4,5,6,7,8,9]，那么要找和为8的两个数的角标，可能的条件有1+7;2+6;两种
+可以发现：所找的两个数是一个从前面找一个从后面找，最后找出所有的结果&lt;/p&gt;
+
+&lt;p&gt;那么我们可以设置两个指针分别指向数组第一个元素和最后一个元素，然后比较之和和所求值的大小，之和大于所求值则表示所加的数过大需要减小，就把尾指针–；而之和小于所求值的话表示所加的数国小需要增加，就把头指针++；当之和等于所求值的时候返回当前的头指针和尾指针的角标。&lt;/p&gt;
+
+&lt;p&gt;注意返回的格式是一个数组，并且是元素的位置而非角标，所以得把角标加一并存放到数组中去。&lt;/p&gt;
+
+&lt;h2 id=&quot;java求解的代码&quot;&gt;Java求解的代码&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;twoSum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;indice&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;num&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;||&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;indice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;-&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+            &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;left&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;num&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;right&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;indice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;indice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;+&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;v&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;right&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;--;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+                &lt;span class=&quot;n&quot;&gt;left&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;++;&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;indice&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>LeetCode题目1. Two Sum</title>
+   <link href="https://wangxin1248.com/leetcode/2018/02/twosum.html"/>
+   <updated>2018-02-18T00:00:00+08:00</updated>
+   <id>https://wangxin1248.com/leetcode/2018/02/twosum</id>
+   <content type="html">&lt;h1 id=&quot;开始leetcode刷题之路首先进行题目1-two-sum的求解&quot;&gt;开始LeetCode刷题之路，首先进行题目1. Two Sum的求解&lt;/h1&gt;
+
+&lt;h2 id=&quot;description&quot;&gt;Description&lt;/h2&gt;
+
+&lt;p&gt;Given an array of integers, return indices of the two numbers such that they add up to a specific target.&lt;/p&gt;
+
+&lt;p&gt;You may assume that each input would have exactly one solution, and you may not use the same element twice.&lt;/p&gt;
+
+&lt;p&gt;Example:
+Given nums = [2, 7, 11, 15], target = 9,&lt;/p&gt;
+
+&lt;p&gt;Because nums[0] + nums[1] = 2 + 7 = 9,
+return [0, 1]&lt;/p&gt;
+
+&lt;h2 id=&quot;思路&quot;&gt;思路&lt;/h2&gt;
+
+&lt;p&gt;使用简单的双重循环遍历所有的可能组合，遇到满足条件的则返回对应的角标&lt;/p&gt;
+
+&lt;h2 id=&quot;java求解的代码&quot;&gt;Java求解的代码&lt;/h2&gt;
+
+&lt;div class=&quot;language-java highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;kd&quot;&gt;class&lt;/span&gt; &lt;span class=&quot;nc&quot;&gt;Solution&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+    &lt;span class=&quot;kd&quot;&gt;public&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;twoSum&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;)&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;{&lt;/span&gt;
+        &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[]=&lt;/span&gt;&lt;span class=&quot;k&quot;&gt;new&lt;/span&gt; &lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;];&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+            &lt;span class=&quot;k&quot;&gt;for&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;kt&quot;&gt;int&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;+&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;na&quot;&gt;length&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;++){&lt;/span&gt;
+                &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;((&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]+&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;nums&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;])==&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;target&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;){&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;i&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]=&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;j&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                    &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;a&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+                &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+            &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+        &lt;span class=&quot;k&quot;&gt;return&lt;/span&gt; &lt;span class=&quot;kc&quot;&gt;null&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;;&lt;/span&gt;
+    &lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+</content>
+ </entry>
+ 
+ <entry>
    <title>教育网环境下实现免费上网</title>
-   <link href="https://www.pipxia.com/life/2017/07/usevpn.html"/>
+   <link href="https://wangxin1248.com/life/2017/07/usevpn.html"/>
    <updated>2017-07-28T00:00:00+08:00</updated>
-   <id>https://www.pipxia.com/life/2017/07/usevpn</id>
-   <content type="html">&lt;p&gt;没错，本教程就是教你免费上网的。&lt;/p&gt;
+   <id>https://wangxin1248.com/life/2017/07/usevpn</id>
+   <content type="html">&lt;h1 id=&quot;在教育网的环境下使用softethervpn搭建vpn服务器通过vpn服务器的相关配置实现在教育网环境下免费使用网络&quot;&gt;在教育网的环境下使用SoftEtherVPN搭建VPN服务器，通过VPN服务器的相关配置实现在教育网环境下免费使用网络&lt;/h1&gt;
+&lt;p&gt;没错，本教程就是教你免费上网的。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/01.jpg&quot; alt=&quot;vpnsetup&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;嗯，当然是有前提滴……&lt;/p&gt;
 
-&lt;h1 id=&quot;前提&quot;&gt;前提&lt;/h1&gt;
-&lt;p&gt;如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。
-目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。&lt;/p&gt;
+&lt;h2 id=&quot;前提&quot;&gt;前提&lt;/h2&gt;
+&lt;p&gt;如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。&lt;/p&gt;
 
-&lt;h1 id=&quot;原理&quot;&gt;原理&lt;/h1&gt;
-&lt;p&gt;本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。&lt;/p&gt;
+&lt;p&gt;目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。&lt;/p&gt;
 
-&lt;h1 id=&quot;准备条件&quot;&gt;准备条件&lt;/h1&gt;
+&lt;h2 id=&quot;原理&quot;&gt;原理&lt;/h2&gt;
+&lt;p&gt;本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。&lt;/p&gt;
+
+&lt;p&gt;这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。&lt;/p&gt;
+
+&lt;h2 id=&quot;准备条件&quot;&gt;准备条件&lt;/h2&gt;
 
 &lt;h3 id=&quot;服务器提供商&quot;&gt;服务器提供商&lt;/h3&gt;
-&lt;p&gt;搭建服务器的VPS使用的是&lt;a href=&quot;https://bandwagonhost.com/&quot;&gt;bandwagonhost&lt;/a&gt;，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。
-并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……
-具体服务器的购买和使用请自行百度&lt;/p&gt;
+&lt;p&gt;搭建服务器的VPS使用的是&lt;a href=&quot;https://bandwagonhost.com/&quot;&gt;bandwagonhost&lt;/a&gt;，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。&lt;/p&gt;
+
+&lt;p&gt;并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……&lt;/p&gt;
+
+&lt;p&gt;具体服务器的购买和使用请自行百度&lt;/p&gt;
 
 &lt;h3 id=&quot;服务器系统&quot;&gt;服务器系统&lt;/h3&gt;
 &lt;p&gt;VPS所搭载的系统是&lt;a href=&quot;https://www.centos.org/&quot; title=&quot;CentOS&quot;&gt;CentOS64位&lt;/a&gt;&lt;/p&gt;
@@ -49,177 +1333,148 @@
 &lt;p&gt;首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。&lt;/p&gt;
 
 &lt;p&gt;32位系统&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;64位系统&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;以上为截止发布本文时的最新版本，建议从&lt;a href=&quot;&quot;&gt;SoftEther&lt;/a&gt;官方网站获取最新版本。&lt;/p&gt;
 
 &lt;h3 id=&quot;安装启动&quot;&gt;安装启动&lt;/h3&gt;
 
 &lt;p&gt;解压下载的文件&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -zxvf softether-vpnserver-*.tar.gz
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;tar -zxvf softether-vpnserver-*.tar.gz
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;将解压的文件移动到&lt;strong&gt;/usr/local&lt;/strong&gt;下&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv vpnserver /usr/local
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;mv vpnserver /usr/local
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;进入解压目录&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /usr/local/vpnserver
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;cd /usr/local/vpnserver
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;启动安装脚本&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./.install.sh
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./.install.sh
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;p&gt;接下来显示&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
+Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.
 
-&lt;blockquote&gt;
-  &lt;p&gt;SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
-Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.&lt;/p&gt;
-&lt;/blockquote&gt;
+Do you want to read the License Agreement for this software ?
 
-&lt;blockquote&gt;
-  &lt;p&gt;Do you want to read the License Agreement for this software ?&lt;/p&gt;
+1.Yes
 
-  &lt;p&gt;1.Yes&lt;/p&gt;
+2.No
 
-  &lt;p&gt;2.No&lt;/p&gt;
-
-  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
-&lt;/blockquote&gt;
+Please choose one of above number:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这里询问你是否阅读License，输入1&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Did you read and understand the License Agreement ?&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Did you read and understand the License Agreement ?
 
-  &lt;p&gt;(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)&lt;/p&gt;
-
-  &lt;p&gt;1.Yes&lt;/p&gt;
-
-  &lt;p&gt;2.No&lt;/p&gt;
-
-  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
-&lt;/blockquote&gt;
+(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)
+ 
+1.Yes
+ 
+2.No
+ 
+Please choose one of above number:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;询问你是否读懂了，输入1&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Did you agree the License Agreement ?&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Did you agree the License Agreement ?
+ 
+1.Agree
 
-  &lt;p&gt;1.Agree&lt;/p&gt;
-
-  &lt;p&gt;2.Do Not Agree&lt;/p&gt;
-
-  &lt;p&gt;Please choose one of above number:&lt;/p&gt;
-&lt;/blockquote&gt;
+2.Do Not Agree
+ 
+Please choose one of above number:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;问你同不同意，继续输入1&lt;/p&gt;
 
 &lt;p&gt;接下来便会开始安装，假如遇到gcc命令无法识别，使用&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum install gcc
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;yum install gcc
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;命令安装，接下来重新执行安装命令。&lt;/p&gt;
 
 &lt;p&gt;如果没有异常则说明安装成功，执行&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver start
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver start
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;启动服务&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver stop
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
-
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpnserver stop
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 &lt;p&gt;停止服务。&lt;/p&gt;
 
 &lt;h3 id=&quot;服务器端配置&quot;&gt;服务器端配置&lt;/h3&gt;
 
 &lt;p&gt;启动成功后我们需要设置远程登录密码以便本地管理服务。
 运行&lt;/p&gt;
-
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpncmd
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;./vpncmd
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;进入VPN的命令行：&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;vpncmd command - SoftEther VPN Command Line Management Utility&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vpncmd command - SoftEther VPN Command Line Management Utility
+ 
+SoftEther VPN Command Line Management Utility (vpncmd command)
 
-  &lt;p&gt;SoftEther VPN Command Line Management Utility (vpncmd command)&lt;/p&gt;
+Version 4.22 Build 9634 (English)
 
-  &lt;p&gt;Version 4.22 Build 9634 (English)&lt;/p&gt;
+Compiled 2016/11/27 21:59:35 by yagi at pc30
+Copyright (c) SoftEther VPN Project. All Rights Reserved.
+ 
+By using vpncmd program, the following can be achieved.
+ 
 
-  &lt;p&gt;Compiled 2016/11/27 21:59:35 by yagi at pc30
-Copyright (c) SoftEther VPN Project. All Rights Reserved.&lt;/p&gt;
+1.Management of VPN Server or VPN Bridge
 
-  &lt;p&gt;By using vpncmd program, the following can be achieved.&lt;/p&gt;
+2.Management of VPN Client
 
-  &lt;p&gt;1.Management of VPN Server or VPN Bridge&lt;/p&gt;
+3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)
 
-  &lt;p&gt;2.Management of VPN Client&lt;/p&gt;
-
-  &lt;p&gt;3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)&lt;/p&gt;
-
-  &lt;p&gt;Select 1, 2 or 3:&lt;/p&gt;
-&lt;/blockquote&gt;
+Select 1, 2 or 3:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这里我们选择1，然后出现：&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.
 
-  &lt;p&gt;By specifying according to the format ‘host name:port number’, you can also specify the port number.
-(When the port number is unspecified, 443 is used.)&lt;/p&gt;
+By specifying according to the format ‘host name:port number’, you can also specify the port number.
+(When the port number is unspecified, 443 is used.)
+ 
+If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).
 
-  &lt;p&gt;If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).&lt;/p&gt;
-
-  &lt;p&gt;Hostname of IP Address of Destination:&lt;/p&gt;
-&lt;/blockquote&gt;
+Hostname of IP Address of Destination:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这里需要选择地址和端口。由于这台VPS已经搭建了一个网站，用了SSL占用了443端口，所以默认的443端口是用不了了，所以一定要改。我改用了5555端口，所以在这里输入localhost:5555，然后出现：&lt;/p&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
 If connecting by server admin mode, please press Enter without inputting anything.
-Specify Virtual Hub Name:&lt;/p&gt;
-&lt;/blockquote&gt;
+Specify Virtual Hub Name:
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这里就是指定一个虚拟HUB名字，用默认的直接回车就行&lt;/p&gt;
-&lt;blockquote&gt;
-  &lt;p&gt;Connection has been established with VPN Server “localhost” (port 5555).&lt;/p&gt;
 
-  &lt;p&gt;You have administrator privileges for the entire VPN Server.&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;Connection has been established with VPN Server “localhost” (port 5555).
 
-  &lt;p&gt;VPN Server&amp;gt;&lt;/p&gt;
-&lt;/blockquote&gt;
+You have administrator privileges for the entire VPN Server.
+
+VPN Server&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;这时我们需要输入&lt;/p&gt;
 
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ServerPasswordSet
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/div&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ServerPasswordSet
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
 
 &lt;p&gt;命令设置远程管理密码&lt;/p&gt;
 
@@ -239,7 +1494,9 @@ Specify Virtual Hub Name:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpnset.png&quot; alt=&quot;vpnset&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：&lt;/p&gt;
+&lt;p&gt;Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。&lt;/p&gt;
+
+&lt;p&gt;新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/assets/images/2017-06/vpneasy.png&quot; alt=&quot;vpneasy&quot; /&gt;&lt;/p&gt;
 

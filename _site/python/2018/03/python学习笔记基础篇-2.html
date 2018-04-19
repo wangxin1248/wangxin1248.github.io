@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+  <link href="http://gmpg.org/xfn/11" rel="profile">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+
+  <link rel="stylesheet" href="/assets/css/normalize.css"/>
+  <link rel="stylesheet" href="/assets/css/bulma.css"/>
+  <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="/assets/css/syntax.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
+
+  <!-- Icons -->
+  <link rel="shortcut icon" href="/assets/images/icon-xin.png">
+
+  <!-- RSS -->
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
+  
+  <title>
+    
+      python学习笔记基础篇-python基础知识(1) &middot; wangxin
+    
+  </title>
+
+</head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101239613-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-101239613-1');
+</script>
+
+<!-- Google analytics -->
+
+
+<body>
+
+<section class="hero is-dark">
+  <div class="hero-body" >
+    <div class="container">
+        <h1 class="title">
+          <!-- 网站顶部提示信息 -->
+          <span class="typewrite" data-period="2000" data-type='[ "Hello,World","你好，世界","こんにちは世界","안녕하세요 세계","Bonjour le monde","Привет мир"]'>
+            <span class="wrap"></span>
+          </span>
+        </h1>
+      <h4 class="subtitle" id="quote">
+      </h4>
+    </div>
+  </div>
+</section>
+
+<div class="main-container">
+  <div class="tile is-ancestor is-vertical">
+
+
+    <nav class="nav has-shadow">
+
+      <div class="nav-left">
+
+        <a href="/" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-home" aria-hidden="true" title="Homepage"></i>
+          </span>
+        </a>
+
+        <a href="https://github.com/wangxin1248" class="nav-item">
+          <span class="icon">
+            <i class="fa fa-github" aria-hidden="true" title="Github"></i>
+          </span>
+        </a>
+
+        <div class="nav-item" id="searchFieldNav">
+          <div class="field has-addons">
+            <p class="control">
+              <input class="input is-small" type="text" placeholder="Find an article" id="search-text">
+            </p>
+            <p class="control">
+              <a class="button is-dark is-small" onclick="searchHandler();">
+                Search
+              </a>
+            </p>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="nav-right nav-menu" id='nav-menu'>
+        <a href="/archive" class="nav-item">Archive</a>
+        <a href="/categories" class="nav-item">categories</a>
+        <a href="/tags" class="nav-item">Tags</a>
+      </div>
+
+      <span class="nav-toggle" id="nav-toggle">
+          <span></span>
+          <span></span>
+          <span></span>
+    </nav>
+
+    <div class="tile is-parent">
+      <div class="tile is-8 is-child main">
+
+        <div class="box">
+    <h1 class="post-title">python学习笔记基础篇-python基础知识(1)</h1>
+    <span class="post-meta">5 March, 2018. It was a Monday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="python学习笔记记录之基础篇学习如何使用python输出hello-world以及一些python的简单操作">python学习笔记记录之基础篇，学习如何使用python输出Hello World，以及一些python的简单操作。</h1>
+<p>在学习一门语言之前，按照惯例先实现Hello World的输出</p>
+
+<p>在Ubuntu的命令行中输入<em>python</em>进入python的交互模式，然后输入如下的代码，回车执行：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="k">print</span><span class="p">(</span><span class="s">"Hello World"</span><span class="p">)</span>
+</code></pre></div></div>
+
+<p>恭喜你，python入门的第一步就结束了。</p>
+
+<h2 id="1python交互模式">1.python交互模式</h2>
+
+<p>在安装了Linux之后，可以直接在shell中对python的语法进行测试，这样当在程序中遇到不了解具体使用方式的函数时可以直接在shell中进行测试。</p>
+
+<p>根据所安装的python版本不用，进入交互模式的方法有所不同。这里以python3为例：</p>
+
+<p>在Ubuntu的终端中输入：</p>
+<blockquote>
+  <p><strong>python3</strong></p>
+</blockquote>
+
+<p><img src="/assets/images/2018-03/python3交互模式.PNG" alt="python3交互模式" /></p>
+
+<p>这样就进入到了python交互模式，可以在这里执行相应的python代码</p>
+
+<p>还有一种交互模式，其功能较python自带的强大且支持命令，那就是ipython3</p>
+
+<p>在Ubuntu系统中输入</p>
+<blockquote>
+  <p><strong>sudo apt-get install ipython3</strong></p>
+</blockquote>
+
+<p>来安装ipython3</p>
+
+<p>接下来输入</p>
+<blockquote>
+  <p><strong>ipython3</strong></p>
+</blockquote>
+
+<p>来进行ipython3的交互模式，在交互模式中输入ls命令来显示当前文件夹下的文件，并执行hello world程序。
+<img src="/assets/images/2018-03/ipython3交互模式.PNG" alt="ipython3交互模式" /></p>
+
+<h2 id="2注释">2.注释</h2>
+<p>在python程序中是以#开头来注释代码的，#是进行单行注释
+想要进行多行注释，则得使用一对’'’或者一对”"”来进行。</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#这是python程序中的单行注释</span>
+
+<span class="s">"""
+这是python程序中的多行注释
+"""</span>
+
+<span class="s">'''
+这是python程序中的多行注释
+'''</span>
+</code></pre></div></div>
+
+<p>以上方式都可以进行python程序注释，可以根据需要进行使用。</p>
+
+<h3 id="注意">注意：</h3>
+<p>在python2中出现中文注释是会报错的，需要在程序开头指定编码格式：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#-*- coding:utf-8 -*-</span>
+</code></pre></div></div>
+
+<h2 id="3变量">3.变量</h2>
+<p>变量：用来存储数据的一个容器</p>
+
+<p>python中不需要指定具体变量的格式，而是根据右边所附值的类型确定变量的格式，python中变量定义的格式为：</p>
+
+<blockquote>
+  <p><strong>变量名 = 变量值</strong></p>
+</blockquote>
+
+<p>eg:</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="c">#定义了一个变量，变量名为score，里面存储的数为100</span>
+<span class="n">score</span> <span class="o">=</span> <span class="mi">100</span>
+</code></pre></div></div>
+
+<h2 id="4python标准变量类型">4.python标准变量类型</h2>
+
+<p>python定义了一些标准的变量类型，用来存储各种类型的数据</p>
+
+<p>python有五个基本的变量类型：</p>
+<ol>
+  <li>Numbers（数字）</li>
+  <li>String（字符串）</li>
+  <li>List（列表）</li>
+  <li>Tuple（元组）</li>
+  <li>Dictionary（字典）</li>
+</ol>
+
+<h2 id="5输入输出">5.输入输出</h2>
+<h3 id="1输入">(1)输入</h3>
+
+<p>python中获取键盘输入的数据非常简单</p>
+
+<blockquote>
+  <p><strong>user_input = input(“获取从键盘输入的值”)</strong></p>
+</blockquote>
+
+<p>执行上面的代码将会要求用户在键盘上输入内容，并将输入的内容存储在user_input变量中。</p>
+
+<p>input方法会获取用户在键盘上输入的内容，默认返回类型为String字符串类型。</p>
+
+<h3 id="2输出">(2)输出</h3>
+<p>在上面的Hello World例子中就已经使用过了python的输出函数print了，在python中使用<strong>print()</strong>方法将所需打印的内容打印到控制台上。</p>
+
+<p>在print打印中会有占位符的使用，其使用方法与c语言中的占位符相似。</p>
+
+<p>例如：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">age</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="c">#打印age变量中的值，%d为数字型占位符</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"age变量里的值是：</span><span class="si">%</span><span class="s">d"</span><span class="o">%</span><span class="n">age</span><span class="p">)</span>
+
+<span class="n">name</span> <span class="o">=</span> <span class="s">"wx"</span>
+<span class="c">#打印name变量中的值，%s为字符串型占位符</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"姓名是：</span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+</code></pre></div></div>
+<p>目前常用的占位符也就%d以及%s了。</p>
+
+<p>要一次打印多个变量中的值的时候,可以按照如下的格式进行：</p>
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">name</span> <span class="o">=</span> <span class="s">"wx"</span>
+<span class="n">age</span> <span class="o">=</span> <span class="mi">18</span>
+<span class="n">addr</span> <span class="o">=</span> <span class="s">"***************"</span>
+<span class="c">#一次性输出多个变量中的值</span>
+<span class="k">print</span><span class="p">(</span><span class="s">"姓名：</span><span class="si">%</span><span class="s">s  年龄：</span><span class="si">%</span><span class="s">d  地址：</span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">age</span><span class="p">,</span><span class="n">addr</span><span class="p">))</span>
+</code></pre></div></div>
+
+<p>这样便可以实现一次性打印多个变量的值了</p>
+
+<h3 id="注意-1">注意：</h3>
+
+<p>在python2与python3中input输入不同</p>
+
+<ul>
+  <li>python2中input输入的是命令（变量），使用raw_input则输入字符串</li>
+  <li>python3中input输入的是字符串（目前主流使用）</li>
+</ul>
+
+<h2 id="6练习">6.练习</h2>
+
+<p>要求：实现一个名片打印的程序</p>
+<ol>
+  <li>使用input获取必要的信息</li>
+  <li>使用print来打印名片信息</li>
+  <li>名片内容包括姓名，性别，手机号，qq号，地址</li>
+</ol>
+
+<p>代码：</p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  <span class="mi">1</span> <span class="c">#要求：打印名片</span>
+  <span class="mi">2</span> <span class="c">#要点：</span>
+  <span class="mi">3</span> <span class="c">#     1.使用input获取必要的信息</span>
+  <span class="mi">4</span> <span class="c">#     2.使用print来打印名片信息</span>
+  <span class="mi">5</span> <span class="c">#     3.名片信息包括姓名、性别、手机号、QQ号、地址</span>
+  <span class="mi">6</span>
+  <span class="mi">7</span> <span class="c">#程序开始</span>
+  <span class="mi">8</span> <span class="k">print</span><span class="p">(</span><span class="s">"请输入相关信息，系统将为您生成个性名片"</span><span class="p">)</span>
+  <span class="mi">9</span>
+ <span class="mi">10</span> <span class="c">#获取相关信息</span>
+ <span class="mi">11</span> <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"姓名：</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+ <span class="mi">12</span> <span class="n">sex</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"性别：</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+ <span class="mi">13</span> <span class="n">phone_number</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"手机号：</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+ <span class="mi">14</span> <span class="n">address</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s">"地址：</span><span class="se">\n</span><span class="s">"</span><span class="p">)</span>
+ <span class="mi">15</span>
+ <span class="mi">16</span> <span class="c">#生成个性名片，输出相关信息</span>
+ <span class="mi">17</span> <span class="k">print</span><span class="p">(</span><span class="s">"======您的名片======"</span><span class="p">)</span>
+ <span class="mi">18</span> <span class="k">print</span><span class="p">(</span><span class="s">"姓名： </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">name</span><span class="p">)</span>
+ <span class="mi">19</span> <span class="k">print</span><span class="p">(</span><span class="s">"--------------------"</span><span class="p">)</span>
+ <span class="mi">20</span> <span class="k">print</span><span class="p">(</span><span class="s">"性别： </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">sex</span><span class="p">)</span>
+ <span class="mi">21</span> <span class="k">print</span><span class="p">(</span><span class="s">"--------------------"</span><span class="p">)</span>
+ <span class="mi">22</span> <span class="k">print</span><span class="p">(</span><span class="s">"手机号： </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">phone_number</span><span class="p">)</span>
+ <span class="mi">23</span> <span class="k">print</span><span class="p">(</span><span class="s">"--------------------"</span><span class="p">)</span>
+ <span class="mi">24</span> <span class="k">print</span><span class="p">(</span><span class="s">"地址： </span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="n">address</span><span class="p">)</span>
+ <span class="mi">25</span> <span class="k">print</span><span class="p">(</span><span class="s">"--------------------"</span><span class="p">)</span>
+ <span class="mi">26</span>
+ <span class="mi">27</span>
+ <span class="mi">28</span> <span class="c">#一次性打印所有变量</span>
+ <span class="mi">29</span> <span class="k">print</span><span class="p">(</span><span class="s">"="</span><span class="o">*</span><span class="mi">5</span><span class="o">+</span><span class="s">"您的名片"</span><span class="o">+</span><span class="s">"="</span><span class="o">*</span><span class="mi">5</span><span class="p">)</span>
+ <span class="mi">30</span> <span class="k">print</span><span class="p">(</span><span class="s">"姓名：</span><span class="si">%</span><span class="s">s</span><span class="se">\n</span><span class="s">性别：</span><span class="si">%</span><span class="s">s</span><span class="se">\n</span><span class="s">手机号：</span><span class="si">%</span><span class="s">s</span><span class="se">\n</span><span class="s">地址：</span><span class="si">%</span><span class="s">s"</span><span class="o">%</span><span class="p">(</span><span class="n">name</span><span class="p">,</span><span class="n">sex</span><span class="p">,</span><span class="n">phone_number</span><span class="p">,</span><span class="n">address</span><span class="p">))</span>
+</code></pre></div></div>
+
+<h2 id="执行结果">执行结果：</h2>
+<p><img src="/assets/images/2018-03/打印名片.PNG" alt="打印名片" /></p>
+</span>
+</div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
+
+
+      </div>
+
+      <div class="tile is-4 is-child">
+        <div class="tile is-parent is-vertical sidebar">
+
+          <!-- 个人头像 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Sponsored
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                    <a href="/resume.html"><img src="/assets/images/web_hi_res_512.png"/></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 文章分类 -->
+          <div class="tile is-child widget">
+
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                Article classification
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  
+                  <ul class="categories_box inline">
+                      
+                    
+
+
+  
+     
+    	<li><a href="/categories#Life-ref">
+    		Life <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#leetcode-ref">
+    		leetcode <span>4</span>
+    	</a></li>
+     
+    	<li><a href="/categories#python-ref">
+    		python <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#java-ref">
+    		java <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#jekyll-ref">
+    		jekyll <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#linux-ref">
+    		linux <span>4</span>
+    	</a></li>
+    
+  
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 推荐网站部分 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recommended Websites
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                    <li>
+                      <a href="https://leetcode.com/">leetcode</a>
+                    </li>
+                    <li>
+                      <a href="http://blog.csdn.net/icarus_wang/">csdn blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT home</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <div class="content has-text-centered">
+      <p>
+        Copyright (C) wangxin1248, All Rights Reserved.
+      </p>
+      <p>
+        Made with <a href="/resume.html">wangxin</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+      </p>
+      <p>
+        <a class="icon" href="https://github.com/wangxin1248">
+          <i class="fa fa-github" title="Github"></i>
+        </a>
+        <a class="icon" href="https://weibo.com/wangxin1248">
+          <i class="fa fa-weibo" title="Weibo"></i>
+        </a>
+        <a class="icon" href="mailto:wangxin1248@gmail.com">
+          <i class="fa fa-envelope" title="Email"></i>
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+
+<!-- js -->
+<script src="/assets/js/custom.js"></script>
+<script src="/assets/js/typewriter.js"></script>
+</body>
+</html>

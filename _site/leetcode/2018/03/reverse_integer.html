@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      LeetCode题目7.Reverse Integer &middot; wangxin
     
   </title>
 
@@ -110,13 +110,110 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">LeetCode题目7.Reverse Integer</h1>
+    <span class="post-meta">8 March, 2018. It was a Thursday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="leetcode刷题之题目7reverse-integer">LeetCode刷题之题目7.Reverse Integer</h1>
+
+<h2 id="description">Description</h2>
+
+<p>Given a 32-bit signed integer, reverse digits of an integer.</p>
+
+<p>Example 1:</p>
+
+<blockquote>
+  <p>Input: 123
+Output:  321</p>
+</blockquote>
+
+<p>Example 2:</p>
+
+<blockquote>
+  <p>Input: -123
+Output: -321</p>
+</blockquote>
+
+<p>Example 3:</p>
+
+<blockquote>
+  <p>Input: 120
+Output: 21</p>
+</blockquote>
+
+<h2 id="note">Note</h2>
+
+<p>Assume we are dealing with an environment which could only hold integers within the 32-bit signed integer range. For the purpose of this problem, assume that your function returns 0 when the reversed integer overflows.</p>
+
+<h2 id="思路">思路</h2>
+
+<p>这道题可以分成两部分来求解，首先是对int型整数进行逆序，接下来就是判断逆序后的数是否超过int型数的范围。</p>
+
+<h3 id="第一步逆序">第一步：逆序</h3>
+
+<p>对于123这个整数来说，想要对其进行逆序的话，那么首先得获取到3这个个位数，将它乘以10之后加上十位的2。然后将32乘以10再加上百位的1。这样，整数的逆序就完成了。</p>
+
+<p>那么对于一般的数来说，其基本的操作就是：</p>
+<blockquote>
+  <p>1.获取个位数，将原数除10去掉原个位数
+2.乘10再加上新的个位数</p>
+</blockquote>
+
+<p>用代码来体现就是：</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">*</span><span class="mi">10</span> <span class="o">+</span> <span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="o">;</span>
+<span class="n">x</span> <span class="o">/=</span> <span class="mi">10</span><span class="o">;</span>
+</code></pre></div></div>
+<p>对于int型整数来说，除10之后便没有小数点之后的了。对应循环的开始条件便是x不为0。</p>
+
+<h3 id="第二步判断是否超过int型数范围">第二步：判断是否超过int型数范围</h3>
+
+<p>对应int型数来说，其最大值和最小值通过java中的Integer类中的常量可以很方便的得到。</p>
+
+<p>主要问题是逆序后的数有可能超过int型数，所以对于逆序后的数来说得使用更大范围类型的变量来接收，这里使用long长整型。</p>
+
+<h2 id="java求解代码">java求解代码</h2>
+
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kd">class</span> <span class="nc">Solution</span> <span class="o">{</span>
+    <span class="kd">public</span> <span class="kt">int</span> <span class="nf">reverse</span><span class="o">(</span><span class="kt">int</span> <span class="n">x</span><span class="o">)</span> <span class="o">{</span>
+       <span class="kt">long</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">0</span><span class="o">;</span>
+        <span class="k">while</span><span class="o">(</span><span class="n">x</span><span class="o">!=</span><span class="mi">0</span><span class="o">){</span>
+            <span class="n">result</span> <span class="o">=</span> <span class="n">result</span><span class="o">*</span><span class="mi">10</span><span class="o">+</span><span class="n">x</span><span class="o">%</span><span class="mi">10</span><span class="o">;</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="n">x</span><span class="o">/</span><span class="mi">10</span><span class="o">;</span>
+        <span class="o">}</span>
+        <span class="k">if</span><span class="o">(</span><span class="n">result</span><span class="o">&gt;</span><span class="mi">0</span><span class="o">){</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">&gt;</span><span class="n">Integer</span><span class="o">.</span><span class="na">MAX_VALUE</span><span class="o">?</span><span class="mi">0</span><span class="o">:(</span><span class="kt">int</span><span class="o">)</span><span class="n">result</span><span class="o">;</span>
+        <span class="o">}</span><span class="k">else</span><span class="o">{</span>
+            <span class="k">return</span> <span class="n">result</span><span class="o">&lt;</span><span class="n">Integer</span><span class="o">.</span><span class="na">MIN_VALUE</span><span class="o">?</span><span class="mi">0</span><span class="o">:(</span><span class="kt">int</span><span class="o">)</span><span class="n">result</span><span class="o">;</span>
+        <span class="o">}</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

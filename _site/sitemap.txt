@@ -1,10 +1,27 @@
 
-https://www.pipxia.com/404
-https://www.pipxia.com/archive
-https://www.pipxia.com/atom.xml
-https://www.pipxia.com/
-https://www.pipxia.com/rss.xml
-https://www.pipxia.com/sitemap.txt
-https://www.pipxia.com/tags
+https://wangxin1248.com/404
+https://wangxin1248.com/archive
+https://wangxin1248.com/atom.xml
+https://wangxin1248.com/categories
+https://wangxin1248.com/
+https://wangxin1248.com/resume
+https://wangxin1248.com/rss.xml
+https://wangxin1248.com/sitemap.txt
+https://wangxin1248.com/tags
 
-https://www.pipxia.com/life/2017/07/usevpn.html
+https://wangxin1248.com/linux/2018/04/linux-adduser.html
+https://wangxin1248.com/linux/2018/04/ubuntu-install-mysql.html
+https://wangxin1248.com/linux/2018/04/ubuntu-set-chinese-language.html
+https://wangxin1248.com/linux/2018/04/ubuntu-install-shadowsocks.html
+https://wangxin1248.com/life/2018/04/mac-install-python.html
+https://wangxin1248.com/jekyll/2018/03/rouge.html
+https://wangxin1248.com/jekyll/2018/03/usehttps.html
+https://wangxin1248.com/java/2018/03/mystack.html
+https://wangxin1248.com/java/2018/03/8code.html
+https://wangxin1248.com/leetcode/2018/03/palindrome_number.html
+https://wangxin1248.com/leetcode/2018/03/reverse_integer.html
+https://wangxin1248.com/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-2.html
+https://wangxin1248.com/python/2018/03/python%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E5%9F%BA%E7%A1%80%E7%AF%87-1.html
+https://wangxin1248.com/leetcode/2018/02/twosum2.html
+https://wangxin1248.com/leetcode/2018/02/twosum.html
+https://wangxin1248.com/life/2017/07/usevpn.html

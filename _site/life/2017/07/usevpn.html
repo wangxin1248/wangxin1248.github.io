@@ -11,24 +11,33 @@
   <link rel="stylesheet" href="/assets/css/normalize.css"/>
   <link rel="stylesheet" href="/assets/css/bulma.css"/>
   <link rel="stylesheet" href="/assets/css/custom.css"/>
+  <link rel="stylesheet" href="/assets/css/syntax.css">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
   <link href="https://fonts.googleapis.com/css?family=Open+Sans|Roboto" rel="stylesheet">
 
   <!-- Icons -->
-  <link rel="shortcut icon" href="/assets/images/favicon.ico">
+  <link rel="shortcut icon" href="/assets/images/icon-xin.png">
 
   <!-- RSS -->
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
   <link rel="alternate" type="application/rss+xml" title="RSS" href="/atom.xml">
-
+  
   <title>
     
-      教育网环境下实现免费上网 &middot; pipxia
+      教育网环境下实现免费上网 &middot; wangxin
     
   </title>
 
 </head>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-101239613-1"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
 
+  gtag('config', 'UA-101239613-1');
+</script>
 
 <!-- Google analytics -->
 
@@ -36,7 +45,7 @@
 <body>
 
 <section class="hero is-dark">
-  <div class="hero-body">
+  <div class="hero-body" >
     <div class="container">
         <h1 class="title">
           <!-- 网站顶部提示信息 -->
@@ -87,6 +96,7 @@
 
       <div class="nav-right nav-menu" id='nav-menu'>
         <a href="/archive" class="nav-item">Archive</a>
+        <a href="/categories" class="nav-item">categories</a>
         <a href="/tags" class="nav-item">Tags</a>
       </div>
 
@@ -103,25 +113,31 @@
     <h1 class="post-title">教育网环境下实现免费上网</h1>
     <span class="post-meta">28 July, 2017. It was a Friday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
 
-    <span class="post-text"><p>没错，本教程就是教你免费上网的。</p>
+    <span class="post-text"><h1 id="在教育网的环境下使用softethervpn搭建vpn服务器通过vpn服务器的相关配置实现在教育网环境下免费使用网络">在教育网的环境下使用SoftEtherVPN搭建VPN服务器，通过VPN服务器的相关配置实现在教育网环境下免费使用网络</h1>
+<p>没错，本教程就是教你免费上网的。</p>
 
 <p><img src="/assets/images/2017-06/01.jpg" alt="vpnsetup" /></p>
 
 <p>嗯，当然是有前提滴……</p>
 
-<h1 id="前提">前提</h1>
-<p>如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。
-目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。</p>
+<h2 id="前提">前提</h2>
+<p>如果你的网络是支持IPV6的，并且IPV6网络不计流量，那么恭喜你，通过本教程你就可以实现免流量上网。</p>
 
-<h1 id="原理">原理</h1>
-<p>本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。</p>
+<p>目前主要的使用场景是广大教育网用户，所以你是穷逼的学生党，交不起每月的那些网费的话，可以试下我的方法。</p>
 
-<h1 id="准备条件">准备条件</h1>
+<h2 id="原理">原理</h2>
+<p>本教程实现免费上网的原理是使用IPV6网络连接VPN服务器，然后使用服务器的网络来进行上网。</p>
+
+<p>这就要求VPN服务器得支持IPV4和IPV6网络，这样理论上就可以通过本地不计费的IPV6流量连接服务器，服务器来访问对应的网络。</p>
+
+<h2 id="准备条件">准备条件</h2>
 
 <h3 id="服务器提供商">服务器提供商</h3>
-<p>搭建服务器的VPS使用的是<a href="https://bandwagonhost.com/">bandwagonhost</a>，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。
-并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……
-具体服务器的购买和使用请自行百度</p>
+<p>搭建服务器的VPS使用的是<a href="https://bandwagonhost.com/">bandwagonhost</a>，主要看中的是搬瓦工的价格便宜，并且支持IPV6和IPV4。</p>
+
+<p>并且针对本国的国情，对于IT相关专业的学生来说，使用这样方式还可以实现科学上网……</p>
+
+<p>具体服务器的购买和使用请自行百度</p>
 
 <h3 id="服务器系统">服务器系统</h3>
 <p>VPS所搭载的系统是<a href="https://www.centos.org/" title="CentOS">CentOS64位</a></p>
@@ -135,177 +151,148 @@
 <p>首先要在服务器上下载并解压安装文件，注意服务器是32位还是64位，分别下载对应的文件。</p>
 
 <p>32位系统</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
-</code></pre>
-</div>
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/32bit_-_Intel_x86/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x86-32bit.tar.gz
+</code></pre></div></div>
 <p>64位系统</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>wget http://www.softether-download.com/files/softether/v4.22-9634-beta-2016.11.27-tree/Linux/SoftEther_VPN_Server/64bit_-_Intel_x64_or_AMD64/softether-vpnserver-v4.22-9634-beta-2016.11.27-linux-x64-64bit.tar.gz
+</code></pre></div></div>
 
 <p>以上为截止发布本文时的最新版本，建议从<a href="">SoftEther</a>官方网站获取最新版本。</p>
 
 <h3 id="安装启动">安装启动</h3>
 
 <p>解压下载的文件</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>tar -zxvf softether-vpnserver-*.tar.gz
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>tar -zxvf softether-vpnserver-*.tar.gz
+</code></pre></div></div>
 
 <p>将解压的文件移动到<strong>/usr/local</strong>下</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>mv vpnserver /usr/local
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>mv vpnserver /usr/local
+</code></pre></div></div>
 
 <p>进入解压目录</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>cd /usr/local/vpnserver
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>cd /usr/local/vpnserver
+</code></pre></div></div>
 
 <p>启动安装脚本</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./.install.sh
+</code></pre></div></div>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>./.install.sh
-</code></pre>
-</div>
+<p>接下来显示</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
+Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.
 
-<blockquote>
-  <p>SoftEther VPN Server (Ver 4.22, Build 9630, Intel x64 / AMD64) for Linux Install Utility
-Copyright (c) SoftEther Project at University of Tsukuba, Japan. All Rights Reserved.</p>
-</blockquote>
+Do you want to read the License Agreement for this software ?
 
-<blockquote>
-  <p>Do you want to read the License Agreement for this software ?</p>
+1.Yes
 
-  <p>1.Yes</p>
+2.No
 
-  <p>2.No</p>
-
-  <p>Please choose one of above number:</p>
-</blockquote>
+Please choose one of above number:
+</code></pre></div></div>
 
 <p>这里询问你是否阅读License，输入1</p>
 
-<blockquote>
-  <p>Did you read and understand the License Agreement ?</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Did you read and understand the License Agreement ?
 
-  <p>(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)</p>
-
-  <p>1.Yes</p>
-
-  <p>2.No</p>
-
-  <p>Please choose one of above number:</p>
-</blockquote>
+(If you couldn’t read above text, Please read ‘ReadMeFirst_License.txt’ file with any text editor.)
+ 
+1.Yes
+ 
+2.No
+ 
+Please choose one of above number:
+</code></pre></div></div>
 
 <p>询问你是否读懂了，输入1</p>
 
-<blockquote>
-  <p>Did you agree the License Agreement ?</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Did you agree the License Agreement ?
+ 
+1.Agree
 
-  <p>1.Agree</p>
-
-  <p>2.Do Not Agree</p>
-
-  <p>Please choose one of above number:</p>
-</blockquote>
+2.Do Not Agree
+ 
+Please choose one of above number:
+</code></pre></div></div>
 
 <p>问你同不同意，继续输入1</p>
 
 <p>接下来便会开始安装，假如遇到gcc命令无法识别，使用</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>yum install gcc
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>yum install gcc
+</code></pre></div></div>
 
 <p>命令安装，接下来重新执行安装命令。</p>
 
 <p>如果没有异常则说明安装成功，执行</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./vpnserver start
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./vpnserver start
+</code></pre></div></div>
 
 <p>启动服务</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./vpnserver stop
-</code></pre>
-</div>
-
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./vpnserver stop
+</code></pre></div></div>
 <p>停止服务。</p>
 
 <h3 id="服务器端配置">服务器端配置</h3>
 
 <p>启动成功后我们需要设置远程登录密码以便本地管理服务。
 运行</p>
-
-<div class="highlighter-rouge"><pre class="highlight"><code>./vpncmd
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>./vpncmd
+</code></pre></div></div>
 
 <p>进入VPN的命令行：</p>
 
-<blockquote>
-  <p>vpncmd command - SoftEther VPN Command Line Management Utility</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>vpncmd command - SoftEther VPN Command Line Management Utility
+ 
+SoftEther VPN Command Line Management Utility (vpncmd command)
 
-  <p>SoftEther VPN Command Line Management Utility (vpncmd command)</p>
+Version 4.22 Build 9634 (English)
 
-  <p>Version 4.22 Build 9634 (English)</p>
+Compiled 2016/11/27 21:59:35 by yagi at pc30
+Copyright (c) SoftEther VPN Project. All Rights Reserved.
+ 
+By using vpncmd program, the following can be achieved.
+ 
 
-  <p>Compiled 2016/11/27 21:59:35 by yagi at pc30
-Copyright (c) SoftEther VPN Project. All Rights Reserved.</p>
+1.Management of VPN Server or VPN Bridge
 
-  <p>By using vpncmd program, the following can be achieved.</p>
+2.Management of VPN Client
 
-  <p>1.Management of VPN Server or VPN Bridge</p>
+3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)
 
-  <p>2.Management of VPN Client</p>
-
-  <p>3.Use of VPN Tools (certificate creation and Network Traffic Speed Test Tool)</p>
-
-  <p>Select 1, 2 or 3:</p>
-</blockquote>
+Select 1, 2 or 3:
+</code></pre></div></div>
 
 <p>这里我们选择1，然后出现：</p>
 
-<blockquote>
-  <p>Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Specify the host name or IP address of the computer that the destination VPN Server or VPN Bridge is operating on.
 
-  <p>By specifying according to the format ‘host name:port number’, you can also specify the port number.
-(When the port number is unspecified, 443 is used.)</p>
+By specifying according to the format ‘host name:port number’, you can also specify the port number.
+(When the port number is unspecified, 443 is used.)
+ 
+If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).
 
-  <p>If nothing is input and the Enter key is pressed, the connection will be made to the port number 8888 of localhost (this computer).</p>
-
-  <p>Hostname of IP Address of Destination:</p>
-</blockquote>
+Hostname of IP Address of Destination:
+</code></pre></div></div>
 
 <p>这里需要选择地址和端口。由于这台VPS已经搭建了一个网站，用了SSL占用了443端口，所以默认的443端口是用不了了，所以一定要改。我改用了5555端口，所以在这里输入localhost:5555，然后出现：</p>
 
-<blockquote>
-  <p>If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>If connecting to the server by Virtual Hub Admin Mode, please input the Virtual Hub name.
 If connecting by server admin mode, please press Enter without inputting anything.
-Specify Virtual Hub Name:</p>
-</blockquote>
+Specify Virtual Hub Name:
+</code></pre></div></div>
 
 <p>这里就是指定一个虚拟HUB名字，用默认的直接回车就行</p>
-<blockquote>
-  <p>Connection has been established with VPN Server “localhost” (port 5555).</p>
 
-  <p>You have administrator privileges for the entire VPN Server.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>Connection has been established with VPN Server “localhost” (port 5555).
 
-  <p>VPN Server&gt;</p>
-</blockquote>
+You have administrator privileges for the entire VPN Server.
+
+VPN Server&gt;
+</code></pre></div></div>
 
 <p>这时我们需要输入</p>
 
-<div class="highlighter-rouge"><pre class="highlight"><code>ServerPasswordSet
-</code></pre>
-</div>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>ServerPasswordSet
+</code></pre></div></div>
 
 <p>命令设置远程管理密码</p>
 
@@ -325,7 +312,9 @@ Specify Virtual Hub Name:</p>
 
 <p><img src="/assets/images/2017-06/vpnset.png" alt="vpnset" /></p>
 
-<p>Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：</p>
+<p>Host Name填服务器的地址或域名，端口如果之前改过了在这也记得改过来，右下角的密码填之前设置过的密码。</p>
+
+<p>新建完成后Connect就会弹出Easy Setup窗口（如果提示连不上请检查一下服务器的防火墙设置）：</p>
 
 <p><img src="/assets/images/2017-06/vpneasy.png" alt="vpneasy" /></p>
 
@@ -422,7 +411,7 @@ Specify Virtual Hub Name:</p>
 <script type="text/javascript">
     
     var disqus_developer = 1;
-    var disqus_shortname = 'pipxia'; // required: replace example with your forum shortname
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
     
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
@@ -442,30 +431,8 @@ Specify Virtual Hub Name:</p>
       <div class="tile is-4 is-child">
         <div class="tile is-parent is-vertical sidebar">
 
+          <!-- 个人头像 -->
           <div class="tile is-child widget">
-
-            <div class="card">
-              <header class="card-header">
-                <p class="card-header-title nice-title">
-                  Recent Posts
-                </p>
-              </header>
-              <div class="card-content">
-                <div class="content nice-text">
-                  <ul>
-                  
-                  <li><a href="/life/2017/07/usevpn.html">
-                    教育网环境下实现免费上网
-                  </a></li>
-                  
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="tile is-child widget">
-
             <div class="card">
               <header class="card-header">
                 <p class="card-header-title nice-title">
@@ -474,13 +441,64 @@ Specify Virtual Hub Name:</p>
               </header>
               <div class="card-content">
                 <div class="content nice-text">
-                  <img src="/assets/images/Dust_Bunny.jpg"/>
+                    <a href="/resume.html"><img src="/assets/images/web_hi_res_512.png"/></a>
                 </div>
               </div>
             </div>
+          </div>
+          <!-- 文章分类 -->
+          <div class="tile is-child widget">
 
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                Article classification
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  
+                  <ul class="categories_box inline">
+                      
+                    
+
+
+  
+     
+    	<li><a href="/categories#Life-ref">
+    		Life <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#leetcode-ref">
+    		leetcode <span>4</span>
+    	</a></li>
+     
+    	<li><a href="/categories#python-ref">
+    		python <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#java-ref">
+    		java <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#jekyll-ref">
+    		jekyll <span>2</span>
+    	</a></li>
+     
+    	<li><a href="/categories#linux-ref">
+    		linux <span>4</span>
+    	</a></li>
+    
+  
+
+
+                  </ul>
+                </div>
+              </div>
+            </div>
           </div>
 
+          <!-- 推荐网站部分 -->
           <div class="tile is-child widget">
             <div class="card">
               <header class="card-header">
@@ -492,10 +510,13 @@ Specify Virtual Hub Name:</p>
                 <div class="content nice-text">
                   <ul>
                     <li>
-                      <a href="www.pipxia.com">pipxia</a>
+                      <a href="https://leetcode.com/">leetcode</a>
                     </li>
                     <li>
-                      <a href="www.bilibili.com">BiliBili</a>
+                      <a href="http://blog.csdn.net/icarus_wang/">csdn blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT home</a>
                     </li>
                   </ul>
                 </div>
@@ -516,10 +537,10 @@ Specify Virtual Hub Name:</p>
   <div class="container">
     <div class="content has-text-centered">
       <p>
-        Some rights reserved.
+        Copyright (C) wangxin1248, All Rights Reserved.
       </p>
       <p>
-        Made with <a href="https://github.com/wangxin1248">wangxin1248</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
+        Made with <a href="/resume.html">wangxin</a>, <a href="https://jekyllrb.com/">Jekyll</a>. Hosted on <a href="https://github.com/">Github</a>
       </p>
       <p>
         <a class="icon" href="https://github.com/wangxin1248">

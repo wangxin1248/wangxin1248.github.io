@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      Ubuntu16.04服务器安装mysql数据库并配置远程连接 &middot; wangxin
     
   </title>
 
@@ -110,13 +110,89 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">Ubuntu16.04服务器安装mysql数据库并配置远程连接</h1>
+    <span class="post-meta">18 April, 2018. It was a Wednesday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="在搬瓦工的ubuntu1604-vps-中安装mysql数据库并配置远程连接">在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库并配置远程连接</h1>
+
+<h2 id="安装mysql">安装mysql</h2>
+
+<p>安装之前首先需要更新系统的软件源</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get update
+</code></pre></div></div>
+
+<p>更新完之后便可以安装mysql服务器和客户端了</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo apt-get install mysql-server mysql-client libmysqlclient-dev
+</code></pre></div></div>
+
+<p>在安装过程中会提示是否确认安装
+<img src="/assets/images/2018-04/mysql-install-1.png" alt="mysql-install-1" /></p>
+
+<p>属于y确认安装</p>
+
+<p>接下来会提示输入相关的root密码
+<img src="/assets/images/2018-04/mysql-install-2.png" alt="mysql-install-2" />
+<img src="/assets/images/2018-04/mysql-install-3.png" alt="mysql-install-3" /></p>
+
+<p>以上3个软件包安装完成后，使用如下命令查询是否安装成功：</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo netstat -tap | grep mysql
+</code></pre></div></div>
+<p>查询结果如下图所示，表示安装成功。
+<img src="/assets/images/2018-04/mysql-install-5.png" alt="mysql-install-5" /></p>
+
+<p>安装完成之后便可以进行登录mysql数据库
+<img src="/assets/images/2018-04/mysql-install-4.png" alt="mysql-install-4" /></p>
+
+<h3 id="mysqld服务操作命令">mysqld服务操作命令</h3>
+
+<ul>
+  <li>启动mysqld服务: sudo /etc/init.d/mysql start</li>
+  <li>停止mysqld服务: sudo /etc/init.d/mysql stop</li>
+  <li>启动mysqld服务: sudo /etc/init.d/mysql restart</li>
+</ul>
+
+<h2 id="配置mysql远程连接">配置mysql远程连接</h2>
+
+<p>编辑mysql配置文件，把其中bind-address = 127.0.0.1注释了</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo vi /etc/mysql/mysql.conf.d/mysqld.cnf 
+</code></pre></div></div>
+
+<p>使用root进入mysql命令行，执行如下2个命令</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>grant all on *.* to root@'%' identified by 'root用户密码' with grant option;
+flush privileges;
+</code></pre></div></div>
+
+<p>重启mysql</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>/etc/init.d/mysql restart
+</code></pre></div></div>
+<p>重启成功后，便可以支持从其他计算机进行远程登录。</p>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>

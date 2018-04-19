@@ -24,7 +24,7 @@
   
   <title>
     
-      Oops! &middot; wangxin
+      linux服务器中添加一个用户并赋予相应权限 &middot; wangxin
     
   </title>
 
@@ -110,13 +110,141 @@
       <div class="tile is-8 is-child main">
 
         <div class="box">
-    <h1 class="post-title">Oops!</h1>
-    <hr/>
-    <div class="content"><span class="post-text"><h3 class="nice-title">Seems like you've hit a 404</h3>
-<img src="/assets/images/404-error.png" alt="file not found" />
-<p class="post-text">Our sophisticated engineers are already looking into the problem, as seen above. Meanwhile, why don't you visit <a href="/">home</a> </p>
-</span></div>
+    <h1 class="post-title">linux服务器中添加一个用户并赋予相应权限</h1>
+    <span class="post-meta">19 April, 2018. It was a Thursday. <a style="color:grey" href="#disqus_thread"></a></span><hr/>
+
+    <span class="post-text"><h1 id="linux服务器中添加一个用户并赋予相应权限">linux服务器中添加一个用户并赋予相应权限</h1>
+
+<p>在unix/linux中添加用户账号可以使用<strong>adduser</strong>或者<strong>useradd</strong>命令，因为adduser命令时指向useradd命令的一个链接。因此，这两个命令的使用格式完全一样。</p>
+
+<p>接下来便使用useradd命令来添加一个新的用户到服务器中，注意：<strong>以下的代码得以root用户的身份进行</strong></p>
+<h2 id="创建用户账号">创建用户账号</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo useradd 用户名 -m -d /home/用户名
+</code></pre></div></div>
+<h3 id="命令参数">命令参数：</h3>
+<ul>
+  <li><strong>-d</strong>：  指定用户登录系统时的主目录，如果不使用该参数，系统自动在/home目录下建立与用户名同名的目录为主目录。</li>
+  <li><strong>-m</strong>：  自动建立目录</li>
+  <li><strong>-g</strong>：  指定组名称
+    <h3 id="说明">说明</h3>
+    <ol>
+      <li>linux每个用户都要有一个主目录，主目录就是第一次登录系统，用户默认的当前目录。</li>
+      <li>每一个用户必须有一个主目录，所以用useradd创建用户的时候，一定得给用户指定一个主目录。</li>
+      <li>用户的主目录一般要在根目录的home目录下，用户的主目录和用户名是相同的。</li>
+      <li>如果创建用户的时候不指定组名，那么系统会自动创建一个和用户名一样的组名。</li>
+    </ol>
+  </li>
+</ul>
+
+<h2 id="设置用户密码">设置用户密码</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>passwd 用户名
+</code></pre></div></div>
+<p>在unix/linux中，超级用户可以使用<strong>passwd</strong>命令为普通用户设置或修改用户口令。用户也可以直接使用该命令来修改自己的口令，而无需在命令的后面使用用户名。</p>
+
+<h2 id="为创建的用户添加sudo权限">为创建的用户添加sudo权限</h2>
+<p>新创建的用户，默认不能使用sudo，需要进行相应的设置</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo usermod -a -G adm 用户名
+sudo usermod -a -G sudo 用户名
+</code></pre></div></div>
+
+<h3 id="命令参数-1">命令参数：</h3>
+<ul>
+  <li><strong>-a</strong>：  用来指定这个用户默认的用户组</li>
+  <li><strong>-G</strong>：  一般配合‘-a’来完成其他组的添加</li>
+</ul>
+
+<h2 id="切换到用户为新创建的用户">切换到用户为新创建的用户</h2>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>su - 用户名
+</code></pre></div></div>
+<h3 id="命令参数-2">命令参数：</h3>
+<p>su和<em>su -</em>的不同之处在于：<strong>su -</strong>切换到对应的用户时会将当前的工作目录自动切换到切换后的用户主目录。</p>
+
+<hr />
+
+<h2 id="用户账号操作相关命令">用户账号操作相关命令</h2>
+
+<h3 id="删除用户">删除用户</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>userdel [-r] 用户名
+</code></pre></div></div>
+
+<ul>
+  <li>userdel 用户名：  删除用户，但不会自动删除用户的主目录</li>
+  <li>userdel -r 用户名：  删除用户，同时删除用户的主目录</li>
+</ul>
+
+<h3 id="切换root用户">切换root用户</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>sudo -s
+</code></pre></div></div>
+
+<h3 id="查看当前登录用户">查看当前登录用户</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>whoami
+</code></pre></div></div>
+
+<p><strong>whoami</strong>命令用于用户查看当前系统当前账号的用户名。可以通过<strong>cat/etc/passwd</strong>查看系统用户信息。</p>
+
+<h3 id="查看当前服务器登录信息">查看当前服务器登录信息</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>who
+</code></pre></div></div>
+<p><strong>who</strong>命令用来查看当前所有登录系统的用户信息。</p>
+<h4 id="常用选项">常用选项</h4>
+<ul>
+  <li><strong>-m 或 am i</strong>：  只显示运行who命令的用户名、登录终端和登录时间</li>
+  <li><strong>-q 或 –count</strong>：  只显示用户的登陆账号和登陆用户的数量</li>
+  <li><strong>-u 或 –heading</strong>：  显示列标题</li>
+</ul>
+
+<h3 id="推出登录账号">推出登录账号</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>exit
+</code></pre></div></div>
+<ul>
+  <li>如果是图形界面，退出当前终端</li>
+  <li>如果是使用ssh远程登录，退出当前登录账号</li>
+  <li>如果是切换后的登录用户，退出则返回到上一个登录账号</li>
+</ul>
+
+<h3 id="查看有哪些用户组">查看有哪些用户组</h3>
+
+<p>方法一：<strong>cat/etc/group</strong>
+方法二：<strong>groupmod +三次tab键</strong></p>
+
+<h3 id="添加组账号">添加组账号</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>groupadd 组账号
+</code></pre></div></div>
+
+<h3 id="删除组账号">删除组账号</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>groupdel 组账号
+</code></pre></div></div>
+
+<h3 id="查看用户在哪些组">查看用户在哪些组</h3>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>groups 用户名
+</code></pre></div></div>
+</span>
 </div>
+
+<!--<div class="box">-->
+    <!-- google ads code box -->
+<!--</div>-->
+
+
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'wangxin1248'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
+
+
 
 
       </div>
