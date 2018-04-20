@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "linux服务器中添加一个用户并赋予相应权限"
+title:  "linux服务器中添加用户并赋予相应权限"
 date:  2018-04-19
-desc: "在Linux服务器中新建一个用户账号，并赋予用户权限，使其可以使用sudo命令，linux服务器版本为 Ubuntu16.04"
+desc: "在Linux服务器中新建用户账号，并赋予用户权限，使其可以使用sudo命令，linux服务器版本为 Ubuntu16.04"
 keywords: "Linux,ubuntu16.04,添加账号,服务器,sudo"
 categories: [linux]
 tags: [Linux,Ubuntu,sudo]
 ---
-# linux服务器中添加一个用户并赋予相应权限
+# linux服务器中添加用户并赋予相应权限
 
 在unix/linux中添加用户账号可以使用**adduser**或者**useradd**命令，因为adduser命令时指向useradd命令的一个链接。因此，这两个命令的使用格式完全一样。
 
@@ -43,7 +43,7 @@ sudo usermod -a -G sudo 用户名
 - **-a**：  用来指定这个用户默认的用户组
 - **-G**：  一般配合‘-a’来完成其他组的添加
 
-## 切换到用户为新创建的用户
+## 切换用户
 ```
 su - 用户名
 ```
