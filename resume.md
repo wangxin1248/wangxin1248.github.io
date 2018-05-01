@@ -18,7 +18,7 @@ group: resume
  - 研究生/西北工业大学软件工程专业 
  - 技术博客：https://wangxin1248.com
  - Github：http://github.com/wangxin1248
- - 期望职位：Java程序员，人工智能
+ - 期望职位：数据挖掘，人工智能
  - 期望薪资：税前月薪15k~20k，特别喜欢的公司可例外
  - 期望城市：西安
 
