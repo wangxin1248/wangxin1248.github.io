@@ -47,7 +47,14 @@ colorscheme solarized
 
 ## ls
 
-Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一套，ls 不是 GNU ls，所以即使 Terminal/iTerm2 配置了颜色，但是在 Mac 上敲入 ls 命令也不会显示高亮，可以通过安装 coreutils 来解决（brew install coreutils），不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1：
+Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一套，ls 不是 GNU ls，所以即使 Terminal配置了颜色，但是在 Mac 上敲入 ls 命令也不会显示高亮
+可以通过安装 coreutils 来解决
+
+```
+brew install coreutils
+```
+
+不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1：
 
 ```
 $ vi ~/.bash_profile
