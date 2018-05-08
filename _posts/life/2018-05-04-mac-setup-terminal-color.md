@@ -43,6 +43,7 @@ $ vi ~/.vimrc
 syntax enable
 set background=dark
 colorscheme solarized
+set nu!
 ```
 
 ## ls
@@ -51,12 +52,31 @@ Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一
 可以通过安装 coreutils 来解决
 
 ```
-brew install coreutils
+$ brew install xz coreutils
+$ gdircolors --print-database > ~/.dir_colors
+$ vim ~/.bash_profile 添加以下代码
+    if brew list | grep coreutils > /dev/null ; then
+        PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+        alias ls='ls -F --show-control-chars --color=auto'
+        eval `gdircolors -b $HOME/.dir_colors`
+    fi
+
 ```
 
-不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1：
+## grep语法高亮
 
 ```
-$ vi ~/.bash_profile
-export CLICOLOR=1
+$ vim ~/.bash_profile 添加以下代码
+    alias grep='grep --color'
+    alias egrep='egrep --color'
+    alias fgrep='fgrep --color'
+```
+
+## 增强命令行工具
+
+```
+$ vim ~/.bash_profile 添加以下代码
+    alias ll='ls -alF'
+    alias la='ls -A'
+    alias l='ls -CF'
 ```
