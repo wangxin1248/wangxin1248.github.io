@@ -19,7 +19,7 @@ tags: [python3,运行环境]
 在安装virtualenv之前需要安装[python3](http://getpython3.com)。
 安装完成之后需要配置python3的环境变量
 
-```
+``` python3
 export PATH=$PATH:/Users/用户名/Library/Python/3.6/bin
 ```
 
@@ -40,7 +40,7 @@ virtualenv env
 
 这样，一个独立的python开发环境就已经设置好了，这样遗憾想要进入独立的开发环境时只需要在终端中输入：
 
-```
+``` python3
 cd 项目路径
 source env/bin/activate
 ```
