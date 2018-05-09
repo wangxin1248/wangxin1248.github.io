@@ -16,7 +16,12 @@ tags: [python3,运行环境]
 
 ## 准备条件
 
-在安装virtualenv之前需要安装python3。
+在安装virtualenv之前需要安装[python3](http://getpython3.com)。
+安装完成之后需要配置python3的环境变量
+
+```
+export PATH=$PATH:/Users/用户名/Library/Python/3.6/bin
+```
 
 ## 安装virtualenv
 
