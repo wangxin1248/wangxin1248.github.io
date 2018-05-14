@@ -43,8 +43,7 @@ h1.title > span {
 
 /* 文章界面显示信息修改 */
 .post {
-    margin-bottom: 2em;
-    margin-left: 2em;
+    margin-bottom: 1em;
 }
 
 .nice-title {
