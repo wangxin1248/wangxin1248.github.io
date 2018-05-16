@@ -13,7 +13,7 @@ title: just do it!
             <br>
             <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
             <p class="nice-text">{{ post.desc }} 
-            <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a>
+            <!-- <a href="{{ BASE_PATH }}{{ post.url }}">阅读更多!</a> -->
             </p>
         </li>
     {% endfor %}
@@ -24,7 +24,7 @@ title: just do it!
 <div align="center">
     <!-- 上一页跳转 -->
     {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">Previous</a>
+        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">上一页</a>
     {% endif %}
     <!-- 遍历中间的页 -->
     {% for page in (1..paginator.total_pages) %}
@@ -38,7 +38,7 @@ title: just do it!
     {% endfor %}    
     <!-- 下一页跳转 -->
     {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a>
+        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">下一页</a>
     {% endif %}
 </div>
 
@@ -54,6 +54,12 @@ title: just do it!
     {% endfor %}
 </ul> -->
 
+<!-- 谷歌网页翻译 -->
+<div id="google_translate_element"></div><script type="text/javascript">
+    function googleTranslateElementInit() {
+      new google.translate.TranslateElement({pageLanguage: 'zh-CN', layout: google.translate.TranslateElement.FloatPosition.TOP_LEFT, multilanguagePage: true, gaTrack: true, gaId: 'UA-101239613-1'}, 'google_translate_element');
+    }
+    </script><script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <!-- 多说评论功能 -->
 <script type="text/javascript">
