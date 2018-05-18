@@ -4,7 +4,7 @@ title:  "linux服务器设置语言环境为支持中文"
 date:  2018-04-17
 desc: "搬瓦工中的ubuntu16.04 vps默认不支持中文，其实对于所有的Linux服务器来说都是默认不支持中文，需要单独进行设置才能使用中文"
 keywords: "Linux,中文,ubuntu16.04,搬瓦工vps,服务器"
-categories: [linux]
+categories: [Linux]
 tags: [Linux,Ubuntu]
 ---
 # linux服务器设置语言环境为支持中文

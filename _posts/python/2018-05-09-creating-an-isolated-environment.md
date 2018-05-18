@@ -4,7 +4,7 @@ title:  "创建一个独立的python项目运行环境"
 date:  2018-05-09
 desc: "开始创建python项目之前，首先需要创建一个独立的项目运行环境，这样有助于管理不同项目之间可能发生冲突的库版本"
 keywords: "python,运行环境,创建项目"
-categories: [python]
+categories: [Python]
 tags: [python3,运行环境]
 ---
 

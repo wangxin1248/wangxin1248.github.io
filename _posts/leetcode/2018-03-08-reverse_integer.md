@@ -4,7 +4,7 @@ title:  "LeetCode题目7.Reverse Integer"
 date:  2018-03-08
 desc: "LeetCode刷题之题目7.Reverse Integer"
 keywords: "LeetCode,刷题,算法,java,Reverse Integer"
-categories: [leetcode]
+categories: [LeetCode]
 tags: [LeetCode,算法,java]
 ---
 # LeetCode刷题之题目7.Reverse Integer

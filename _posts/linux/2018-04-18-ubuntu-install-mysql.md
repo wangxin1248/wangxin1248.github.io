@@ -4,7 +4,7 @@ title:  "Ubuntu16.04服务器安装mysql数据库并配置远程连接"
 date:  2018-04-18
 desc: "在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库，并且设置远程连接，使用navicat进行控制"
 keywords: "Linux,ubuntu16.04,搬瓦工vps,服务器,mysql,数据库"
-categories: [linux]
+categories: [Linux]
 tags: [Linux,Ubuntu,mysql]
 ---
 # 在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库并配置远程连接

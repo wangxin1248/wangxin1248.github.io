@@ -4,7 +4,7 @@ title:  "数据清洗之获取文件中的中文内容"
 date:  2018-05-16
 desc: "在进行各种各样的操作之前，首先需要的便是清洗数据。最近获取到一份文件，其中中文和英文都有，现想要从中提取出其中的中文内容"
 keywords: "python,数据清洗,获取中文"
-categories: [python]
+categories: [Python]
 tags: [python3,数据清洗]
 ---
 

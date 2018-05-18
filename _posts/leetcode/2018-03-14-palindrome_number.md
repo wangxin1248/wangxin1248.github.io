@@ -4,7 +4,7 @@ title:  "LeetCode题目9.Palindrome Numbers"
 date:  2018-03-14
 desc: "LeetCode刷题之题目9.Palindrome Numbers"
 keywords: "LeetCode,刷题,算法,java,Palindrome Numbers"
-categories: [leetcode]
+categories: [LeetCode]
 tags: [LeetCode,算法,java]
 ---
 # LeetCode刷题之题目9.Palindrome Numbers

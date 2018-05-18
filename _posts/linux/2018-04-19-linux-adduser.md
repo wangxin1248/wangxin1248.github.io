@@ -4,7 +4,7 @@ title:  "linux服务器中添加用户并赋予相应权限"
 date:  2018-04-19
 desc: "在Linux服务器中新建用户账号，并赋予用户权限，使其可以使用sudo命令，linux服务器版本为 Ubuntu16.04"
 keywords: "Linux,ubuntu16.04,添加账号,服务器,sudo"
-categories: [linux]
+categories: [Linux]
 tags: [Linux,Ubuntu,sudo]
 ---
 # linux服务器中添加用户并赋予相应权限
