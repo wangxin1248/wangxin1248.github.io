@@ -238,7 +238,7 @@ $ brew install dart
 
 项目的主要目录结构如下
 
-![flutter-1-project-menu](/assets/images/flutter-1-project-menu.png)
+![flutter-1-project-menu](/assets/images/2018-05/flutter-1-project-menu.png)
 
 点击绿色倒三角启动项目
 
@@ -259,4 +259,4 @@ pip install six
 ```
 
 接下来再次启动项目，成功运行：
-![flutter-1-run](/assets/images/flutter-1-run.png)
+![flutter-1-run](/assets/images/2018-05/flutter-1-run.png)
