@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Flutter学习（一）：开发环境搭建-macOS版"
+title:  "Flutter学习（一）：开发环境搭建"
 date:  2018-05-18
 desc: "Flutter是谷歌的移动UI框架，可以快速在iOS和Android上构建高质量的原生用户界面。 Flutter可以与现有的代码一起工作。在全世界，Flutter正在被越来越多的开发者和组织使用，并且Flutter是完全免费、开源的。"
 keywords: "Flutter,学习,开发环境,搭建"
@@ -8,7 +8,7 @@ categories: [Flutter]
 tags: [Flutter,开发环境搭建]
 ---
 
-# Flutter学习（一）：开发环境搭建-macOS版
+# Flutter学习（一）：开发环境搭建
 
 ## 什么是 Flutter
 
@@ -205,28 +205,58 @@ pod setup
 在 **Android Virtual Device Manager**中, 点击工具栏的 **Run**。模拟器启动并显示所选操作系统版本或设备的启动画面.
 
 
-## 执行 Flutter
-
-设置好相应的 iOS模拟器或者 Android模拟器，或者连接真机之后，使用如下命令来创建项目
-
-```
-flutter create myapp
-cd myapp
-flutter run
-```
-
 ## 使用 IDEA 来创建项目
 
+flutter支持多种方式来创建项目，官网中演示的有在bash中创建项目并直接运行的，还有使用visual code安装flutter插件来创建项目。方法有很多种，这里因为我经常使用IDEA来开发java项目，所以使用idea来创建flutter项目。
 
-打开IDEA，按下图所示，点击Plugins进入插件管理页面
+首先打开IDEA，按下图所示，点击Plugins进入插件管理页面
 
 ![flutter-1-使用idea创建项目](/assets/images/2018-05/flutter-1-使用idea创建项目.png)
 
 在插件管理页面，搜索Dart、Flutter两个插件并点击安装
+
 ![flutter-1-dart](/assets/images/2018-05/flutter-1-dart.png)
 ![flutter-1-flutter](/assets/images/2018-05/flutter-1-flutter.png)
 
 
 下载插件后，点击创建新项目，先选择Dart，在对应位置填入Dart SDK的path
+注意，dart sdk需要单独下载，下载命令：
 
-最后再选择Flutter，在对应位置填入Flutter SDK的path，然后点击创建按钮，就可以创建一个新的Flutter项目了
+```
+$ brew tap dart-lang/dart
+$ brew install dart
+```
+![flutter-1-dart-setup](/assets/images/2018-05/flutter-1-dart-setup.png)
+
+最后再选择Flutter，在对应位置填入Flutter SDK的path
+
+![flutter-1-create-new-project](/assets/images/2018-05/flutter-1-create-new-project.png)
+
+然后点击创建按钮，就可以创建一个新的Flutter项目了
+
+![flutter-1-setup](/assets/images/2018-05/flutter-1-setup.png)
+
+项目的主要目录结构如下
+
+![flutter-1-project-menu](/assets/images/flutter-1-project-menu.png)
+
+点击绿色倒三角启动项目
+
+出现了下面的错误： 
+
+```
+Missing Xcode dependency: Python module "six".
+Install via 'pip install six' or 'sudo easy_install six'.
+Could not build the application for the simulator.
+Error launching application on iPhone X.
+```
+
+**解决方法**：使用如下命令来安装pip
+
+```
+brew reinstall python@2
+pip install six
+```
+
+接下来再次启动项目，成功运行：
+![flutter-1-run](/assets/images/flutter-1-run.png)
