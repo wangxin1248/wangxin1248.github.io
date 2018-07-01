@@ -1,8 +1,8 @@
 ---
 layout: post
-title:  "ubuntu服务器完全卸载 mysql"
+title:  "ubuntu 完全卸载 mysql"
 date:  2018-07-01
-desc: "需要在服务器中卸载掉安装的mysql-server，只需要一下简单的几步便可以实现完全卸载"
+desc: "需要在 ubuntu 中卸载掉安装的 mysql-server，只需要一下简单的几步便可以实现完全卸载"
 keywords: "Linux,ubuntu,mysql-server,服务器,卸载"
 categories: [Linux]
 tags: [Linux,Ubuntu,mysql]
@@ -10,7 +10,7 @@ tags: [Linux,Ubuntu,mysql]
 
 # ubuntu服务器完全卸载 mysql
 
-需要在服务器中卸载掉安装的mysql-server，只需要一下简单的几步便可以实现完全卸载:
+需要在ubuntu 服务器中卸载掉安装的 mysql-server，只需要一下简单的几步便可以实现完全卸载:
 
 ```
 sudo apt-get remove mysql-common
