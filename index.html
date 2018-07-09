@@ -34,7 +34,8 @@ title: just do it!
         {% elsif page == 1 %}
             <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
         {% else %}
-            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
+        <!-- 修改首页页面跳转错误 -->
+            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: '/num', page }}">{{ page }}</a>
         {% endif %}
     {% endfor %}    
     <!-- 下一页跳转 -->
