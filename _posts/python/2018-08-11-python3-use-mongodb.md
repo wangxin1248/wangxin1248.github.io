@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 MongoDB 数据库连接"
-date:  2018-07-10
+date:  2018-07-11
 desc: "本文将为大家介绍 Python3 使用 pymongo 连接数据库，并实现简单的增删改查操作"
 keywords: "Python3,pymongo,MongoDB"
 categories: [Python]

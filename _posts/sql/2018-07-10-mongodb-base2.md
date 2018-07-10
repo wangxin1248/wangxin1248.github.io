@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "MongoDB 知识点归纳总结（二）"
-date:  2018-07-11
+date:  2018-07-10
 desc: "MongoDB 知识点归纳总结（二）：基础知识点。"
 keywords: "mongodb,知识点，整理，归纳"
 categories: [SQL]
