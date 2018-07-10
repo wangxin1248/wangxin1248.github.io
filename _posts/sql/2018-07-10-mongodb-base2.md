@@ -289,7 +289,7 @@ MongoDB 数据库在默认情况下是不需要密码验证便可以直接登陆
 首先修改配置文件
 
 ```shell
-$ sudo vi /etc/mongod.conf
+$ sudo vi /etc/mongodb.conf
 ```
 在配置文件中添加(注意配置文件：后有空格)：
 
@@ -301,13 +301,13 @@ security:
 修改完成之后需要重启 MongoDB
 
 ```shell
-$ sudo systemctl restart MongoDB
+$ sudo systemctl restart mongodb
 ```
 
 接下来便可以使用用户名和密码登陆 mongo 终端了：
 
 ```shell
-mongo -u 'admin' -p '...' --authenticationDatabase 'admin'
+$ mongo -u 'admin' -p '...' --authenticationDatabase 'admin'
 ```
 
 ### 创建普通用户
