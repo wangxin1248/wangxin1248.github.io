@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 爬虫（三）：使用正则表达式获取内涵段子中的段子数据"
-date:  2018-08-12
+date:  2018-08-11
 desc: "python3 网络爬虫实战系列之三：使用 re模块来进行正则表达式的匹配，来获取内涵段子中的段子数据"
 keywords: "Python3,网络爬虫,实战,知识点,正则表达式"
 categories: [Python]
@@ -10,7 +10,7 @@ tags: [python3,网络爬虫,re]
 
 # Python3 爬虫（三）：使用正则表达式获取内涵段子中的段子信息
 
-本教程将首先介绍有关正则表达式的一些基本信息，然后利用正则表达式的功能从内涵段子中获取器内涵段子中的信息。主要内容包括：
+本教程将首先介绍有关正则表达式的一些基本信息，然后利用正则表达式的功能从内涵段子中获取其中内涵段子中的信息。主要内容包括：
 
 ##### 1.re模块介绍
 ##### 2.获取内涵段子信息
@@ -78,7 +78,7 @@ http://neihanba.92kaifa.com/wenzi/index_3.html
 pattern = re.compile('<div\sclass="f18 mb20">\s+<div>\s+(.*?)\s+</div>')
 ```
 
-完整的代码如下：
+### 完整的代码如下
 
 ```python
 import urllib.request
