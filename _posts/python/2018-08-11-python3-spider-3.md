@@ -78,7 +78,9 @@ http://neihanba.92kaifa.com/wenzi/index_3.html
 pattern = re.compile('<div\sclass="f18 mb20">\s+<div>\s+(.*?)\s+</div>')
 ```
 
-### 完整的代码如下
+这样就不会出现正则表达式贪婪的匹配符合要求的文字的情况了。
+
+**完整的代码如下**
 
 ```python
 import urllib.request
