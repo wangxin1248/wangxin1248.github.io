@@ -10,12 +10,17 @@ tags: [python3,网络爬虫,Xpath]
 
 # Python3 爬虫（四）：通过 Xpath 解析百度贴吧
 
+## Xpath介绍
+
 使用正则来处理 HTML 文档来说比较麻烦，一般来说处理 HTML 文档都是使用 Xpath
 
-Xpath 可以用来查找HTML节点或元素，是一门在 XML 文档中查找信息的语言。他有自己的一套规则来匹配对应的节点元素，类似于正则，具体的xpath学习请看[Xpath](http://www.w3school.com.cn/xpath/)
+**Xpath** 可以用来查找HTML节点或元素，是一门在 XML 文档中查找信息的语言。他有自己的一套规则来匹配对应的节点元素，类似于正则，具体的xpath学习请看[Xpath](http://www.w3school.com.cn/xpath/)
+
+常用的 Xpath 匹配的表达式如下表所示：
+![xpath](/assets/images/2018-08/02-xpath匹配规则.jpg)
 
 在使用 Xpath 之前呢需要将 HTML 文档转换为 XML 文档（其实转换的是HTML DOM),
-这里的转换是通过 lxml模块中的etree包下的HTML方法来实现，
+这里的转换是通过 lxml 模块中的 etree 包下的HTML方法来实现，
 而 lxml 模块是一个第三方模块，需要自己手动安装到电脑中去才能使用，
 
 在ubuntu中的安装方法如下：
@@ -52,11 +57,20 @@ https://tieba.baidu.com/p/5832432185
 //img[@class="BDE_Image"]/@src
 ```
 
+**注意：**
+
+有时出现在浏览器中可以匹配xpath规则，但是在程序中却不能匹配的情况，这是因为服务器会针对不同的浏览器进行相应的优化，为了保证xpath能正确的匹配网页数据，因此最好使用ie的user-agent。
+
+附上ie11的 user-agent
+
+```python
+Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko
+```
+
 ### 代码
 
 ```python
 import urllib.request
-import random
 from lxml import etree
 
 
@@ -65,13 +79,6 @@ class TiebaSpider(object):
     创建一个贴吧的爬虫类，可以实现爬取指定贴吧中的图片信息
     """
     def __init__(self):
-        self.ag_list = [
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv2.0.1) Gecko/20100101 Firefox/4.0.1",
-            "Mozilla/5.0 (Windows NT 6.1; rv2.0.1) Gecko/20100101 Firefox/4.0.1",
-            "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11",
-            "Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11",
-            "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_7_0) AppleWebKit/535.11 (KHTML, like Gecko) Chrome/17.0.963.56 Safari/535.11"
-        ]
         # 贴吧基本url
         self.url = r'https://tieba.baidu.com'
         # 获取帖子url的xpath规则
@@ -82,6 +89,9 @@ class TiebaSpider(object):
         self.num = 1
         # 图片保存路径
         self.path = r'tieba_image/'
+        # user-agent
+        self.user_agent = r'Mozilla/5.0 (Windows NT 6.1; WOW64; Trident/7.0; AS; rv:11.0) like Gecko'
+
 
     def download_html(self, full_url):
         """
@@ -90,15 +100,12 @@ class TiebaSpider(object):
         :return:所下载界面的html信息
         """
         request = urllib.request.Request(full_url)
-        # 在user-agent列表里随机选择一个做为user-agent
-        user_agent = random.choice(self.ag_list)
         # 使用add_header方法来添加或者修改一个http报头
-        request.add_header('User-Agent', user_agent)
+        request.add_header('User-Agent', self.user_agent)
         response = urllib.request.urlopen(request)
 
         # 爬取到的网页源码
-        # html = response.read()
-        html = response.read().decode('utf-8')
+        html = response.read()
         # 将html数据返回
         return html
 
