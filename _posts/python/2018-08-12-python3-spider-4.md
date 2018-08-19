@@ -17,7 +17,7 @@ tags: [python3,网络爬虫,Xpath]
 **Xpath** 可以用来查找HTML节点或元素，是一门在 XML 文档中查找信息的语言。他有自己的一套规则来匹配对应的节点元素，类似于正则，具体的xpath学习请看[Xpath](http://www.w3school.com.cn/xpath/)
 
 常用的 Xpath 匹配的表达式如下表所示：
-![xpath](/assets/images/2018-08/02-xpath匹配规则.jpg)
+![xpath](/assets/images/2018-08/02-xpath匹配规则.png)
 
 在使用 Xpath 之前呢需要将 HTML 文档转换为 XML 文档（其实转换的是HTML DOM),
 这里的转换是通过 lxml 模块中的 etree 包下的HTML方法来实现，
