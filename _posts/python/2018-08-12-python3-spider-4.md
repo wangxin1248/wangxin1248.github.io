@@ -8,8 +8,6 @@ categories: [Python]
 tags: [python3,网络爬虫,lxml]
 ---
 
-# Python3 爬虫（四）：lxml 解析库学习
-
 ## lxml介绍
 
 使用正则来处理 HTML 文档来说比较麻烦，一般来说处理 HTML 文档都是使用 Xpath

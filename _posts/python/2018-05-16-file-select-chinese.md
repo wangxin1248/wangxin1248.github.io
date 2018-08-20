@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,数据清洗]
 ---
 
-# 清洗文件之获取文件中的中文内容
 
 ## 原理
 

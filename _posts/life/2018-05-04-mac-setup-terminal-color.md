@@ -7,7 +7,7 @@ keywords: "macOS,终端颜色定制,Solarized"
 categories: [Life]
 tags: [macOS,terminal,Solarized]
 ---
-# Mac OSX 配置终端vim配色
+
 
 这里使用的配色方案是Solarized，[Solarized](http://ethanschoonover.com/solarized) 是目前最完整的 Terminal/Editor/IDE 配色项目，几乎覆盖所有主流操作系统（Mac OS X, Linux, Windows）、编辑器和 IDE（Vim, Emacs, Xcode, TextMate, NetBeans, Visual Studio 等），终端（iTerm2, Terminal.app, Putty 等）。
 

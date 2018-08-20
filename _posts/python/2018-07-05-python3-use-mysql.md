@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,mysql]
 ---
 
-# Python3 MySQL 数据库连接
 
 本文将为大家介绍 Python3 使用 PyMySQL 连接数据库，并实现简单的增删改查以及封装为帮助类。
 

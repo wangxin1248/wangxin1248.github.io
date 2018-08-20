@@ -8,7 +8,6 @@ categories: [Machine Learning]
 tags: [python3,numpy]
 ---
 
-# numpy.random中的shuffle和permutationx
 
 numpy中的random中排列功能下有两个方法shuffle和permutationx，那么他们有什么不同呢？
 

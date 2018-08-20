@@ -7,7 +7,7 @@ keywords: "Linux,ubuntu16.04,添加账号,服务器,sudo"
 categories: [Linux]
 tags: [Linux,Ubuntu,sudo]
 ---
-# linux服务器中添加用户并赋予相应权限
+
 
 在unix/linux中添加用户账号可以使用**adduser**或者**useradd**命令，因为adduser命令时指向useradd命令的一个链接。因此，这两个命令的使用格式完全一样。
 

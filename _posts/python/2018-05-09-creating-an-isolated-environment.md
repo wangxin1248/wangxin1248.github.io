@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,运行环境]
 ---
 
-# 创建一个独立的机器学习项目运行环境
 
 强烈推荐大家创建一个单独的机器学习工作环境，这样可以保证在多个工作项目之间不同的依赖库版本不会导致冲突。
 创建一个独立的工作环境主要是通过 [virtualenv](https://virtualenv.pypa.io/en/stable/) 来实现的。

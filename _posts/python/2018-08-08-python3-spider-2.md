@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,网络爬虫]
 ---
 
-# Python3 爬虫（二）：urllib 库的用法
 
 学习python 爬虫首先要学习的知识点便是 urllib 库的使用。urllib 库是 python 中进行网络请求和相应的主要库，是python自带的基础库。为了模拟用户真实的浏览器网络请求，我们便要学会使用 urllib 库来进行网络的请求发送。
 

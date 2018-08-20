@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,mongodb]
 ---
 
-# Python3 MongoDB 数据库连接
 
 本文将为大家介绍 Python3 使用 pymongo 连接数据库，并实现简单的增删改查操作。主要内容包括：
 

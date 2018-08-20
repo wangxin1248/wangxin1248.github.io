@@ -8,7 +8,6 @@ categories: [Python]
 tags: [python3,网络爬虫]
 ---
 
-# Python3 爬虫（一）：基础知识点
 
 python3 网络爬虫实战系列之一：网络爬虫基础知识点以及学习路径介绍。主要内容包括：
 

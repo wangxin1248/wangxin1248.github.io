@@ -8,7 +8,6 @@ categories: [Linux]
 tags: [Linux,Ubuntu,mysql]
 ---
 
-# ubuntu服务器完全卸载 mysql
 
 需要在ubuntu 服务器中卸载掉安装的 mysql-server，只需要一下简单的几步便可以实现完全卸载:
 

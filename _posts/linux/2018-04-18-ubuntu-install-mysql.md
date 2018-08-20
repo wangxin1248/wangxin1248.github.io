@@ -7,7 +7,7 @@ keywords: "Linux,ubuntu16.04,搬瓦工vps,服务器,mysql,数据库"
 categories: [Linux]
 tags: [Linux,Ubuntu,mysql]
 ---
-# 在搬瓦工的ubuntu16.04 vps 中安装MySQL数据库并配置远程连接
+
 
 ## 安装mysql
 

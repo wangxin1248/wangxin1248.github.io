@@ -7,7 +7,7 @@ keywords: "Linux,中文,ubuntu16.04,搬瓦工vps,服务器"
 categories: [Linux]
 tags: [Linux,Ubuntu]
 ---
-# linux服务器设置语言环境为支持中文
+
 
 最近想在Linux服务器中进行开发工作，但在编辑文件时发现不能输入中文，在文件中输入的中文会变成乱码。在网上找了好久之后发现来下面这种方法可以很简单的设置服务器支持中文。
 

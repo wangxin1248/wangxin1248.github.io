@@ -8,10 +8,6 @@ categories: [Python]
 tags: [python3,网络爬虫,BeautifulSoup4]
 ---
 
-# Python3 爬虫（五）：BeautifulSoup4解析库学习
-
----
-
 ## BeautifulSoup4解析库介绍
 
 BeautifulSoup4 是 HTML/XML 的解析器，主要的功能便是解析和提取 HTML/XML 中的数据。

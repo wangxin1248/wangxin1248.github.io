@@ -7,7 +7,7 @@ keywords: "Linux,shadowsocks,ubuntu16.04,搬瓦工vps"
 categories: [Linux]
 tags: [Linux,shadowsocks]
 ---
-# UBUNTU 16.04服务器上搭建SHADOWSOCKS服务
+
 最近购买了搬瓦工的vps，想着搭个梯子用来在国外看些最新技术资料，现将搭建过程分享给大家。
 本教程仅供教育和科学使用，勿进行其他用途。
 

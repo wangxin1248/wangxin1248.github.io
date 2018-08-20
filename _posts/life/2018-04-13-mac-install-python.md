@@ -7,7 +7,7 @@ keywords: "macOS,python,安装,Homebrew"
 categories: [Life]
 tags: [macOS,python]
 ---
-# macOS中安装python3
+
 在最新的macOS系统中已经默认安装了python2，但目前python3处于主流地位，许多新的项目已经使用python3进行开发了。于是便得需要在macOS中安装python3.
 
 在macOS中安装python3得需要通过Homebrew来进行安装。

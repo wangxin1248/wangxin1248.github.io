@@ -8,7 +8,6 @@ categories: [SQL]
 tags: [mongodb,sql]
 ---
 
-# MongoDB 知识点归纳总结（二）
 
 本片博客将接着总结 MongoDB 的主要知识点，主要内容包括：
 
