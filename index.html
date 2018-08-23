@@ -17,7 +17,8 @@
 </ul>
 {% endif %}
 
-<!-- 分页功能代码 -->
+
+<!-- 底部分页显示-->
 <div style="text-align:center;">
     {% if paginator.page == 1 %}
     <span style="margin-right:15px;"><b>首页</b></span>
@@ -47,6 +48,19 @@
     <span style="margin-left:15px;"><b>已达尾页</b></span>
     {% endif %} {% endif %}
 </div>
+
+<!-- <ul class="posts">
+    
+    {% for post in site.posts %}
+    <li class="post">
+        <small>{{ post.date | date_to_string }}</small>
+        <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
+        <br>
+        <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+        <p class="nice-text">{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a></p>
+    </li>
+    {% endfor %}
+</ul> -->
 
 <!-- 多说评论功能 -->
 <script type="text/javascript">
