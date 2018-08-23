@@ -30,7 +30,7 @@ title: just do it!
             {% if paginator.previous_page %}
             <a href="/" title="首页">首页</a>
             <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="上一页">
-            <span class="fa fa-backward" style="padding:10px;"></span></a>
+            上一页</a>
             {% endif %}
             {% for page in (1..paginator.total_pages) %}
             {% if page == paginator.page %}
@@ -58,7 +58,7 @@ title: just do it!
             {% endfor %}
             {% if paginator.next_page %}
             <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="下一页">
-            <i class="fa fa-forward" style="padding:10px;"></i></a>
+            下一页</a>
             <a href="/page{{ paginator.total_pages }}/" title="尾页">尾页</a>
             {% endif %}
             {% if paginator.page == paginator.total_pages %}
@@ -66,19 +66,6 @@ title: just do it!
             {% endif %}
             {% endif %}
     </div>
-
-<!-- <ul class="posts">
-    
-    {% for post in site.posts %}
-    <li class="post">
-        <small>{{ post.date | date_to_string }}</small>
-        <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
-        <br>
-        <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-        <p class="nice-text">{{ post.content | strip_html | truncatewords: 50 }} <a href="{{ BASE_PATH }}{{ post.url }}">Read more!</a></p>
-    </li>
-    {% endfor %}
-</ul> -->
 
 <!-- 多说评论功能 -->
 <script type="text/javascript">
