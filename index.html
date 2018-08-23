@@ -67,10 +67,10 @@ title: just do it!
             {% for page in (1..paginator.total_pages) %}
             {% assign page_num = page_num | plus: 1 %}
             {% if page_num < paginator.total_pages %}
-            <option value="/paginate_{{ page_num }}/">跳至:第 {{ page_num }} 页</option>
+            <option value="/page{{ page_num }}/">跳至:第 {{ page_num }} 页</option>
             {% endif %}
             {% endfor %}
-            <option value="/paginate_{{ paginator.total_pages }}">跳至:尾页</option>
+            <option value="/page{{ paginator.total_pages }}">跳至:尾页</option>
             </select>
             {% elsif page == 1 %}
             {% else %}
@@ -79,7 +79,7 @@ title: just do it!
             {% if paginator.next_page %}
             <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="下一页">
             <i class="fa fa-forward" style="padding:10px;"></i></a>
-            <a href="/paginate_{{ paginator.total_pages }}/" title="尾页">尾页</a>
+            <a href="/page{{ paginator.total_pages }}/" title="尾页">尾页</a>
             {% endif %}
             {% if paginator.page == paginator.total_pages %}
             <span style="margin-left:15px;"><i><b>已达尾页</b></i></span>
