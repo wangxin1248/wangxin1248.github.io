@@ -42,85 +42,13 @@ title: just do it!
             <!-- <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a> -->
         <!-- {% endif %} -->
     <!-- </div> -->
-    <section class="main-content" style="font-family:Georgia;">
-            <div class="home">
-            <h3 class="page-heading">
-            <strong>
-            <i class="fa fa-home" name="top"> Home </i>
-            <i class="fa fa-terminal" style="color:red;"></i></h3>
-            <h2 style="text-align:center;padding-bottom:30px;">
-            <i class="fa fa-bolt"></i>
-            <i class="fa fa-bolt"></i>
-            <i class="fa fa-bolt"></i>
-            Latest 3 by @ckwongloy
-            </strong></h2>
-            <ul class="post-list">
-            {% for post in paginator.posts %}
-            <hr>
-            <li style="list-style:none;">
-            <h3>
-            <span class="post-meta">
-            <b>
-            <a href="#" style="padding:10px;" title="Post">
-            <i class="fa fa-paper-plane" style="font-size:30px;"></i></a>
-            <i class="fa fa-calendar"></i>
-            <a href="/archive.html#{{ post.date | date: "%Y-%m" }}" title="Archive：{{ post.date | date: "%Y-%m" }}">
-            {% assign d = post.date | date: "%-d" %} 
-            {{ post.date | date: "%B" }}
-            {% case d %}
-            {% when '1' or '21' or '31' %}{{ d }}st
-            {% when '2' or '22' %}{{ d }}nd
-            {% when '3' or '23' %}{{ d }}rd
-            {% else %}{{ d }}th
-            {% endcase %}, 
-            {{ post.date | date: "%Y, %A" }}.
-            </a></b></span></h3>
-            <h1 style="text-align:center;font-size:26px;"><strong>
-            <i class="fa fa-angle-double-left" style="color:silver;"></i>
-            {{ post.title }}
-            <i class="fa fa-angle-double-right" style="color:silver;"></i>
-            </strong></h1>
-            <h4 style="text-align:center;">
-            <i class="fa fa-heart"></i>
-            <a href="https://github.com/ckwongloy" target="_blank" title="Author：@ckwongloy">
-            {% if site.id %}
-            {{ site.id }}
-            {% endif %}
-            </a>
-            <i class="fa fa-folder"></i>
-            {% for categories in post.categories %}
-            <a href="/category.html#{{ post.categories[0] }}" title="Category：{{ post.categories[0] }}">
-            {{ post.categories[0] }}
-            </a>
-            {% endfor %}
-            <i class="fa fa-tags"></i>
-            {% for tag in post.tags %}
-            <a href="/tag.html#{{ tag }}" title="Tag：“{{ tag }}”" style="background:#BFD9DB;margin:2px;radius:50%;">
-            <i>
-            {{ tag }}
-            {{ tag | last }}
-            </i></a>
-            {% endfor %}
-            <i class="fa fa-pencil"></i>
-            <a title="文章字数：{{ post.content | number_of_words }}">
-            {{ post.content | number_of_words }}
-            </a></h4>
-            {{ post.excerpt }}
-            </p>
-            <p style="text-align:right;">
-            <a href="{{ post.url }}" class="btn" style="background-color:#438F97;" title="Read this full article.">
-            Read More
-            <i class="fa fa-angle-double-right"></i></a></p>
-            {% endfor %}
-            </li></ul>
-            <hr>
-            <h2 style="text-align:center;">
+    <h2 style="text-align:center;">
             {% if paginator.page == 1 %}
             <span style="margin-right:15px;"><i><b>首页</b></i></span>
             {% endif %}
             {% if  paginator.total_pages >1 %}
             {% if paginator.previous_page %}
-            <a href="/home/" title="首页">首页</a>
+            <a href="/" title="首页">首页</a>
             <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="上一页">
             <span class="fa fa-backward" style="padding:10px;"></span></a>
             {% endif %}
@@ -135,14 +63,14 @@ title: just do it!
             页
             </option>
             {% assign page_num = 1 %}
-            <option value="/home/">跳至:首页</option>
+            <option value="/">跳至:首页</option>
             {% for page in (1..paginator.total_pages) %}
             {% assign page_num = page_num | plus: 1 %}
             {% if page_num < paginator.total_pages %}
-            <option value="/home/paginate_{{ page_num }}/">跳至:第 {{ page_num }} 页</option>
+            <option value="/paginate_{{ page_num }}/">跳至:第 {{ page_num }} 页</option>
             {% endif %}
             {% endfor %}
-            <option value="/home/paginate_{{ paginator.total_pages }}">跳至:尾页</option>
+            <option value="/paginate_{{ paginator.total_pages }}">跳至:尾页</option>
             </select>
             {% elsif page == 1 %}
             {% else %}
@@ -157,7 +85,7 @@ title: just do it!
             <span style="margin-left:15px;"><i><b>已达尾页</b></i></span>
             {% endif %}
             {% endif %}
-            </h2></div></section>
+            </h2>
 
 <!-- <ul class="posts">
     

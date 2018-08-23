@@ -116,7 +116,7 @@ JB :
 # paginate: 8
 # paginate_path: "page:num"
 paginate: 8
-paginate_path: "paginate_:num"
+paginate_path: "/paginate_:num"
 # 使用代码高亮
 highlighter: rouge
 markdown: kramdown
