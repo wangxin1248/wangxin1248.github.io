@@ -44,7 +44,7 @@ title: just do it!
     <!-- </div> -->
     <div style="text-align:center;">
             {% if paginator.page == 1 %}
-            <span style="margin-right:15px;"><i><b>首页</b></i></span>
+            <span style="margin-right:15px;"><b>首页</b></span>
             {% endif %}
             {% if  paginator.total_pages >1 %}
             {% if paginator.previous_page %}
@@ -82,7 +82,7 @@ title: just do it!
             <a href="/page{{ paginator.total_pages }}/" title="尾页">尾页</a>
             {% endif %}
             {% if paginator.page == paginator.total_pages %}
-            <span style="margin-left:15px;"><i><b>已达尾页</b></i></span>
+            <span style="margin-left:15px;"><b>已达尾页</b></span>
             {% endif %}
             {% endif %}
     </div>
