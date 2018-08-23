@@ -79,13 +79,13 @@ title: just do it!
             {% if paginator.next_page %}
             <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="下一页">
             <i class="fa fa-forward" style="padding:10px;"></i></a>
-            <a href="/home/paginate_{{ paginator.total_pages }}/" title="尾页">尾页</a>
+            <a href="/paginate_{{ paginator.total_pages }}/" title="尾页">尾页</a>
             {% endif %}
             {% if paginator.page == paginator.total_pages %}
             <span style="margin-left:15px;"><i><b>已达尾页</b></i></span>
             {% endif %}
             {% endif %}
-            </h2>
+    </h2>
 
 <!-- <ul class="posts">
     
