@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（五）：BeautifulSoup4解析库学习"
+title:  "Python3 爬虫（五）：BeautifulSoup4解析库"
 date:  2018-08-20
 desc: "python3 网络爬虫实战系列之五：BeautifulSoup4解析库学习，并利用 BeautifulSoup4解析库来完成模拟登陆"
 keywords: "Python3,网络爬虫,实战,知识点,BeautifulSoup4"

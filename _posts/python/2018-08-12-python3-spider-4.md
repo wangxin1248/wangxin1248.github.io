@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（四）：lxml 解析库学习"
+title:  "Python3 爬虫（四）：lxml 解析库"
 date:  2018-08-12
 desc: "python3 网络爬虫实战系列之四：学习 lxml 解析库，并且通过他来解析百度贴吧，爬取指定贴吧中发送的图片并下载到本地。"
 keywords: "Python3,网络爬虫,实战,知识点,lxml"
