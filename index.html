@@ -22,28 +22,29 @@ title: just do it!
 {% endif %}
 
 
-<!-- <div align="center">
-    <!-- 上一页跳转 -->
-    {% if paginator.previous_page %}
-        <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">Previous</a>
-    {% endif %}
-    <!-- 遍历中间的页 -->
-    {% for page in (1..paginator.total_pages) %}
-        {% if page == paginator.page %}
-            <span class="active">{{ page }}</span>
-        {% elsif page == 1 %}
-            <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a>
-        {% else %}
-            <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a>
-        {% endif %}
-    {% endfor %}
-    <!-- 下一页跳转 -->
-    {% if paginator.next_page %}
-        <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a>
-    {% endif %}
-</div> -->
+<!-- <div align="center"> -->
+        <!-- 上一页跳转 -->
+        <!-- {% if paginator.previous_page %} -->
+            <!-- <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">Previous</a> -->
+        <!-- {% endif %} -->
+        <!-- 遍历中间的页 -->
+        <!-- {% for page in (1..paginator.total_pages) %} -->
+            <!-- {% if page == paginator.page %} -->
+                <!-- <span class="active">{{ page }}</span> -->
+            <!-- {% elsif page == 1 %} -->
+                <!-- <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a> -->
+            <!-- {% else %} -->
+                <!-- <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a> -->
+            <!-- {% endif %} -->
+        <!-- {% endfor %} -->
+        <!-- 下一页跳转 -->
+        <!-- {% if paginator.next_page %} -->
+            <!-- <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a> -->
+        <!-- {% endif %} -->
+    <!-- </div> -->
 
 <!-- <ul class="posts">
+    
     {% for post in site.posts %}
     <li class="post">
         <small>{{ post.date | date_to_string }}</small>
