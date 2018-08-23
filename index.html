@@ -1,53 +1,91 @@
---- layout: page title: just do it! ---
+---
+layout: page
+title: just do it!
+---
 <!-- 分页功能实现 -->
 {% if paginator.total_pages > 1 %}
-<!-- 开启分页换页功能 -->
-<ul class="posts">
+    <!-- 开启分页换页功能 -->
+    <ul class="posts">
     {% for post in paginator.posts %}
-    <li class="post">
-        <small>{{ post.date | date_to_string }}</small>
-        <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
-        <br>
-        <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
-        <p class="nice-text">{{ post.desc }} ...
+        <li class="post">
+            <small>{{ post.date | date_to_string }}</small>
+            <small><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></small>
+            <br>
+            <a class="nice-title" href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a>
+            <p class="nice-text">{{ post.desc }} 
+            ...
             <!-- <a href="{{ BASE_PATH }}{{ post.url }}">...</a> -->
-        </p>
-    </li>
+            </p>
+        </li>
     {% endfor %}
-</ul>
+    </ul>
 {% endif %}
 
 
-<!-- 底部分页显示-->
-<div style="text-align:center;">
-    {% if paginator.page == 1 %}
-    <span style="margin-right:15px;"><b>首页</b></span>
-    {% endif %} {% if paginator.total_pages >1 %} {% if paginator.previous_page %}
-    <a href="/" title="首页">首页</a>
-    <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="上一页">
-        <span class="fa fa-backward" style="padding:10px;"></span></a>
-    {% endif %} {% for page in (1..paginator.total_pages) %} {% if page == paginator.page %}
-    <select onChange="location.replace(this.options[this.selectedIndex].value)">
-        <option>
-            第 {{ paginator.page }} / {{ paginator.total_pages }} 页
-        </option>
-        {% assign page_num = 1 %}
-        <option value="/">跳至:首页</option>
-        {% for page in (1..paginator.total_pages) %} {% assign page_num = page_num | plus: 1 %} {% if page_num
-        < paginator.total_pages
-            %} <option value="/page{{ page_num }}/">跳至:第 {{ page_num }} 页
+<!-- <div align="center"> -->
+        <!-- 上一页跳转 -->
+        <!-- {% if paginator.previous_page %} -->
+            <!-- <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}">Previous</a> -->
+        <!-- {% endif %} -->
+        <!-- 遍历中间的页 -->
+        <!-- {% for page in (1..paginator.total_pages) %} -->
+            <!-- {% if page == paginator.page %} -->
+                <!-- <span class="active">{{ page }}</span> -->
+            <!-- {% elsif page == 1 %} -->
+                <!-- <a href="{{ '/index.html' | prepend: site.baseurl | replace: '//', '/' }}">{{ page }}</a> -->
+            <!-- {% else %} -->
+                <!-- <a href="{{ site.paginate_path | prepend: site.baseurl | replace: '//', '/' | replace: ':num', page }}">{{ page }}</a> -->
+            <!-- {% endif %} -->
+        <!-- {% endfor %} -->
+        <!-- 下一页跳转 -->
+        <!-- {% if paginator.next_page %} -->
+            <!-- <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}">Next</a> -->
+        <!-- {% endif %} -->
+    <!-- </div> -->
+    <div style="text-align:center;">
+            {% if paginator.page == 1 %}
+            <span style="margin-right:15px;"><b>首页</b></span>
+            {% endif %}
+            {% if  paginator.total_pages >1 %}
+            {% if paginator.previous_page %}
+            <a href="/" title="首页">首页</a>
+            <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="上一页">
+            <span class="fa fa-backward" style="padding:10px;"></span></a>
+            {% endif %}
+            {% for page in (1..paginator.total_pages) %}
+            {% if page == paginator.page %}
+            <select onChange="location.replace(this.options[this.selectedIndex].value)">
+            <option>
+            第
+            {{ paginator.page }}
+             /
+            {{ paginator.total_pages }}
+            页
             </option>
-            {% endif %} {% endfor %}
+            {% assign page_num = 1 %}
+            <option value="/">跳至:首页</option>
+            {% for page in (1..paginator.total_pages) %}
+            {% assign page_num = page_num | plus: 1 %}
+            {% if page_num < paginator.total_pages %}
+            <option value="/page{{ page_num }}/">跳至:第 {{ page_num }} 页</option>
+            {% endif %}
+            {% endfor %}
             <option value="/page{{ paginator.total_pages }}">跳至:尾页</option>
-    </select>
-    {% elsif page == 1 %} {% else %} {% endif %} {% endfor %} {% if paginator.next_page %}
-    <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="下一页">
-        <i class="fa fa-forward" style="padding:10px;"></i></a>
-    <a href="/page{{ paginator.total_pages }}/" title="尾页">尾页</a>
-    {% endif %} {% if paginator.page == paginator.total_pages %}
-    <span style="margin-left:15px;"><b>已达尾页</b></span>
-    {% endif %} {% endif %}
-</div>
+            </select>
+            {% elsif page == 1 %}
+            {% else %}
+            {% endif %}
+            {% endfor %}
+            {% if paginator.next_page %}
+            <a href="{{ paginator.next_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="下一页">
+            <i class="fa fa-forward" style="padding:10px;"></i></a>
+            <a href="/page{{ paginator.total_pages }}/" title="尾页">尾页</a>
+            {% endif %}
+            {% if paginator.page == paginator.total_pages %}
+            <span style="margin-left:15px;"><b>已达尾页</b></span></span>
+            {% endif %}
+            {% endif %}
+    </div>
 
 <!-- <ul class="posts">
     
