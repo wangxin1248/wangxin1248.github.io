@@ -113,8 +113,6 @@ JB :
   # where [HELPER] is the name of the helper you are overriding.
   
   # 开启分页功能
-# paginate: 8
-# paginate_path: "page:num"
 paginate: 8
 paginate_path: "/page:num"
 # 使用代码高亮
