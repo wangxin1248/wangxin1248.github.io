@@ -30,7 +30,7 @@ title: just do it!
             {% if paginator.previous_page %}
             <a href="/" title="首页">首页</a>
             <a href="{{ paginator.previous_page_path | prepend: site.baseurl | replace: '//', '/' }}" title="上一页">
-            <span class="fa fa-backward" style="padding:10px;"></span></a>
+            <!-- <span class="fa fa-backward" style="padding:10px;"></span>--></a> 
             {% endif %}
             {% for page in (1..paginator.total_pages) %}
             {% if page == paginator.page %}
