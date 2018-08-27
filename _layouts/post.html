@@ -2,6 +2,50 @@
 layout: default
 ---
 
+<!-- 回到顶部 -->
+<script>
+    $("#back-top").hide();
+  $(document).ready(function () {
+    $(window).scroll(function () {
+      if ($(this).scrollTop() > 100) {
+        $('#back-top').fadeIn();
+      } else {
+        $('#back-top').fadeOut();
+      }
+    });
+    $('#back-top a').click(function () {
+      $('body,html').animate({
+        scrollTop: 0
+      }, 800);
+      return false;
+    });
+  });
+  </script>
+  
+  <style type="text/css">
+      #back-top {
+        position: fixed;
+        bottom: 30px;
+        margin-left: 1040px;
+      }
+      #back-top a {
+        width: 54px;
+        height: 54px;
+        display: block;
+        background: #ddd url(../img/bgs/bg_up_arrow.png) no-repeat center center;
+        background-color: #aaa;
+        -webkit-border-radius: 7px;
+        -moz-border-radius: 7px;
+        border-radius: 7px;
+        -webkit-transition: 1s;
+        -moz-transition: 1s;
+        transition: 1s;
+      }
+      #back-top a:hover {
+        background-color: #777;
+      }
+  </style>
+
 <div class="box">
     <h1 class="post-title">{{ page.title }}</h1>
     <span class="post-meta">{{ page.date | date: "%-d %B, %Y. It was a %A. " }} <span id="busuanzi_container_page_pv">
@@ -10,22 +54,9 @@ layout: default
     <span class="post-text">{{ content }}</span>
 </div>
 
-<!-- 分页链接 -->
-<!-- <div class="pagination">
-        {% if paginator.previous_page %}
-          <a href="/page{{ paginator.previous_page }}" class="previous">Previous</a>
-        {% else %}
-          <span class="previous">Previous</span>
-        {% endif %}
-        <span class="page_number ">Page: {{ paginator.page }} of {{ paginator.total_pages }}</span>
-        {% if paginator.next_page %}
-          <a href="/page{{ paginator.next_page }}" class="next">Next</a>
-        {% else %}
-          <span class="next ">Next</span>
-        {% endif %}
-      </div> -->
-<!--<div class="box">-->
-    <!-- google ads code box -->
-<!--</div>-->
+<!-- 回到顶部 -->
+<div id="back-top">
+    <a href="#top" title="回到顶部"></a>
+</div>
 
 {% include JB/comments %}
