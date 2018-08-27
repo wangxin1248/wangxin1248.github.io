@@ -1,10 +1,8 @@
----
-layout: default
----
+--- layout: default ---
 
 <!-- 回到顶部 -->
 <script>
-    $("#back-top").hide();
+  $("#back-top").hide();
   $(document).ready(function () {
     $(window).scroll(function () {
       if ($(this).scrollTop() > 100) {
@@ -20,43 +18,46 @@ layout: default
       return false;
     });
   });
-  </script>
-  
-  <style type="text/css">
-      #back-top {
-        position: fixed;
-        bottom: 30px;
-        margin-left: 1040px;
-      }
-      #back-top a {
-        width: 54px;
-        height: 54px;
-        display: block;
-        background: #ddd url(../img/bgs/bg_up_arrow.png) no-repeat center center;
-        background-color: #aaa;
-        -webkit-border-radius: 7px;
-        -moz-border-radius: 7px;
-        border-radius: 7px;
-        -webkit-transition: 1s;
-        -moz-transition: 1s;
-        transition: 1s;
-      }
-      #back-top a:hover {
-        background-color: #777;
-      }
-  </style>
+</script>
+
+<style type="text/css">
+  #back-top {
+    position: fixed;
+    bottom: 30px;
+    margin-left: 1040px;
+  }
+
+  #back-top a {
+    width: 54px;
+    height: 54px;
+    display: block;
+    background: #ddd url(../img/bgs/bg_up_arrow.png) no-repeat center center;
+    background-color: #aaa;
+    -webkit-border-radius: 7px;
+    -moz-border-radius: 7px;
+    border-radius: 7px;
+    -webkit-transition: 1s;
+    -moz-transition: 1s;
+    transition: 1s;
+  }
+
+  #back-top a:hover {
+    background-color: #777;
+  }
+</style>
 
 <div class="box">
-    <h1 class="post-title">{{ page.title }}</h1>
-    <span class="post-meta">{{ page.date | date: "%-d %B, %Y. It was a %A. " }} <span id="busuanzi_container_page_pv">
-        <div align="left"><i class="fa fa-eye" title="eye"></i>view: <span id="busuanzi_value_page_pv"></span></div>
-      </span><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></span><hr/>
-    <span class="post-text">{{ content }}</span>
+  <h1 class="post-title">{{ page.title }}</h1>
+  <span class="post-meta">{{ page.date | date: "%-d %B, %Y. It was a %A. " }} <span id="busuanzi_container_page_pv">
+      <div align="left"><i class="fa fa-eye" title="eye"></i>view: <span id="busuanzi_value_page_pv"></span></div>
+    </span><a style="color:grey" href="{{ BASE_PATH }}{{ post.url }}#disqus_thread"></a></span>
+  <hr/>
+  <span class="post-text">{{ content }}</span>
 </div>
 
 <!-- 回到顶部 -->
 <div id="back-top">
-    <a href="#top" title="回到顶部"></a>
+  <a href="#top" title="回到顶部"></a>
 </div>
 
 {% include JB/comments %}
