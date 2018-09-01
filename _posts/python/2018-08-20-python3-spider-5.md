@@ -95,7 +95,7 @@ def get_codeimage(image_data):
 
 def web_login(url):
     """
-    进行知乎的登陆操作
+    进行登陆操作
     :return:
     """
     # 创建session对象，其中可以保存用户登陆的cookies信息
@@ -124,8 +124,8 @@ def web_login(url):
 
     # 构造向服务器发送的表单数据
     data = {
-        'username':	'2018263292',
-        'password': 'WANGxin926494@+-',
+        'username':	'',
+        'password': '',
         'imageCodeName': codeimage,
         'errors': '0',
         'lt': lt,
