@@ -3,9 +3,9 @@ layout: post
 title:  "Python3 爬虫（八）：Selenium 和 Chrome Headless"
 date:  2018-09-06
 desc: "python3 网络爬虫实战系列之八：学习使用Selenium 和 Chrome Headless来爬取动态网页中的内容"
-keywords: "Python3,网络爬虫,实战,知识点,Selenium,PhantomJS"
+keywords: "Python3,网络爬虫,实战,知识点,Selenium,Chrome headless"
 categories: [Python]
-tags: [python3,网络爬虫,Selenium,PhantomJS]
+tags: [python3,网络爬虫,Selenium,Chrome headless]
 ---
 # 动态HTML实现技术
 
