@@ -39,6 +39,7 @@ tags: [python3,网络爬虫,Selenium,Chrome headless]
 
 # 房间观看人数：
 .//span[@class="dy-num fr"]/text()
+
 # 房间封面图片url：
 .//span[@class="imgbox"]/img[@class="JS_listthumb"]/@src
 ```
