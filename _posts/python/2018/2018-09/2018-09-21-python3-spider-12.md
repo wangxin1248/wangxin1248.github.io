@@ -2,7 +2,7 @@
 layout: post
 title:  "Python3 爬虫（十二）：Scrapy 框架介绍"
 date:  2018-09-21
-desc: "python3 网络爬虫实战系列之十一：介绍python爬虫框架：scrapy，并且安装和简单应用scrapy框架来进行爬虫爬取数据"
+desc: "python3 网络爬虫实战系列之十二：介绍python爬虫框架：scrapy，并且安装和简单应用scrapy框架来进行爬虫爬取数据"
 keywords: "Python3,网络爬虫,实战,scrapy,机器学习"
 categories: [Python]
 tags: [python3,网络爬虫,scrapy]
