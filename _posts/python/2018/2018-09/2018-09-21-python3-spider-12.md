@@ -128,13 +128,15 @@ Spider是用户编写用于从单个网站(或者一些网站)爬取数据的类
 
 ```python
 from scrapy.spiders import Spider
-
+  
 
 class BlogSpider(Spider):
     # 爬虫名称
     name = 'wangxin1248'
     # 爬虫爬取范围
-    start_urls = ['https://wangxin1248.github.io/']
+    allowd_domains  =  ['https://wangxin1248.github.io/']
+    # 爬虫真实的爬取url
+    start_urls = ["https://wangxin1248.github.io"]
 
     # 网页响应解析
     def parse(self, response):
