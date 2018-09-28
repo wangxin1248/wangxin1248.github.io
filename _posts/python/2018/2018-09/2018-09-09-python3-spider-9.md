@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（九）：实战项目一：模拟登陆豆瓣网站"
+title:  "Python3 爬虫（九）：Selenium 实战项目一：模拟登陆豆瓣网站"
 date:  2018-09-09
 desc: "python3 网络爬虫实战系列之九：使用Selenium 和 Chrome Headless 来模拟登陆豆瓣网站"
 keywords: "Python3,网络爬虫,实战,Selenium,Chrome headless"

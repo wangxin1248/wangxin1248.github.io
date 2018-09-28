@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（十）：实战项目二：爬取斗鱼直播网站"
+title:  "Python3 爬虫（十）：Selenium 实战项目二：爬取斗鱼直播网站"
 date:  2018-09-10
 desc: "python3 网络爬虫实战系列之十：使用Selenium 和 Chrome Headless 来爬取斗鱼直播网站，获取每一个直播间的对应信息，将其保存到本地中。并进行简单的数据统计操作"
 keywords: "Python3,网络爬虫,实战,Selenium,Chrome headless"
