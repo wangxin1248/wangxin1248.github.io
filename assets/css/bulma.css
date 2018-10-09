@@ -5580,7 +5580,6 @@ label.panel-block:hover {
 /* 左边内容修改 */
 .tile.is-child {
   margin: 0 !important;
-  max-width: 960px;
 }
 
 .tile.is-parent {

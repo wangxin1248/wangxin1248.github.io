@@ -84,11 +84,13 @@ h1.title > span {
 
 .post-text > p {
     margin-bottom: 1em;
+    max-width: 900px;
 }
 
 /* 右侧sidebar*/
 .sidebar {
-    padding: 0 0.75rem 0.75rem 0.75rem !important;
+    padding: 0 0.75rem 2rem 0.75rem !important;
+    /* padding: 0 0.75rem 0.75rem 0.75rem !important; */
     max-width: 300px;
 }
 
