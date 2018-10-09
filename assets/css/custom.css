@@ -89,6 +89,7 @@ h1.title > span {
 /* sorry God. Just once */
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
+    max-width: 200px;
 }
 
 .box {
