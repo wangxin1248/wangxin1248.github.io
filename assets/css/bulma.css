@@ -103,8 +103,13 @@ h6  {
   font-weight: bold;
 }
 
+/* 列表样式修改 */
 ul {
-  list-style: none;
+  list-style-type: disc;
+  /* list-style: square; */
+}
+ol{
+  list-style-type: decimal;
 }
 
 button,
