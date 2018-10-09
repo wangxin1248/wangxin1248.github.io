@@ -106,10 +106,11 @@ h6  {
 /* 列表样式修改 */
 ul {
   list-style-type: disc;
-  /* list-style: square; */
+  margin-left: 5px;
 }
 ol{
   list-style-type: decimal;
+  margin-left: 5px;
 }
 
 button,
