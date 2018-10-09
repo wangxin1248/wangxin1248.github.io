@@ -19,10 +19,11 @@
     padding-left: 2%;
     padding-right: 2%;
 }
-/* 调整界面宽度 */
+/* 主体界面宽度 */
 .container {
     text-align: center;
-    max-width: 960px;
+    /* max-width: 960px; */
+    max-width: 1160px;
 }
 
 /* 搜索框大小*/
@@ -86,10 +87,10 @@ h1.title > span {
     margin-bottom: 1em;
 }
 
-/* sorry God. Just once */
+/* 右侧sidebar*/
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
-    max-width: 200px;
+    max-width: 300px;
 }
 
 .box {
