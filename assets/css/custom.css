@@ -84,7 +84,6 @@ h1.title > span {
 
 .post-text > p {
     margin-bottom: 1em;
-    max-width: 900px;
 }
 
 /* 右侧sidebar*/
@@ -97,7 +96,7 @@ h1.title > span {
 .box {
     padding: 0.75rem;
     margin-bottom: 0.75rem;
-    max-width: 960px;
+    max-width: 1000px;
 }
 
 html, body {
