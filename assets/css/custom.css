@@ -90,14 +90,14 @@ h1.title > span {
 /* 右侧sidebar*/
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
-    max-width: 20%;
+    max-width: 300px;
 }
 
 /* 左侧内容 */
 .box {
     padding: 0.75rem;
     margin-bottom: 0.75rem;
-    max-width: 80%;
+    max-width: 1040px;
 }
 
 html, body {
