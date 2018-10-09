@@ -14,7 +14,8 @@
 
 /* 所有内容界面宽度（包括文章和右侧内容）*/
 .main-container {
-    max-width: 1140px;
+    /* max-width: 1140px; */
+    max-width: 1440;
     margin: 0 auto;
     padding-left: 2%;
     padding-right: 2%;
