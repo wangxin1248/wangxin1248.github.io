@@ -90,7 +90,7 @@ h1.title > span {
 /* 右侧sidebar*/
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
-    max-width: 300px;
+    /* max-width: 300px; */
 }
 
 /* 左侧内容 */
