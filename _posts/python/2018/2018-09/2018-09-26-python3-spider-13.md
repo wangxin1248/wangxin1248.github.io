@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（十三）：Scrapy 框架使用之Pipeline"
+title:  "Python3 爬虫（十三）：Scrapy基础之Pipeline"
 date:  2018-09-26
 desc: "python3 网络爬虫实战系列之十三：使用 scrapy 框架进行爬虫项目时，需要用到对数据进行处理，这时便可以使用 scrapy 中的 Pipeline"
 keywords: "Python3,网络爬虫,实战,scrapy,pipeline"
