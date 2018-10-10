@@ -15,7 +15,7 @@
 /* 所有内容界面宽度（包括文章和右侧内容）*/
 .main-container {
     /* max-width: 1140px; */
-    max-width: 1340px;
+    max-width: 1240px;
     margin: 0 auto;
     padding-left: 2%;
     padding-right: 2%;
@@ -28,7 +28,8 @@
 
 /* 搜索框大小*/
 #searchFieldNav {
-    width: 60%;
+    /* width: 60%; */
+    width: 80%;
 }
 
 h1.title > span {
@@ -90,7 +91,6 @@ h1.title > span {
 /* 右侧sidebar*/
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
-    max-width: 300px;
     /* margin-left: 100px; */
 }
 
@@ -99,7 +99,6 @@ h1.title > span {
     padding: 0.75rem;
     margin-bottom: 0.75rem;
     max-width: 1040px;
-    margin-left: 100px;
 }
 
 html, body {
