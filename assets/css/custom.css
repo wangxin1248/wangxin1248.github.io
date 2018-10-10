@@ -91,7 +91,7 @@ h1.title > span {
 .sidebar {
     padding: 0 0.75rem 0.75rem 0.75rem !important;
     max-width: 300px;
-    margin-left: 100px;
+    /* margin-left: 100px; */
 }
 
 /* 左侧内容 */
@@ -99,6 +99,7 @@ h1.title > span {
     padding: 0.75rem;
     margin-bottom: 0.75rem;
     max-width: 1040px;
+    margin-left: 100px;
 }
 
 html, body {
