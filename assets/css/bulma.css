@@ -112,19 +112,11 @@ ol{
   list-style-type: decimal;
   margin-left: 22px;
 }
-table {
-  width: 100%;
-  max-width: 100%;
-  border-collapse: collapse;
-  border-spacing: 0;
-  margin-bottom: 1.5em;
-  font-size: 0.96em;
-  box-sizing: border-box;
-}
 
 p {
   margin-top: 0;
   margin-bottom: 1.24em;
+  font-family:Monospace;
 }
 b {
   font-weight: 700;
@@ -165,6 +157,8 @@ iframe {
 table {
   border-collapse: collapse;
   border-spacing: 0;
+  box-sizing: border-box;
+  font-size: 0.96em;
 }
 
 td,
@@ -1724,11 +1718,7 @@ input[type="submit"].button {
   border-color: #ff3860;
 }
 
-/* 搜索框界面调整 */
-.input.is-small{
-  margin-top: 0.75rem;
-  width: 80px;
-}
+.input.is-small,
 .textarea.is-small {
   border-radius: 2px;
   font-size: 0.75rem;
