@@ -29,7 +29,7 @@
 /* 搜索框大小*/
 #searchFieldNav {
     /* width: 60%; */
-    width: 80%;
+    width: 40%;
 }
 
 h1.title > span {
@@ -90,7 +90,8 @@ h1.title > span {
 
 /* 右侧sidebar*/
 .sidebar {
-    padding: 0 0.75rem 0.75rem 0.75rem !important;
+    /* padding: 0 0.75rem 0.75rem 0.75rem !important; */
+    padding: 0 0 0.75rem 0.75rem !important;
     /* margin-left: 100px; */
 }
 
