@@ -106,18 +106,12 @@ h6  {
 /* 列表样式修改 */
 ul {
   list-style-type: disc;
-  /* font-size: 1em; */
+  font-size: 1em;
   margin-left: 22px;
 }
 ul li {
-  display: inline-block;
-  width: 50px;
-  height: 30px;
-  color: #ffffff;
-  font-size: 16px;
-  letter-spacing: normal;
-  word-spacing: normal;
-  background-color: black;
+  margin-top: 0.75em;
+  margin-bottom: 0.75em;
 }
 ol{
   list-style-type: decimal;
