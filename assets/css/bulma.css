@@ -106,12 +106,12 @@ h6  {
 /* 列表样式修改 */
 ul {
   list-style-type: disc;
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 22px;
 }
 ol{
   list-style-type: decimal;
-  font-size: 1.1em;
+  font-size: 1em;
   margin-left: 22px;
 }
 
@@ -207,6 +207,7 @@ pre {
 }
 
 body {
+  font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, Heiti, “黑体”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, sans-serif;
   color: #333333;
   font-size: 1rem;
   font-weight: 400;
