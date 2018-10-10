@@ -1724,7 +1724,11 @@ input[type="submit"].button {
   border-color: #ff3860;
 }
 
-.input.is-small,
+/* 搜索框界面调整 */
+.input.is-small{
+  margin-top: 0.75rem;
+  width: 80px;
+}
 .textarea.is-small {
   border-radius: 2px;
   font-size: 0.75rem;
