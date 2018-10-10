@@ -121,12 +121,7 @@ table {
   font-size: 0.96em;
   box-sizing: border-box;
 }
-table pre {
-  margin: 0;
-  padding: 0;
-  border: none;
-  background: none;
-}
+
 p {
   margin-top: 0;
   margin-bottom: 1.24em;
