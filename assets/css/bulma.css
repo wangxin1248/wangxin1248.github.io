@@ -116,7 +116,7 @@ ol{
 p {
   margin-top: 0;
   margin-bottom: 1.24em;
-  font-family:Monospace;
+  font-family: Helvetica, Tahoma, Arial, STXihei, “华文细黑”, Heiti, “黑体”, “Microsoft YaHei”, “微软雅黑”, SimSun, “宋体”, sans-serif;
 }
 b {
   font-weight: 700;
@@ -157,8 +157,8 @@ iframe {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-  box-sizing: border-box;
-  font-size: 0.96em;
+  /* box-sizing: border-box;
+  font-size: 0.96em; */
 }
 
 td,
