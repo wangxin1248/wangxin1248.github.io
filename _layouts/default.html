@@ -84,85 +84,81 @@
     </nav>
 
     <div class="tile is-parent">
-
-      <!-- 信息框部分 -->
-      <div class="tile is-4 is-child">
-          <div class="tile is-parent is-vertical sidebar">
-  
-            <!-- 个人头像 -->
-            <div class="tile is-child widget">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title nice-title">
-                    Sponsored
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content nice-text">
-                      <a href="{{ site.baseurl }}/resume.html"><img src="{{ site.baseurl }}/assets/images/web_hi_res_512.png"/></a>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <!-- 文章分类 -->
-            <div class="tile is-child widget">
-  
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title nice-title">
-                    Article classification
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content nice-text">
-                    {% include JB/setup %}
-                    <ul class="categories_box inline">
-                      {% assign categories_list = site.categories %}  
-                      {% include JB/categories_list %}
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-            <!-- 推荐网站部分 -->
-            <div class="tile is-child widget">
-              <div class="card">
-                <header class="card-header">
-                  <p class="card-header-title nice-title">
-                    Recommended Websites
-                  </p>
-                </header>
-                <div class="card-content">
-                  <div class="content nice-text">
-                    <ul>
-                      <li>
-                        <a href="https://leetcode.com/">LeetCode</a>
-                      </li>
-                      <li>
-                        <a href="http://blog.csdn.net/icarus_wang/">CSDN Blog</a>
-                      </li>
-                      <li>
-                        <a href="http://www.ithome.com">IT Home</a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-  
-          </div>
-  
-      </div>
       <!-- 文章部分 -->
       <div class="tile is-8 is-child main">
 
         {{ content }}
 
       </div>
+      <!-- 信息框部分 -->
+      <div class="tile is-4 is-child">
+        <div class="tile is-parent is-vertical sidebar">
 
-     
+          <!-- 个人头像 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Sponsored
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                    <a href="{{ site.baseurl }}/resume.html"><img src="{{ site.baseurl }}/assets/images/web_hi_res_512.png"/></a>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- 文章分类 -->
+          <div class="tile is-child widget">
 
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Article classification
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  {% include JB/setup %}
+                  <ul class="categories_box inline">
+                    {% assign categories_list = site.categories %}  
+                    {% include JB/categories_list %}
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 推荐网站部分 -->
+          <div class="tile is-child widget">
+            <div class="card">
+              <header class="card-header">
+                <p class="card-header-title nice-title">
+                  Recommended Websites
+                </p>
+              </header>
+              <div class="card-content">
+                <div class="content nice-text">
+                  <ul>
+                    <li>
+                      <a href="https://leetcode.com/">LeetCode</a>
+                    </li>
+                    <li>
+                      <a href="http://blog.csdn.net/icarus_wang/">CSDN Blog</a>
+                    </li>
+                    <li>
+                      <a href="http://www.ithome.com">IT Home</a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </div>
 
   </div>
