@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（十四）：Scrapy 爬取斗鱼美女图片"
+title:  "Python3 爬虫（十四）：Scrapy 实战项目一：爬取斗鱼美女图片"
 date:  2018-09-28
 desc: "python3 网络爬虫实战系列之十四：使用强大的 scrapy 爬虫框架来爬取斗鱼直播平台中的美女图片并下载保存到本地"
 keywords: "Python3,网络爬虫,实战,scrapy,斗鱼,美女"
