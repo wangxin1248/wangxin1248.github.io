@@ -211,8 +211,8 @@ class LoginSpider(scrapy.Spider):
 
 ```js
 {
-	mail: "18682921024",
-	psw: "WANGXIN5@%2B-",
+	mail: "12345678900",
+	psw: "0000000000",
 	rememberme: "true"
 }
 ```
