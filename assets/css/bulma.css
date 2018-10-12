@@ -113,6 +113,12 @@ ul li {
   margin-top: 0.75em;
   margin-bottom: 0.75em;
 }
+ul li ul li{
+  list-style-type: circle;
+}
+ol li ol li{
+  list-style-type: lower-alpha;
+}
 ol{
   list-style-type: decimal;
   font-size: 1em;
