@@ -31,10 +31,11 @@
     width: 40%;
 }
 
+/* 顶部显示文字大小修改 */
 h1.title > span {
     font-family: "League Gothic", "Arial Narrow", Arial, sans-serif;
     margin-bottom: 1.75rem;
-    font-size: 2em;
+    font-size: 1.85em;
 }
 
 .subtitle {
