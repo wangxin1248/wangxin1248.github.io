@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（十五）：Scrapy基础之CrawlSpider"
+title:  "Python3 爬虫（十五）：Scrapy 基础之 CrawlSpider"
 date:  2018-10-09
 desc: "python3 网络爬虫实战系列之十五：对 Scrapy框架中的 CrawlSpider爬虫类进行详细的介绍，并且使用 CrawlSpider 来爬取腾讯招聘网站全站的数据，将其保存到本地。"
 keywords: "Python3,网络爬虫,实战,Scrapy,CrawlSpider,Spider"
