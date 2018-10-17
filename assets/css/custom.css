@@ -56,7 +56,7 @@ h1.title > span {
 
 /* 头像调整 */
 .resume_img{
-    padding: 1em;
+    padding: 1em 1em 0 1em;
 }
 
 .nice-text {
