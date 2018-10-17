@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 爬虫（二十一）：Scrapy 实战项目四：新浪网全站资讯"
-date:  2018-10-13
+date:  2018-10-17
 desc: "python3 网络爬虫实战系列之二十一：使用 Scrapy 爬虫来爬取新浪网全站的资讯信息，然后将资讯内容以文本文件的形式保存到本地，并且按照其分类进行保存，命名为对应的文章标题。"
 keywords: "Python3,网络爬虫,实战,Scrapy,Spider,下载中间件,新浪,全站,咨询"
 categories: [Python]
