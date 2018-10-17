@@ -55,9 +55,12 @@ h1.title > span {
 }
 
 /* 头像调整 */
+.resume_img{
+    padding: 1em;
+}
+
 .nice-text {
     font-family: "Open Sans", sans-serif;
-    padding: 1em;
 }
 /* 头像框大小 */
 .card-content {
