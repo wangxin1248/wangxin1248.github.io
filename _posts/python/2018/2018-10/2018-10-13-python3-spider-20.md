@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 爬虫（二十）：Scrapy 实战项目四：豆瓣电影 Top 250"
+title:  "Python3 爬虫（二十）：Scrapy 实战项目三：豆瓣电影 Top 250"
 date:  2018-10-13
 desc: "python3 网络爬虫实战系列之二十：利用 Scrapy 的下载中间件实现动态 User-Agent 和 代理 ip 来获取豆瓣 Top 250中的电影的信息，并将其保存到 Mongodb 数据库中"
 keywords: "Python3,网络爬虫,实战,Scrapy,Spider,下载中间件,Mongodb"
@@ -80,7 +80,7 @@ tags: [python3,网络爬虫,scrapy,mongodb]
 
 ### 1.随机User-Agent
 
-为了保证爬虫在运行的过程中不会遭到屏蔽，因此每一次请求的时候都应该更换一下请求中对应的 User-Agent，在这里，推荐大家去访问[常用 User-Agent 整理]()，来获取相应对的不同的 User-Agent。
+为了保证爬虫在运行的过程中不会遭到屏蔽，因此每一次请求的时候都应该更换一下请求中对应的 User-Agent，在这里，推荐大家去访问[常用 User-Agent 整理](https://wangxin1248.github.io/life/2018/10/user-agent.html)，来获取相应对的不同的 User-Agent。
 
 在项目中，这些对应的 User-Agent 是放在 settings.py 设置文件中，以列表的形式保存，当需要时直接在文件中导入即可。在使用 random 中的 **choice**方法从中随机获取一个即可。
 
