@@ -54,8 +54,10 @@ h1.title > span {
     font-family: Roboto, sans-serif;
 }
 
+/* 头像调整 */
 .nice-text {
     font-family: "Open Sans", sans-serif;
+    padding: 1em;
 }
 /* 头像框大小 */
 .card-content {
