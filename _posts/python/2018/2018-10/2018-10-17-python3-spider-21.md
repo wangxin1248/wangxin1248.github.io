@@ -362,4 +362,4 @@ scrapy crawl sina
 
 ### 7.查看结果
 
-![sina-4](/assets/images/2018-10/07-sina-4.png)
+![sina-4](/assets/images/2018-10/10-sina-4.png)
