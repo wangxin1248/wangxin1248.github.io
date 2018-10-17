@@ -6,7 +6,6 @@ group: resume
 ---
 # 联系方式
 
-- 手机：18682921024
 - Email：wangxin1248@gmail.com
 - QQ：1349433028
 
@@ -14,7 +13,7 @@ group: resume
 
 # 个人信息
 
- - 王鑫/男/1994 
+ - 王鑫/男/1994
  - 研究生/西北工业大学软件工程专业
  - 研究方向：深度学习
  - 技术博客：https://wangxin1248.com
@@ -46,14 +45,6 @@ group: resume
 
 # 技能清单
 
-- Web开发：Java/Python
-- Web框架：ThinkPHP/Yaf/Yii/Lavaral/LazyPHP
-- 前端框架：Bootstrap/AngularJS/EmberJS/HTML5/Cocos2dJS/ionic
-- 前端工具：Bower/Gulp/SaSS/LeSS/PhoneGap
-- 数据库相关：MySQL/MongoDB/Redis
-- 版本管理、文档和自动化部署工具：Svn/Git/PHPDoc/Phing/Composer
-- 单元测试：PHPUnit/SimpleTest/Qunit
-- 云和开放平台：SAE/BAE/AWS/微博开放平台/微信应用开发
 
 ---
 
