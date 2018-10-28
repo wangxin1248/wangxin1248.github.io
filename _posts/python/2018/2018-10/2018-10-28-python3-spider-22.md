@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 爬虫（二十二）：Scrapy-Redis 介绍"
-date:  2018-10-17
+date:  2018-10-22
 desc: "python3 网络爬虫实战系列之二十二：介绍基于分布式的爬虫技术 Scrapy-Redis，这是在基本 Scrapy 的基础上添加了分布式的 Redis 组件而形成的一种新技术。我们将介绍这个新技术，并以其官方提供的一个案例来详细了解。 "
 keywords: "Python3,网络爬虫,实战,Scrapy,Spider,Scrapy-Redis,组件"
 categories: [Python]
