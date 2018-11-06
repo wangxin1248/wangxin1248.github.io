@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 数据科学（二）：Numpy"
-date:  2018-11-02
+date:  2018-11-06
 desc: "python3 数据科学分析与实战系列之二：数据分析工具 Numpy 入门介绍"
 keywords: "Python3,数据科学,实战,numpy,数据挖掘,jupyterlab,jupyter"
 categories: [Python]
