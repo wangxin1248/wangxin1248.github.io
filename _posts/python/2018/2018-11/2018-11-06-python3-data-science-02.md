@@ -13,6 +13,7 @@ tags: [python3,数据科学,numpy]
 
 ## 一、使用numpy创建数组
 
+
 ```python
 import numpy as np
 ```
@@ -1079,19 +1080,16 @@ np.sort(b, axis=0)
 
 
 ```python
-np.argsort()
+np.argsort(a)
 ```
 
 
-    ---------------------------------------------------------------------------
 
-    TypeError                                 Traceback (most recent call last)
 
-    <ipython-input-68-3ddf282e736b> in <module>
-    ----> 1 np.argsort()
-    
+    array([[0, 1, 2],
+           [0, 1, 2],
+           [0, 1, 2]])
 
-    TypeError: argsort() missing 1 required positional argument: 'a'
 
 
 ## 七、数组的复制
