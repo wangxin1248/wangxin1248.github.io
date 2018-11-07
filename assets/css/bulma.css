@@ -173,11 +173,22 @@ iframe {
   border: 0;
 }
 
-table {
+/* table {
   border-collapse: collapse;
   border-spacing: 0;
   box-sizing: border-box;
   font-size: 0.96em;
+} */
+table {
+  border-collapse: collapse !important;
+}
+table td,
+table th {
+  background-color: #fff !important;
+}
+table-bordered th,
+table-bordered td {
+  border: 1px solid #ddd !important;
 }
 
 td,
