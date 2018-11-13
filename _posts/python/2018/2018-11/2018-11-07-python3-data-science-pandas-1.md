@@ -38,7 +38,7 @@ dataframe 是一个二维的、表格型的数据结构。Pandas 的 dataframe �
 
 这里我鼓励你去找到自己感兴趣的数据并用来练习，一些公开的数据集可以在 Kaggle 上找到。
 
-这里我使用的是食物营养信息数据集，可以从这里下载 [food_info.csv](assets/data/food_info.csv)
+这里我使用的是食物营养信息数据集，本文所用到的数据[下载地址](https://github.com/wangxin1248/wangxin1248.github.io/tree/master/assets/data/2018/2018-11/07)
 
 
 ```python
@@ -537,7 +537,7 @@ food_info.head()
 
 另一常见的做法是重新建立数据结构，使得数据集呈现出一种更方便并且（或者）有用的形式。
 
-这里我们会使用一份新的数据集来做下面的测试，数据集为英国2014年的降雨数据，点击这里下载：[uk_rain_2014.csv](assets/data/uk_rain_2014.csv)
+这里我们会使用一份新的数据集来做下面的测试，数据集为英国2014年的降雨数据：uk_rain_2014.csv
 
 
 ```python
