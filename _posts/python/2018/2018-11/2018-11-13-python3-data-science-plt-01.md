@@ -35,6 +35,8 @@ import matplotlib.pyplot as plt
 
 ### 折线图绘制
 
+折线图是排列在工作表的列或行中的数据可以绘制到折线图中。 折线图可以显示随时间（根据常用比例设置）而变化的连续数据，因此非常适用于显示在相等时间间隔下数据的趋势。 在折线图中，类别数据沿水平轴均匀分布，所有值数据沿垂直轴均匀分布。
+
 首先导入我们所需要绘制的图像数据：
 
 ```python
@@ -255,6 +257,8 @@ plt.show()
 
 ### 柱状图绘制
 
+柱状图(bar chart)，是一种以长方形的长度为变量的表达图形的统计报告图，由一系列高度不等的纵向条纹表示数据分布的情况，用来比较两个或以上的价值（不同时间或者不同条件），只有一个变量，通常利用于较小的数据集分析。 柱状图亦可横向排列，或用多维方式表达。
+
 这里绘制柱状图使用的数据为 fandango_scores.csv，这是2014-2015年间部分电影在各大评分网站上的评分数据。
 
 首先来加载数据
@@ -353,6 +357,8 @@ plt.show()
 
 ### 散点图绘制
 
+散点图是指在回归分析中，数据点在直角坐标系平面上的分布图，散点图表示因变量随自变量而变化的大致趋势，据此可以选择合适的函数对数据点进行拟合。 用两组数据构成多个坐标点，考察坐标点的分布，判断两变量之间是否存在某种关联或总结坐标点的分布模式。 散点图将序列显示为一组点。 值由点在图表中的位置表示。
+
 跟绘制柱状图调用 **bar**类似，散点图也是直接调用 **scatter**函数，并传入对应的 x 和
 y 数据就可以了。
 
@@ -405,3 +411,63 @@ plt.show()
 显示结果：
 
 ![result](/assets/images/2018/2018-11/24.png)
+
+### 直方图绘制
+
+直方图(Histogram)又称质量分布图。 是一种统计报告图，由一系列高度不等的纵向条纹或线段表示数据分布的情况。 一般用横轴表示数据类型，纵轴表示分布情况。 直方图是数值数据分布的精确图形表示。
+
+使用 matplotlib 中的 **hist** 方法来绘制直方图
+
+```python
+fig,ax = plt.subplots()
+
+# 绘制直方图对象，传入数据以及参数
+ax.hist(some_film_data['Fandango_Ratingvalue'], bins=40, range=(2,4))
+
+# 显示图像
+plt.show()
+```
+
+其中的参数都是在传入的数据的基础上的：
+
+- bins：数据分组数
+- range：数据显示范围
+
+显示结果：
+
+![result](/assets/images/2018/2018-11/25.png)
+
+还可以结合子图来显示多个直方图：
+
+```python
+fig = plt.figure(figsize=(10,6))
+ax1 = fig.add_subplot(2,2,1)
+ax2 = fig.add_subplot(2,2,2)
+ax3 = fig.add_subplot(2,2,3)
+ax4 = fig.add_subplot(2,2,4)
+ax1.hist(some_film_data['Fandango_Ratingvalue'], bins=20, range=(0, 5))
+ax1.set_title('Distribution of Fandango Ratings')
+ax1.set_ylim(0, 50)
+
+ax2.hist(some_film_data['RT_user_norm'], 20, range=(0, 5))
+ax2.set_title('Distribution of Rotten Tomatoes Ratings')
+ax2.set_ylim(0, 50)
+
+ax3.hist(some_film_data['Metacritic_user_nom'], 20, range=(0, 5))
+ax3.set_title('Distribution of Metacritic Ratings')
+ax3.set_ylim(0, 50)
+
+ax4.hist(some_film_data['IMDB_norm'], 20, range=(0, 5))
+ax4.set_title('Distribution of IMDB Ratings')
+ax4.set_ylim(0, 50)
+
+plt.show()
+```
+
+显示结果：
+
+![result](/assets/images/2018/2018-11/26.png)
+
+## 总结
+
+以上的一些图形只是我们在今后的数据分析中经常会使用到的一些。其实在工作或学习中遇到需要显示的图形的时候可以去官网查看对应的图形的案例，替换数据，照着修改即可。记住，这些都只是工具，是为了我们更好的分析数据而提供的，我们会用即可。
