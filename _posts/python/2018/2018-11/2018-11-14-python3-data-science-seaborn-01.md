@@ -127,6 +127,8 @@ context 中可以使用的参数有：
 
 ### 颜色
 
+#### 色板
+
 颜色在绘图中非常重要，因此 seaborn 专门提供了调色板 color_palette 来提供一些比较好看的颜色。
 
 color_palette() 允许传入任何 Matplotlib 所支持的颜色，不传入参数时表示使用默认颜色。并且还可以调用 set_palette() 方法来设置所有图的颜色。
@@ -152,3 +154,45 @@ sns.palplot(sns.color_palette('hls', 12))
 显示结果：
 
 ![result](/assets/images/2018/2018-11/34.png)
+
+其中，hls_palette() 函数来控制颜色的亮度和饱和
+
+- l-亮度 lightness
+- s-饱和 saturation
+
+例如，我们来画一个简单的具有12列数据的箱图：
+
+```python
+data = np.random.normal(size=(20, 12)) + np.arange(12) / 2
+sns.boxplot(data=data,palette=sns.color_palette("hls", 12))
+```
+
+显示结果：
+
+![result](/assets/images/2018/2018-11/35.png)
+
+#### 连续色板
+
+色彩随数据变换，比如数据越来越重要则颜色越来越深。要实现这种效果只需要在 color_palette 函数中传入想要实现渐变效果的颜色即可。
+
+```python
+sns.palplot(sns.color_palette("Blues"))
+```
+
+显示结果：
+
+![result](/assets/images/2018/2018-11/36.png)
+
+当然，颜色也可以从深到浅进行变化，只需要在对应颜色的后面加入 **_r**即可
+
+```python
+sns.palplot(sns.color_palette('Blues_r'))
+```
+
+显示结果：
+
+![result](/assets/images/2018/2018-11/37.png)
+
+## 总结
+
+关于 seaborn 的使用还得在日常工作学习中在进行深入了解，这里只是给出了一个简单入门介绍，还是需要多多练习。
