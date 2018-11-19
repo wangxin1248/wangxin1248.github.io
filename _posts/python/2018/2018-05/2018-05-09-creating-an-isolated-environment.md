@@ -34,7 +34,7 @@ pip3 install --user --upgrade virtualenv
 
 ``` python3
 cd 项目路径
-virtualenv env
+python3 -m virtualenv env
 ```
 
 这样，一个独立的python开发环境就已经设置好了，这样遗憾想要进入独立的开发环境时只需要在终端中输入：
