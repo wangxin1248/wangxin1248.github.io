@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Python3 数据科学（五）：seaborn"
+title:  "Python3 数据科学（五）：seaborn（一）：基础操作"
 date:  2018-11-14
 desc: "python3 数据科学分析与实战系列之五：数据处理分析必备工具之 seaborn 入门介绍"
 keywords: "Python3,数据科学,实战,seaborn,数据挖掘,jupyterlab,jupyter"
