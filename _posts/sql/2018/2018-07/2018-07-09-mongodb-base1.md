@@ -25,6 +25,12 @@ MongoDB是专为可扩展性，高性能和高可用性而设计的数据库。�
 
 MongoDB 数据库是比较自由的，正如同他本身就是非关系型数据库一样。并不需要单独专门定义数据库，只需直接使用数据库，在插入数据的时候便会创建相应的数据库和集合。
 
+首先使用如下的命令来进入 mongodb 的交互界面：
+
+```bash
+mongo
+```
+
 ### 数据库切换
 
 查看当前数据库名称
@@ -60,7 +66,7 @@ db.Dropdatabases()
 语法：
 
 ```js
-db.createCollections(name,options)
+db.createCollection(name,options)
 ```
 
 **name**：是要创建集合的名称
@@ -71,10 +77,10 @@ db.createCollections(name,options)
 
 ```js
 // 不限制集合大小
-db.createCollections("stu")
+db.createCollection("stu")
 
 // 限制集合大小
-db.createCollections("stu",{capped:true,size:10})
+db.createCollection("stu",{capped:true,size:10})
 ```
 
 **capped**：默认值为 false 表示不限制集合大小，为 true 表示限制集合大小
