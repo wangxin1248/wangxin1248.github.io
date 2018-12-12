@@ -1,9 +1,9 @@
 ---
 layout: post
-title:  "Ubuntu16.04服务器安装shadowsocks"
+title:  "Ubuntu 服务器安装shadowsocks"
 date:  2018-04-16
-desc: "搬瓦工vps ubuntu16.04系统下安装shadowsocks并配置相关属性"
-keywords: "Linux,shadowsocks,ubuntu16.04,搬瓦工vps"
+desc: "ubuntu 服务器系统下安装shadowsocks并配置相关属性"
+keywords: "Linux,shadowsocks,ubuntu,vps,gcp,谷歌云"
 categories: [Linux]
 tags: [Linux,shadowsocks]
 ---
