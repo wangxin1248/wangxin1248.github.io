@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 Django（二）Django 站点管理"
-date:  2018-12-31
+date:  2019-01-15
 desc: "python3 服务器开发系列之 Django 开发实战（二）：Django 站点管理"
 keywords: "Python3,后台开发,实战,django,服务器,站点管理"
 categories: [Python]
