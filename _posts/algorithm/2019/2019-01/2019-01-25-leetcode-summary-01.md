@@ -36,6 +36,7 @@ tags: [LeetCode,算法,Java,Python]
 - 一般无需返回
 - 时间复杂度 O(n)
 - 空间复杂度 O(1)
+- 返回数组中符合特定需求的元素或角标
 
 ### 解题主要的技巧和着手点
 
@@ -50,6 +51,31 @@ tags: [LeetCode,算法,Java,Python]
 - **题目提示**
 
 有时，题目也会给出一些提示信息。这时，题目中的信息便是跟解题方法相关的信息。
+
+- **善用集合**
+
+**集合** 是一种特殊的数据结构，其最大的特点是 **不存在重复元素**。根据这一点便可以很巧妙的解决一些数组中有关重复元素的问题。
+
+- **熟记位操作，先用异或运算**
+
+在算法题目中。凡是涉及到数字的运算操作的一般首先得想到使用 **位运算**。并且一般只会用到 **异或运算**。
+
+基本的位运算知识：
+
+- 与运算（&）
+  - 0 & 0 = 0
+  - 1 & 1 = 1
+  - 1 & 0 = 0
+- 或运算（\|）
+  - 0 \| 0 = 0
+  - 1 \| 0 = 1
+  - 1 \| 1 = 1
+- 异或运算（^）
+  - 1 ^ 1 = 0
+  - 1 ^ 0 = 1
+  - 0 ^ 0 = 0
+
+根据上面的知识我们可以知道：**两个相同的数异或的结果为0，而0与任何一个数异或的结果为这个数**
 
 下面是具体的题目和代码
 
@@ -153,4 +179,47 @@ class Solution:
         # 对原数组进行切片重组，一步达到最终结果的样子
         nums[0:n] = nums[n-k:] + nums[:n-k]
 
+```
+
+## 4.存在重复
+
+题目地址：[https://leetcode-cn.com/problems/contains-duplicate/](https://leetcode-cn.com/problems/contains-duplicate/)
+
+### 解题思路
+
+该题目是要求判断数组中是否存在重复的元素，因此可以使用 **集合** 来存储数据，之后再来看集合中的元素的个数是否和之前的数组的个数是否一致。
+
+### Python3 代码
+
+```python
+class Solution:
+    def containsDuplicate(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: bool
+        """
+        return  not len(nums) == len(set(nums))
+```
+
+## 6.只出现一次的数字
+
+题目地址：[https://leetcode-cn.com/problems/single-number/](https://leetcode-cn.com/problems/single-number/)
+
+## 解题思路
+
+这道题使用到了位运算的知识：**两个相同的数异或的结果为0，而0与任何一个数异或的结果为这个数**
+
+## Python3 代码
+
+```python
+class Solution:
+    def singleNumber(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+        j = 0
+        for i in nums:
+            j ^= i
+        return j
 ```
