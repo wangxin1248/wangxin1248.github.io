@@ -44,6 +44,8 @@ tags: [LeetCode,算法,Java,Python]
 
 对于数组类的题目而言，角标绝对是最最最重要的一个点了。很多有技巧性的问题一般都是通过巧妙的角标变化来实现的。通常也不只是一个角标，也可以是两个角标，但一般在没有更多的了。
 
+一般来说需要对数组进行两次的遍历才能完成解题的问题可以通过双角标来遍历一遍来解决。
+
 - **从结果反推**
 
 有时按照题目所要求的规则来实现代码的话可能超时，这时也就是说是不能按照基本的方法是解题。这时，便可以从最终的输出结果入手来反推方法。通过观察题目对应的输入和输出来推导出过程。
@@ -55,6 +57,12 @@ tags: [LeetCode,算法,Java,Python]
 - **善用集合**
 
 **集合** 是一种特殊的数据结构，其最大的特点是 **不存在重复元素**。根据这一点便可以很巧妙的解决一些数组中有关重复元素的问题。
+
+- **善用字典**
+
+在有些题目中有时为了方便的存储数据，有时会需要用到 **字典**这种特殊的数据结构。字典是一种强大的数据结构，用来存储 **键值对 {key:value}**的数据结构，也就是一个键对应不同的值，键和值的数据结构可以不一样。
+
+其中最主要的是键的选择必须是不可变元素，在 Python 中也就是 **字符串、元祖、数字**。而 **列表和字典** 是不可以作为字典当中的键的类型的。
 
 - **熟记位操作，先用异或运算**
 
@@ -76,6 +84,10 @@ tags: [LeetCode,算法,Java,Python]
   - 0 ^ 0 = 0
 
 根据上面的知识我们可以知道：**两个相同的数异或的结果为0，而0与任何一个数异或的结果为这个数**
+
+- **在python中善于利用反向角标**
+
+在 python 中是存在一种和以往的 c++、java 不一样的角标即 **反向角标**，也就是 -1、-2、...。这种角标是从数组的末尾往数组的首部来取的。因此在算法题中可以充分使用这一高级操作来实现对一些题目比较技巧的求解。
 
 下面是具体的题目和代码
 
@@ -222,4 +234,73 @@ class Solution:
         for i in nums:
             j ^= i
         return j
+```
+
+## 7.两个数组的交集 II
+
+题目地址：[https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/](https://leetcode-cn.com/problems/intersection-of-two-arrays-ii/)
+
+### 题目思路
+
+
+为了取出两个数组中的交集，必须首先得创建一个辅助的数据结构。这个数据结构的选择可以是另一个 **数组**也可以是 **字典**。
+
+在 [https://wangxin1248.github.io/algorithm/2018/10/leetcode-350.html](https://wangxin1248.github.io/algorithm/2018/10/leetcode-350.html) 中使用了第三方数组来直接存储最后的结果。
+
+这里我们换一种思路，来采用字典这种独特的数据结构来帮助完成交集数据的寻找。具体的操作是将要利用字典数据结构中的键值对来存储第一个数组中的每一个元素的出现次数，再来遍历第二个数组中的元素，假如该元素存在于字典中的话则将其保存在最终的交集数据结果中。
+
+### Python3代码
+
+```python
+class Solution:
+    def intersect(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: List[int]
+        """
+        nums3 = []
+        dic1 = {}
+        # 统计数组1中的元素个数
+        for num in nums1:
+            if num not in dic1:
+                dic1[num] = 1
+            else:
+                dic1[num] += 1
+        # 遍历数组2中的元素，假如该元素存在则将其加入到结果数组中
+        for num in nums2:
+            if num in dic1 and dic1[num]>0:
+                nums3.append(num)
+                dic1[num] -= 1
+        return nums3
+        
+```
+
+## 8.加一
+
+题目地址：[https://leetcode-cn.com/problems/plus-one/](https://leetcode-cn.com/problems/plus-one/)
+
+### 解题思路
+
+按照对数组进行加一的基本思路我们可以理解到对应的解决方法也就是对数组中的每一个元素加上下一位元素的进位，而最后一位元素加一。
+
+这样最后只需要判断最高位是否有向上的进位即可。
+
+### Python3 代码
+
+```python
+class Solution:
+    def plusOne(self, digits):
+        """
+        :type digits: List[int]
+        :rtype: List[int]
+        """
+        add = 1
+        for i in range(len(digits)-1, -1, -1):
+            num = digits[i]+add
+            digits[i] = num%10
+            add = int(num/10)
+        if add != 0:
+            digits = list(map(int, str(add))) + digits
+        return digits
 ```
