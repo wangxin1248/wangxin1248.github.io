@@ -304,3 +304,15 @@ class Solution:
             digits = list(map(int, str(add))) + digits
         return digits
 ```
+
+## 9.移动零
+
+题目地址：[https://leetcode-cn.com/problems/move-zeroes/](https://leetcode-cn.com/problems/move-zeroes/)
+
+### 解题思路
+
+### Python3 代码
+
+```python
+
+```
