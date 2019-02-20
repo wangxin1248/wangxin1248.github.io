@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "LeetCode 总结（一）：初级算法之数组（持续更新）"
+title:  "LeetCode 总结（一）：初级算法之数组（更新完成）"
 date:  2019-01-25
 desc: "LeetCode 初级算法之数组部分总结"
 keywords: "LeetCode,刷题算法,Java,Python,总结"
@@ -46,6 +46,8 @@ tags: [LeetCode,算法,Java,Python]
 
 一般来说需要对数组进行两次的遍历才能完成解题的问题可以通过双角标来遍历一遍来解决。
 
+还有可以通过双角标移动的快慢来解题。
+
 - **从结果反推**
 
 有时按照题目所要求的规则来实现代码的话可能超时，这时也就是说是不能按照基本的方法是解题。这时，便可以从最终的输出结果入手来反推方法。通过观察题目对应的输入和输出来推导出过程。
@@ -88,6 +90,10 @@ tags: [LeetCode,算法,Java,Python]
 - **在python中善于利用反向角标**
 
 在 python 中是存在一种和以往的 c++、java 不一样的角标即 **反向角标**，也就是 -1、-2、...。这种角标是从数组的末尾往数组的首部来取的。因此在算法题中可以充分使用这一高级操作来实现对一些题目比较技巧的求解。
+
+- **将题目进行简单的变换**
+
+有时候对于所给的题目并没有明确的思路的情况下可以考虑将题目进行相应的变换。
 
 下面是具体的题目和代码
 
@@ -311,8 +317,157 @@ class Solution:
 
 ### 解题思路
 
+该题是要求将数组中的0移动到数组的末尾，换种思路来说就是将0与非0元素进行调换。每一次将所指向第一个0元素和第一个非0元素进行互换，最后数组遍历结束则实现题目要求。
+
 ### Python3 代码
 
 ```python
+class Solution:
+    def moveZeroes(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: void Do not return anything, modify nums in-place instead.
+        """
+        length = len(nums)
+        if length == 1:
+            return
+        # 创建两个角标,fast用来指向非0元素，slow用来指向0元素
+        slow = fast = 0
+        # 开始遍历数组
+        while fast < length:
+            if nums[fast] != 0:
+                if nums[slow] ==0 and slow != fast:
+                    nums[fast],nums[slow] = nums[slow],nums[fast]
+                slow += 1
+            fast += 1
+```
+
+## 10.两数之和
+
+题目地址：[https://leetcode-cn.com/problems/two-sum/](https://leetcode-cn.com/problems/two-sum/)
+
+### 解题思路
+
+两数之和其实可以理解为寻找两数之差，即目标值与数组中每一个元素的差在数组中的位置。那么便可以考虑将每一个元素与目标值的差值以及该元素的位置保存起来。这个保存的数据结构最好便是字典。
+
+我们可以将数组中所给元素的每一个元素与目标值的差值做为键，该元素的角标作为值。这样在遍历数组的过程中，将数组的角标和角标下对应值都取出来，查询该元素是否在字典中，不在则将该值与 target 的差值存入字典，值为角标。
+
+因为是两数之和，所以当遍历到某个元素存在字典中的时候，那么另一个数其实就已经确定了，与这个数之和就是 target，将该数在字典中的值和该数的角标组成新的数组返回即可。
+
+### Python3 代码
+
+```python
+class Solution(object):
+    def twoSum(self, nums, target):
+        dic = {}
+        for i, num in enumerate(nums):
+            if num in dic:
+                return [dic[num], i]
+            else:
+                dic[target - num] = i
+
+```
+
+## 11.有效的数独
+
+题目地址：[https://leetcode-cn.com/problems/valid-sudoku/](https://leetcode-cn.com/problems/valid-sudoku/)
+
+### 解题思路
+
+根据题目所给的条件，对于一个有效的数独来说得满足以下的三个条件：
+
+- 数字 1-9 在每一行只能出现一次。
+- 数字 1-9 在每一列只能出现一次。
+- 数字 1-9 在每一个以粗实线分隔的 3x3 宫内只能出现一次。
+
+因此，我们就对一个 9*9 的矩阵分别判断 行、列、3*3宫
+
+判断的标准是每行、每列、每个3*3宫 数字 1-9 不出现重复。在 python 中对是否有重复元素的处理最快的就是**集合**。
+
+可以将每行、每列、每个3*3宫中的数字分别存到列表中去，之后将列表转换为集合，判断集合和原列表的长度即可。
+
+### Python3 代码
+
+```python
+class Solution:
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+        # 判断行
+        for i in range(0, 9):
+            list1 = []
+            for j in range(0, 9):
+                # 是数字再做处理
+                if board[i][j] != ".":
+                    list1.insert(j, board[i][j])
+            # 判断是否有重复数字
+            if len(set(list1)) != len(list1):
+                return False
+        
+        # 判断列
+        for i in range(0, 9):
+            list2 = []
+            for j in range(0, 9):
+                # 是数字再做处理
+                if board[j][i] != ".":
+                    list2.insert(i, board[j][i])
+            # 判断是否有重复数字
+            if len(set(list2)) != len(list2):
+                return False
+        
+        # 判断3*3的矩阵
+        for i in range(0, 9, 3):
+            for j in range(0, 9, 3):
+                list3 = []
+                # 判断每一个3*3的小矩阵
+                for m in range(i, i+3):
+                    for n in range(j, j+3):
+                        # 是数字再做处理
+                        if board[m][n] != ".":
+                            list3.insert(m+n, board[m][n])
+                # 判断是否有重复数字
+                if len(set(list3)) != len(list3):
+                    return False
+        return True
+```
+
+## 12.旋转图像
+
+题目地址：[https://leetcode-cn.com/problems/rotate-image/](https://leetcode-cn.com/problems/rotate-image/)
+
+### 解题思路
+
+对于90度的翻转有很多方法:
+
+有一种解法，首先以从对角线为轴翻转，然后再以x轴中线上下翻转即可得到结果，如下图所示(其中蓝色数字表示翻转轴)：
+
+![22](/assets/images/2018-10/22.png)
+
+还有一种解法和上面的其实是一种解法，这种方法首先对原数组取其转置矩阵，然后把每行的数字翻转可得到结果，如下所示(其中蓝色数字表示翻转轴)：
+
+![23](/assets/images/2018-10/23.png)
+
+最后，其实就是简单的数组角标元素变换。
+
+### Python3 代码
+
+```python
+class Solution:
+    def rotate(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: void Do not return anything, modify matrix in-place instead.
+        """
+        length = len(matrix)
+        # 先将矩阵按右对角线交换
+        for i in range(0, length-1):
+            for j in range(0, length-i):
+                matrix[i][j], matrix[length-j-1][length-i-1] = matrix[length-j-1][length-i-1], matrix[i][j]
+        # 再将矩阵按中间横线上下交换
+        for i in range(0, int(length/2)):
+            for j in range(0, length):
+                matrix[i][j], matrix[length-i-1][j] = matrix[length-i-1][j],matrix[i][j]
 
 ```
