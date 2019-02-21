@@ -114,6 +114,7 @@ $ python manage.py runserver 0.0.0.0:8000
 - 指定模型所要进行模糊查找的字段 **search_fields**
 - 指定一页所要显示的数据量 **list_per_page**
 - 对属性进行分组（修改属性时显示） **fieldsets**
+- 模型关联显示
 
 接下来以 BookInfo 模型数据的站点管理界面定制为例介绍下站点定义的方式：
 
@@ -150,3 +151,115 @@ admin.site.register(HeroInfo)
 修改 BookInfo 中的记录时界面变为：
 
 ![修改BookInfo站点管理功能](/assets/images/2019/2019-01/21.png)
+
+### 模型关联显示
+
+在我们的实例中英雄与图书是多对一的关联关系，为了在管理界面中表现出来这种关系可以对 manage.py 文件进行定制
+
+首先得创建一个 **HeroInfoLine** 类，用来对关联显示的信息进行设置：
+
+```python
+class HeroInfoLine(admin.StackedInline):
+    """
+    用来设置heroinfo的关联信息,
+    admin.StackedInline表示为默认的显示方式
+    admin.TabularInline表示为采用表格方式显示
+    """
+    # 指定设置的模型
+    model = HeroInfo
+    # 关联现实的数据个数
+    extra = 3
+```
+
+接下来得在所需关联的类中的 admin 管理类中配置相关信息，在这里便是在图书的 admin 类中进行配置：
+
+```python
+class BookAdmin(admin.ModelAdmin):
+    # 指定模型的显示属性
+    list_display = ['b_title', 'b_pub_date']
+    # 指定模型进行查找的过滤字段（一般是数据中出现次数较多的）
+    list_filter = ['b_title']
+    # 指定模型所要进行模糊查找的字段
+    search_fields = ['b_title']
+    # 指定一页所要显示的数据量
+    list_per_page = 10
+
+    # 对属性进行分组
+    fieldsets = [
+        ('basic', {'fields': ['b_title']}),
+        ('more', {'fields': ['b_pub_date']}),
+    ]
+
+    # 进行模型的相关联显示
+    inlines = [HeroInfoLine]
+```
+
+最后为了将结果进行显示，将配置好的类注册到应用中：
+
+```python
+admin.site.register(BookInfo, BookAdmin)
+```
+
+最后的显示效果如图所示：
+
+![关联显示效果](/assets/images/2019/2019-02/3.png)
+
+### 布尔类型属性（性别）显示
+
+在我们的实例中英雄模型中的性别属性是拿布尔类型表示的，这样在存储数据的时候可以节约空间，但是在显示英雄信息的时候不是那么的直接：
+
+![英雄信息显示](/assets/images/2019/2019-02/4.png)
+
+为了将布尔值在管理界面中现实的更加美观直接，可以在模型类的定义时对类属性进行相关的封装：
+
+```python
+class HeroInfo(models.Model):
+    """
+    英雄类，做为书中的英雄
+    """
+    # 英雄名称
+    h_name = models.CharField(max_length=30)
+    # 英雄性别
+    h_gender = models.BooleanField()
+    # 英雄简介
+    h_content = models.CharField(max_length=300)
+    # 英雄所属图书（外键形式引用，注意得指定删除时所执行的操作）
+    h_book = models.ForeignKey('BookInfo', on_delete=models.CASCADE, )
+
+    # 重写str方法，在输出书信息时被调用
+    def __str__(self):
+        return str(self.h_book) + '-' + str(self.h_name)
+
+    # 对性别的显示方式进行处理
+    def gender(self):
+        if self.h_gender:
+            return '男'
+        else:
+            return '女'
+        
+    # 可以给封装的方法的显示起个别名
+    gender.short_description = '性别'
+```
+
+按照上面的方法对原先的布尔类型属性进行了相关的封装操作，并对封装的方法设置了别名。但是这样设置并没有在查看英雄的界面发生变换。为了让封装的方法也显示到界面中，还是得在注册模型的时候对模型进行相关的设置：
+
+```python
+class HeroAdmin(admin.ModelAdmin):
+    list_display = ['id', 'h_name', 'gender', 'h_content', 'h_book']
+
+admin.site.register(HeroInfo, HeroAdmin)
+```
+
+这样，刷新便可以在管理界面中看到显示信息已经发生了变化：
+
+![英雄信息显示](/assets/images/2019/2019-02/5.png)
+
+## 四、总结
+
+总的来说，Django 为我们提供了一个功能丰富且可以自由定制的后台管理站点，这样我们在创建一个 Django 项目的时候便无需在编写一个后台管理程序。接下来对 Django 所提供的后台管理做一个简单的总结：
+
+- 在网址之后加入 /admin 便可以进入到 Django 自带的管理界面中
+- 支持热更新，修改文件之后直接刷新即可
+- 进入站点管理得先创建一个超级管理员
+- 站点管理支持对模型数据的增删改查，也可以对模型数据的显示进行个性化定制
+- 支持模型之间的关联显示
