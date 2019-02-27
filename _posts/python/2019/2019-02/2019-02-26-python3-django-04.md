@@ -332,11 +332,31 @@ Django 自带了一套完整可定制的后端站点管理系统，可以完美�
 
 进入方式是在项目网址后面加上 /admin 
 
+### 创建超级管理员
+
 但是为了保证网站信息的安全，在进入站点管理之前必须得先创建一个超级用户，通过这个超级用户才能登陆到站点管理后台中。输入以下的命令便可以创建一个超级用户：
 
 ```bash
 python manage.py createsuperuser
 ```
+
+### 注册模型
+
+我们进入网站的站点管理界面最主要的任务是要去管理系统中的数据库中的内容。但是我们在之前的工作中只是定义了模型，并完成了模型到数据库的迁移操作。但这些只是一些准备操作，想要在站点中管理数据库中的对象必须首先将想要管理的对应注册到系统管理中。
+
+注册的位置是在所创建的应用目录下的 admin.py 中，在该文件中导入对应的模型类，并使用如下的方法来将其注册到系统管理中：
+
+```python
+from django.contrib import admin
+from booktest.models import *
+
+
+# Register your models here.
+admin.site.register(BookInfo)
+admin.site.register(HeroInfo)
+```
+
+这里将上次项目创建的两个模型类注册到了系统中。
 
 之后便可以登入到站点管理界面了
 
