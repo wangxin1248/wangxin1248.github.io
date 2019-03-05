@@ -160,7 +160,7 @@ cd config
 vim config.php
 ```
 
-将 array 中添加如下内容：
+将 array 中添加如下内容（0是已有的本机ip，只需要添加1）：
 
 ```shell
 array (
