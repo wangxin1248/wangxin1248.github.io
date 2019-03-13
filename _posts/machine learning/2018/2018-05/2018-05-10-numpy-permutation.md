@@ -4,7 +4,7 @@ title:  "numpy.random中的shuffle和permutation"
 date:  2018-05-10
 desc: "numpy.random.shuffle(x) and numpy.random.permutation(x)，这两个有什么不同，或者说有什么关系？"
 keywords: "python,numpy,np,permutation,shuffle"
-categories: [Machine Learning]
+categories: [MachineLearning]
 tags: [python3,numpy]
 ---
 
