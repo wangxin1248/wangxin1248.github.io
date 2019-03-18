@@ -67,7 +67,7 @@ Headless Chrome 指在 headless 模式下运行谷歌浏览器。本质就是不
 
 Headless浏览器是一种很好的工具，用于自动化测试和不需要可视化用户界面的服务器。例如，你想在一个网页上运行一些测试，从网页创建一个PDF，或者只是检查浏览器怎样递交URL。
 
-安装 ChromeHeadless的方法见我的博客
+安装 ChromeHeadless的方法见[https://wangxin1248.github.io/linux/2018/09/ubuntu18.04-install-chrome-headless.html](https://wangxin1248.github.io/linux/2018/09/ubuntu18.04-install-chrome-headless.html)
 
 # Selenium 实际使用
 
@@ -92,8 +92,8 @@ chrome_options.add_argument('--disable-gpu')
 # 调用环境变量指定的chrome浏览器创建浏览器对象
 driver = webdriver.Chrome(chrome_options=chrome_options)
 
-# 如果没有在环境变量指定PhantomJS位置
-# driver = webdriver.PhantomJS(chrome_options=chrome_options, executable_path='/home/wx/application/chromedriver')
+# 如果没有在环境变量指定Chrome位置
+# driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='/home/wx/application/chromedriver')
 
 # get方法会一直等到页面被完全加载，然后才会继续程序，通常测试会在这里选择 time.sleep(2)
 driver.get("http://www.baidu.com/")
