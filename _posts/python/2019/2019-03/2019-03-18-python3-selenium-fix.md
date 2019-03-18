@@ -108,7 +108,7 @@ driver.quit()
 
 - WebDriverWait
 
-配合该类的 until() 和 until_not() 方法使用，能够根据判断条件而进行灵活地等待了。
+配合该类的 until() 和 until_not() 方法使用，能够根据判断条件而进行灵活地等待了。显性等待得等到执行的页面元素加载出来之后才会继续执行下面的代码。
 
 ```python
 from selenium import webdriver
@@ -124,8 +124,8 @@ chrome_options.add_argument('--disable-gpu')
 driver = webdriver.Chrome(chrome_options=chrome_options, executable_path='/home/wx/application/chromedriver')
 driver.get('https://www.douyu.com/directory/all')
 
-# 显性等待
 try:
+    # 显性等待 DyListCover-hot class 加载出来20秒，每0.5秒检查一次
     WebDriverWait(driver, 20, 0.5).until(EC.presence_of_element_located((By.CLASS_NAME, "DyListCover-hot")))
     data = driver.find_elements_by_class_name('DyListCover-hot')
     for hot_num in data:
@@ -134,7 +134,42 @@ finally:
     driver.close()
 ```
 
-显性等待是得等到执行的页面元素加载出来之后在执行下面的代码。
+显性等待调用格式：
+
+```python
+WebDriverWait(driver, 超时时长, 调用频率, 忽略异常).until(可执行方法, 超时时返回的信息)
+```
+
+其中 selenium.webdriver.support.expected_conditions 是 selenium 的一个模块，其中包含一系列可用于判断的条件：
+
+- title_is
+- title_contains
+- presence_of_element_located
+- visibility_of_element_located
+- visibility_of
+- presence_of_all_elements_located
+- text_to_be_present_in_element
+- text_to_be_present_in_element_value
+- frame_to_be_available_and_switch_to_it
+- invisibility_of_element_located
+- element_to_be_clickable 
+- staleness_of
+- element_to_be_selected
+- element_located_to_be_selected
+- element_selection_state_to_be
+- element_located_selection_state_to_be
+- alert_is_present
+
+显性等待中 selenium.webdriver.common.by 中 By 所支持查找的类型：
+
+- CLASS_NAME = 'class name'
+- CSS_SELECTOR = 'css selector'
+- ID = 'id'
+- LINK_TEXT = 'link text'
+- NAME = 'name'¶
+- PARTIAL_LINK_TEXT = 'partial link text'
+- TAG_NAME = 'tag name'
+- XPATH = 'xpath'
 
 注意：**隐性等待和显性等待可以一同使用，最长的等待时间取决于两者之间的大者。**
 
