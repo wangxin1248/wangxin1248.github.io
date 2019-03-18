@@ -166,7 +166,7 @@ WebDriverWait(driver, 超时时长, 调用频率, 忽略异常).until(可执行�
 - CSS_SELECTOR = 'css selector'
 - ID = 'id'
 - LINK_TEXT = 'link text'
-- NAME = 'name'¶
+- NAME = 'name'
 - PARTIAL_LINK_TEXT = 'partial link text'
 - TAG_NAME = 'tag name'
 - XPATH = 'xpath'
