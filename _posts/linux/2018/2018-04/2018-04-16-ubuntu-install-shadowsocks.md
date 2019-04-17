@@ -115,6 +115,22 @@ sudo vi /etc/rc.local
 
 到此配置完成。重启服务器后，ss会自动启动。
 
+### 安装 BBR 加速
+
+首先获取 root 权限
+
+```
+sudo su
+```
+
+输入如下的命令进行安装：
+
+```
+wget --no-check-certificate https://github.com/teddysun/across/raw/master/bbr.sh && chmod +x bbr.sh && ./bbr.sh
+```
+
+安装完成之后重启服务器
+
 ## 安装和配置shadowsocks客户端
 
 - Android版下载地址：[点击下载](https://github.com/shadowsocks/shadowsocks-android/releases/download/v4.5.6/shadowsocks--universal-4.5.6.apk)
