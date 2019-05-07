@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Ubuntu 服务器安装 JupyterLab"
+title:  "Ubuntu 18.04 服务器安装 JupyterLab"
 date:  2018-11-02
 desc: "搭建数据科学分析过程中所需要用到的开发环境 JupyterLab"
 keywords: "Python3,数据科学,实战,机器学习,数据挖掘,jupyterlab,jupyter"
@@ -9,7 +9,7 @@ tags: [python3,数据科学,jupyterlab]
 ---
 # 数据科学环境搭建
 
-在进行数据科学的分析过程中是需要使用到一些专门用来数据分析的 IDE 的，这里我们选择使用的是 JupyterLab，这是 Jupyter 正在开发过程中的一款全新的基于浏览器的数据分析 IDE，是属于下一代的 Jupyter notebook。目前最新的版本是 0.35.3，预计在18年底发布 1.0 版本，届时将会取代 Jupyter notebook。
+在进行数据科学的分析过程中是需要使用到一些专门用来数据分析的 IDE 的，这里我们选择使用的是 JupyterLab，这是 Jupyter 正在开发过程中的一款全新的基于浏览器的数据分析 IDE，是属于下一代的 Jupyter notebook。
 
 ## JupyterLab
 
@@ -87,29 +87,3 @@ c.NotebookApp.password = u'sha1:a68b5838f88b:f6f9fb4340dd081a4d06a5f9f36f841ffa8
 nohup jupyter lab &
 ```
 运行成功之后在该网络上的随意一台电脑上输入 **ip:8888** 便可以访问到 jupyterlab 上。
-
-## Jupyter notebook 使用
-
-可以简单的看一下 Jupyter notebook 的运行界面，其实就是一个在网页上打开的页面。
-
-主要的功能包括：
-
-- 文件：当前目录下的文件信息
-- 运行：当前处于运行状态的 notebook
-- 集群：notebook 集群（需要安装插件）
-- 上传：从其他路径下将文件拷贝到当前工作目录下
-- 新建：创建新的 notebook 文件或文件夹
-
-对于我们需要进行的数据分析来说，我们需要新建一个 python3 的 notebook
-
-![jupyter notebook](/assets/images/2018/2018-11/03.png)
-
-新建之后，点击未命名文件即可更改文件的名称。
-
-当前界面的主要菜单也都是中文显示的，可以很简单的就学会如何使用，接下来让我们来写一个简单的 Hello World 吧。
-
-在 In[1] 的地方来输入输入对应的 python3 代码，按住 shift+enter来执行该代码（也可以点击执行按钮来执行）：
-
-![jupyter notebook](/assets/images/2018/2018-11/04.png)
-
-以上，便是一个完整的数据科学开发环境的搭建过程。
