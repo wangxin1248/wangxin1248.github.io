@@ -25,21 +25,7 @@ JupyterLab 是一个交互式的开发环境，其用于应对包含着 notebook
 
 可以通过很多种方法来安装 JupyterLab，可以通过 conda, pip, 或者 pipenv
 
-这里我选择的是在独立的 python 虚拟环境中通过 pip来安装，这样可以保证电脑上不同项目不同版本的模块包之间不会相互影响。
-
-首先在相对应的目录下创建一个独立虚拟的 python 运行环境：
-
-```bash
-python3 -m virtualenv env
-```
-
-接下来进入到虚拟环境中：
-
-```bash
-source env/bin/activate
-```
-
-之后命令界面之前便出现了 **(env)** 即表示已经进入到了虚拟环境中来。接下来便通过 pip 来安装 juputerlab
+这里我选择的是通过 pip 来安装 juputerlab
 
 ```bash
 pip install jupyterlab
