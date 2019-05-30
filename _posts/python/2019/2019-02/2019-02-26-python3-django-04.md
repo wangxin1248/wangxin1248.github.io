@@ -209,6 +209,26 @@ python manage.py migrate
 </html>
 ```
 
+之后需要在 settings.py 文件中设置模版的目录：
+
+```python
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': ['templates'],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.debug',
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+```
+
 ## 七、编写视图文件
 
 视图是 Django 当中用来处理用户请求的部分，视图会根据用户所发出的请求来向模型获取所需要的数据，并将数据发送给模版，并对模版进行渲染操作，将渲染好的 html 页面信息作为响应发送给客户端浏览器。
