@@ -172,42 +172,7 @@ python manage.py migrate
 
 在 templates 中创建一个和我们创建的应用同名的文件夹，用来存放该应用下的模版文件。我们在该文件夹下创建一个 index.html 作为我们创建的首页模版文件：
 
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>首页</title>
-</head>
-<body>
-<h1>本网站中的图书信息：</h1>
-<ul>
-    {%for book in books%}
-    <li><a href='/detail/{{ book.id }}'>书名：{{ book.b_title }}</a></li>
-    {%endfor%}
-</ul>
-</body>
-</html>
-```
 
-在创建 detail.html 来显示书籍中具体的英雄信息：
-
-```html
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>英雄列表</title>
-</head>
-<body>
-<ul>
-    {% for hero in heros %}
-    <li>英雄名称：{{ hero.h_name }}</li>
-    {% endfor %}
-</ul>
-</body>
-</html>
-```
 
 之后需要在 settings.py 文件中设置模版的目录：
 
