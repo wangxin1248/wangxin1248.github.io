@@ -15,13 +15,13 @@ Mac 中自带的 GCC 版本是 4.2.1，由于版本太低，在很多操作的�
 
 macOS的终端中输入如下的命令来安装Homebrew
 
-```
+```shell
 $ /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 ```
 
 安装完之后查看安装的版本
 
-```
+```shell
 $ brew --version
 ```
 
@@ -31,7 +31,7 @@ $ brew --version
 
 首先先查找下最新的 GCC 版本
 
-```
+```shell
 $ brew search gcc
 ```
 
@@ -51,13 +51,13 @@ homebrew/linuxbrew-core/gcc
 
 这里我选择安装 gcc@8，使用如下的命令进行安装：
 
-```
+```shell
 $ brew install gcc@8
 ```
 
 安装完之后查看下版本：
 
-```
+```shell
 $ gcc-8 -v
 ```
 
@@ -69,13 +69,13 @@ $ gcc-8 -v
 
 这里通过设置用户的环境变量对 gcc 命令设置别名来实现上述效果。
 
-```
+```shell
 $ sudo vi ~/.bash_profile 
 ```
 
 在文件下面添加如下的内容：
 
-```
+```shell
 alias gcc='gcc-8'
 alias cc='gcc-8'
 alias g++='g++-8'
@@ -84,13 +84,13 @@ alias c++='c++-8'
 
 之后刷新环境变量：
 
-```
+```shell
 $ source ~/.bash_profile
 ```
 
 之后在终端中查看 gcc 命令的版本：
 
-```
+```shell
 $ gcc -v
 ```
 
