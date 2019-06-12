@@ -29,7 +29,8 @@
 /* 搜索框大小*/
 #searchFieldNav {
     width: 200px;
-    height: 50%;
+    height: 100px;
+    margin-bottom: 20px;
 }
 
 /* 顶部显示文字大小修改 */
