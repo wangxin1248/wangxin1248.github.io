@@ -28,10 +28,12 @@
 
 /* 搜索框*/
 #searchFieldNav {
+    height: 20%;
 }
 
 /* 导航栏 */
 #nav-menu{
+    height: 20%;
 }
 
 /* 顶部显示文字大小修改 */
