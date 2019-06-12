@@ -30,6 +30,11 @@
 #searchFieldNav {
 }
 
+/* 导航栏 */
+#nav-menu{
+    text-align: center;
+}
+
 /* 顶部显示文字大小修改 */
 h1.title > span {
     font-family: "League Gothic", "Arial Narrow", Arial, sans-serif;
