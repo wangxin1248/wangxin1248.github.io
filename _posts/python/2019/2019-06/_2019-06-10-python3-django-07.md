@@ -8,3 +8,9 @@ categories: [Python]
 tags: [python3,后台开发,django]
 ---
 # Django - 视图
+
+Django 中的视图是专门用来处理用户的请求并返回响应。接下来分别从以下几个方面来研究视图内容。
+
+## 一、URL配置
+
+Django 项目是通过项目中的 settings.py 中的 ROOT_URLCONF 来指定项目中根级 url 的配置路径。在该路径下便是配置项目中对所有从客户端发来的 url 所做的处理。
