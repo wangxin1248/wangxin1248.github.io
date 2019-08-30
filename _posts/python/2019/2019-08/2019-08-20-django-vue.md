@@ -31,16 +31,11 @@ tags: [python3,环境搭建,django]
 
 ## Vue 项目创建
 
-为了快速安装，首先安装 cnmp
+
+安装 vue：
 
 ```shell
-npm install -g cnpm --registry=https://registry.npm.taobao.org
-```
-
-接下来安装 vue：
-
-```shell
-cnpm install -g vue-cli
+cnpm install -g vue-cli --registry=https://registry.npm.taobao.org
 ```
 
 安装完 vue 之后在当前 Django 项目的根目录下创建 vue 项目
@@ -55,13 +50,13 @@ vue-init webpack frontend
 
 ```shell
 cd frontend
-cnpm install
+npm install --registry=https://registry.npm.taobao.org
 ```
 
 打包前端代码
 
 ```shell
-cnpm run build
+npm run build
 ```
 
 打包完成之后便会在 vue 项目中生成一个 dist 文件夹，里面保存了项目对应的 html 文件以及静态资源。
