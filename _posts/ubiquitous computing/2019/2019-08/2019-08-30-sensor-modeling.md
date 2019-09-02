@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "传感器建模方法综述"
-date:  2019-09-30
+date:  2019-08-30
 desc: "传感器网络（WSN）是目前物联网主要的组成部分，其由多个异构的传感器节点以及网关所组成，本文主要对目前所存在的传感器建模方式进行介绍"
 keywords: "传感器,建模,sensor modeling,SensorML,本体建模"
 categories: [Ubiquitous computing]
