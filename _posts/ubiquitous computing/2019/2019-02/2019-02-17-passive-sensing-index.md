@@ -4,8 +4,8 @@ title:  "无源感知概念简介"
 date:  2019-02-17
 desc: "无源感知是最近几年兴起的一种感知技术，其提出是为了与目前广泛应用的物联网进行连接。今天就一些简单的无源感知的概念来简单介绍下"
 keywords: "无源感知,passive sensing,Backscatter,无源感知网络,"
-categories: [PassiveSensing]
-tags: [passive sensing,backscatter,WSN]
+categories: [Ubiquitous computing]
+tags: [ubicom,WSN]
 ---
 # 无源感知
 
