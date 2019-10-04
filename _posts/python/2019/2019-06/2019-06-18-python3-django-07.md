@@ -30,7 +30,7 @@ Django 项目是通过项目中的 settings.py 中的 ROOT_URLCONF 来指定项�
 
 ### 示例
 
-一个简单的 urls.py 文件内容：
+URLconf文件默认位于项目跟路径下 urls.py 文件中，一个简单的 urls.py 文件内容如下：
 
 ```python
 """
@@ -59,8 +59,8 @@ urlpatterns = [
 ```
 其中：
 
-- urlpatterns 是一个 url() 实例的列表
-- 一个url()对象包括：
+- urlpatterns 是一个 path() 实例的列表
+- path()对象包括：
     - url字段
     - 视图函数
     - 名称name
@@ -70,6 +70,8 @@ urlpatterns = [
 - 要从 URL 捕获传递过来的参数的值，需要使用尖括号。
 - 捕获的值可以选择转换器类型。例如，用于 <int:name> 捕获整数参数。如果未包含转换器/，则匹配除字符之外的任何字符串。
 - 没有必要添加前导斜杠，因为每个URL都有。例如，articles 不是 /articles。
+- 每个应用单独设置自己的 urlpattern，并不写在主路径下。
+- url地址中所有的元素都是字符串类型的。
 
 示例请求：
 
@@ -90,9 +92,9 @@ urlpatterns = [
 
 ### 使用正则表达式
 
-上面使用的是指定 url 匹配，但是如果路径和转换器语法不足以定义 URL 模式，则还可以使用正则表达式。为此，只需要使用 re_path() 来替换 path()。
+上面使用的是指定 url 匹配，但是如果路径和转换器语法不足以定义 URL 模式，则还可以使用正则表达式。为此，只需要使用 **re_path()** 来替换 path()。
 
-在 Python 正则表达式中，命名正则表达式组的语法是 (?P<name>pattern) ，组name的名称，并且 pattern 是要匹配的模式。
+在 Python 正则表达式中，命名正则表达式组的语法是 **(?P<name>pattern)** ， name 是所要传递给 view 视图的请求参数的名称，并且 pattern 是要匹配字符串正则表达式。
 
 将前面示例的 URLconf 使用正则表达式重写：
 
@@ -117,7 +119,7 @@ urlpatterns = [
 
 ### 使用未命名的正则表达式组
 
-除了命名组语法之外，例如 (?P<year>[0-9]{4}) ，还可以使用较短的未命名组，例如 ([0-9]{4}) 。
+除了命名组语法之外，例如 (?P<year>[0-9]{4}) ，还可以使用较短的未命名组，例如 ([0-9]{4}) 这样就是通过位置来确定所要传递给 view 的参数。
 
 但是不特别推荐这种用法，因为它更容易在匹配的预期含义和视图的参数之间意外引入错误。因此建议直接使用命名组的方式。
 
@@ -156,6 +158,27 @@ URLconf 将会搜索请求过来的 URL，将其作为普通的Python的字符�
 在请求中 https://www.example.com/myapp/?page=3，URLconf 将查找 myapp/。
 
 URLconf 不查看请求方法。换句话说，所有的请求方法 GET 或者 POST 等将被路由到相同的 URL 指定的视图去处理。
+
+### URL 的反向解析
+
+如果在视图、模版中使用硬编码的链接，在 urlconf 发生变化时，通常难以进行维护。
+
+那么在配置 url 的时候便通过指向 urlconf 的名称，动态生成链接地址。
+
+在视图中进行重定向时便可以用到这里定义的名称。
+
+指定 url 的名称的方式有两种：
+
+- 普通 path 中的 name 属性
+- include url配置中的 namespace 属性
+
+```py
+# 普通 path
+re_path(r'^$', views.index, name='index'),
+
+# include url配置
+path(r'booktest/', include('booktest.urls',namespace='booktest')),
+```
 
 ## 二、视图函数
 
