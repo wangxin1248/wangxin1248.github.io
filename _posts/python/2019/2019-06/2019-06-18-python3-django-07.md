@@ -182,7 +182,98 @@ path(r'booktest/', include('booktest.urls',namespace='booktest')),
 
 ## 二、视图函数
 
+Django 中的视图函数本质就是一个定义在应用中 views.py 文件中的函数。
+
+视图函数所具有的参数：
+
+- 一个HttpRequest实例
+- 通过正则表达式组获取的位置参数
+- 通过正则表达式组获得的关键字参数
+
+### Django自带的错误视图
+
+Django 原生自带几个默认视图用于处理 HTTP 错误
+
+#### 404(page not found)视图
+
+当 Django 在检测 URLconf 中的每个正则表达式后没有找到匹配的内容时便会去调用 404 视图
+
+默认的 404 视图将传递 request_path 变量到模版文件中，它是导致错误的URL
+
+使用方法：
+
+- 在 templates 文件夹中创建 404.html 文件，并写入所需显示的内容。
+- 将 settings.py 中 DEBUG 设置为 False。
+
+#### 500 (server error) 视图
+
+在视图代码中出现运行时错误时便会报出 500 错误，此时 Django 便会去调用 500 视图
+
+默认的 500 视图不会传递变量给 500.html 模板
+
+使用方法：
+
+- 在 templates 文件夹中创建 500.html 文件，并写入所需显示的内容。
+- 将 settings.py 中 DEBUG 设置为 False。
+
+#### 400 (bad request) 视图
+
+当来自客户端的操作错误时便会报出 400 错误，此时 Django 便会去调用 400 视图
+
+使用方法：
+
+- 在 templates 文件夹中创建 400.html 文件，并写入所需显示的内容。
+- 将 settings.py 中 DEBUG 设置为 False。
+
 ## 三、Request对象
+
+Django 视图函数的第一个参数是 HttpRequest 对象，这是当服务器接收到 http 协议的请求后，根据报文所创建处来的 HttpRequest 对象。
+
+### 对象属性
+
+（以下属性除非特别说明，否则都是只读的）
+
+- path：一个字符串，表示请求的页面的完整路径，不包含域名
+- method：一个字符串，表示请求使用的 HTTP 方法，常用值包括：'GET'、'POST'
+- encoding：一个字符串，表示提交的数据的编码方式，如果为None则表示使用浏览器的默认设置，一般为utf-8。这个属性是可写的，可以通过修改它来修改访问表单数据使用的编码，接下来对属性的任何访问将使用新的 encoding 值
+- GET：一个类似于字典的对象，包含 get 请求方式的所有参数
+- POST：一个类似于字典的对象，包含 post 请求方式的所有参数
+- FILES：一个类似于字典的对象，包含所有的上传文件
+- COOKIES：一个标准的Python字典，包含所有的 cookie，键和值都为字符串
+- session：一个既可读又可写的类似于字典的对象，表示当前的会话，只有当Django 启用会话的支持时才可用
+
+### 对象方法
+
+Request对象的方法如下：
+
+- is_ajax()：如果请求是通过 XMLHttpRequest 发起的，则返回True
+
+### QueryDict对象
+
+QueryDict 对象定义在 django.http.QueryDict 中。而 HttpRequest 对象中的属性 GET、POST 都是属于 QueryDict 类型的对象。
+
+与 python 字典不同，QueryDict 类型的对象用来处理同一个键带有多个值的情况（python 字典一个键对应一个值）
+
+方法get()：根据键获取值
+
+- 只能获取键的一个值
+- 如果一个键同时拥有多个值，获取最后一个值
+
+```py
+dict.get('键',default)
+# 或简写为
+dict['键']
+```
+
+方法getlist()：根据键获取值,将键的值以列表返回，可以获取一个键的多个值
+
+```py
+dict.getlist('键',default)
+```
+
+### GET 属性
+
+### POST 属性
 
 ## 四、Response对象
 
