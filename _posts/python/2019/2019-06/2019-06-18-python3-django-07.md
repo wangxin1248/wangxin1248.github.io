@@ -273,7 +273,182 @@ dict.getlist('键',default)
 
 ### GET 属性
 
+GET 属性是 request 对象的属性，是属于 QueryDict 类型的对象，主要用来存储客户端以 get 请求方式发送过来的数据。是一种类字典类型的数据结构。
+
+一个简单的 get 请求如下：
+
+```
+http://www.example.com/test/?a=1&b=2&c=3
+```
+
+其中所携带的数据是从 ？之后的数据，按照键值对的方式以 & 进行分割。其中传递的数据都是字符串类型的数据。
+
+接下来简单演示下 Django 处理 get 请求的过程。
+
+首先在 view.py 视图文件中创建几个用于处理 get 请求的函数
+
+```py
+def get_test1(request):
+    return render(request, 'booktest/gettest1.html')
+
+
+def get_test2(request):
+    a = request.GET['a']
+    b = request.GET['b']
+    c = request.GET['c']
+    content = {'a': a, 'b': b, 'c': c}
+    return render(request, 'booktest/gettest2.html', content)
+
+
+def get_test3(request):
+    # 获取一个键对应的多个值，是个list
+    a = request.GET.getlist('a')
+    context = {'a': a}
+    return render(request, 'booktest/gettest3.html', context)
+```
+
+然后配置对应的 url 
+
+```py
+re_path(r'^gettest1/$', views.get_test1, name='gettest1'),
+re_path(r'^gettest2/$', views.get_test2, name='gettest2'),
+re_path(r'^gettest3/$', views.get_test3, name='gettest3'),
+```
+
+最后在模版中设置对应的 html 页面
+
+gettest1.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br/>
+一个键传递一个值：<a href="/booktest/gettest2/?a=1&b=2&c=3">gettest2</a><br/>
+一个键传递多个个值：<a href="/booktest/gettest3/?a=1&a=2&a=3">gettest3</a><br/>
+</body>
+</html>
+```
+
+gettest2.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<br/>
+a = {{ a }}<br/>
+b = {{ b }}<br/>
+c = {{ c }}<br/>
+</body>
+</html>
+```
+
+gettest3.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+a = {{ a }}
+</body>
+</html>
+```
+
 ### POST 属性
+
+POST 属性是 request 对象的属性，是属于 QueryDict 类型的对象，主要用来存储客户端 form 表单以 post 请求方式发送过来的数据。是一种类字典类型的数据结构。
+
+接下来简单演示下 Django 处理 get 请求的过程。
+
+首先在 view.py 视图文件中创建几个用于处理 post 请求的函数
+
+```py
+def post_test1(request):
+    return render(request, 'booktest/posttest1.html')
+
+
+def post_test2(request):
+    if request.POST:
+        uname = request.POST['uname']
+        ugender = request.POST['ugender']
+        uage = request.POST['uage']
+        uhobby = request.POST.getlist('uhobby')
+        context = {
+            'uname': uname,
+            'ugender': ugender,
+            'uage': uage,
+            'uhobby': uhobby
+        }
+    return render(request, 'booktest/posttest2.html', context)
+```
+
+然后配置对应的 url 
+
+```py
+re_path(r'^posttest1/$', views.post_test1, name='posttest1'),
+re_path(r'^posttest2/$', views.post_test2, name='posttest2'),
+```
+
+最后在模版中设置对应的 html 页面
+
+posttest1.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" action="/booktest/posttest2/">
+    姓名：<input type="text" name="uname"><br/>
+    性别：<input type="radio" name="ugender" checked="checked" value="1"> 男
+         <input type="radio" name="ugender" value="0"> 女<br/>
+    年龄：<input type="date" name="uage"><br/>
+    爱好：<br/>
+        <input type="checkbox" name="uhobby" value="唱歌">唱歌<br/>
+        <input type="checkbox" name="uhobby" value="跳舞">跳舞<br/>
+        <input type="checkbox" name="uhobby" value="打游戏">打游戏<br/>
+    <input type="submit">
+</form>
+</body>
+</html>
+```
+
+posttest2.html
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+姓名：{{ uname }}<br/>
+性别：{{ ugender }}<br/>
+年龄：{{ uage }}<br/>
+爱好：
+{% for hobby in uhobby %}
+    {{ hobby }}<br/>
+{% endfor %}
+</body>
+</html>
+```
 
 ## 四、Response对象
 
