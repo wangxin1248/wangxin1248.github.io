@@ -1,7 +1,7 @@
 ---
 layout: post
 title:  "Python3 Django（七）视图详解"
-date:  2019-06-18
+date:  2019-10-21
 desc: "python3 服务器开发系列之 Django 开发实战（六）：Django 视图详细介绍"
 keywords: "Python3,后台开发,实战,django,MVC,ORM"
 categories: [Python]
@@ -30,7 +30,7 @@ Django 项目是通过项目中的 settings.py 中的 ROOT_URLCONF 来指定项�
 
 ### 示例
 
-URLconf文件默认位于项目跟路径下 urls.py 文件中，一个简单的 urls.py 文件内容如下：
+URLconf 文件默认位于项目跟路径下 urls.py 文件中，一个简单的 urls.py 文件内容如下：
 
 ```python
 """
@@ -452,6 +452,243 @@ posttest2.html
 
 ## 四、Response对象
 
+Response 对象是对客户端发送过来的 Request 对象的响应，Django 在 django.http 模块中定义了 HttpResponse 对象的API。
+
+HttpRequest 对象由 Django 自动创建，而 HttpResponse 对象由程序员创建
+
+### 属性
+
+- content：表示返回的内容，字符串类型
+- charset：表示response采用的编码字符集，字符串类型
+- status_code：响应的HTTP响应状态码
+- content-type：指定输出的MIME类型
+
+### 方法
+
+- init ：使用页内容实例化 HttpResponse 对象
+- write(content)：以文件的方式写
+- flush()：以文件的方式输出缓存区
+- set_cookie(key, value='', max_age=None, expires=None)：设置Cookie
+    - key、value 都是字符串类型
+    - max_age 是一个整数，表示在指定秒数后过期
+    - expires是一个 datetime 或 timedelta 对象，会话将在这个指定的日期/时间过期，注意 datetime 和 timedelta 值只有在使用 PickleSerializer 时才可序列化
+    - max_age 与 expires 二选一
+    - 如果不指定过期时间，则两个星期后过期
+    - 注意：cookie 在每次请求服务器时会自动加入到请求头中
+- delete_cookie(key)：删除指定的 key 的 Cookie，如果 key 不存在则什么也不发生
+
+### 使用方式
+
+HttpRequest 对象一般包含模版文件信息一起返回，但也可以直接返回相应的文本信息。
+
+#### 使用模版
+
+```py
+from django.http import HttpResponse
+from django.template import RequestContext, loader
+
+def index(request):
+    # 加载模版文件
+    t1 = loader.get_template('booktest/index.html')
+    # 设置模版内容
+    context = RequestContext(request, {'h1': 'hello'})
+    # 渲染模版并返回
+    return HttpResponse(t1.render(context))
+```
+
+上面使用模版的方式写法比较复杂，不符合 python 简洁的特色，因此 django 为上述操作设置了一种简写方式：render
+
+```py
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'booktest/index.html', {'h1': 'hello'})
+```
+
+#### 不使用模版
+
+```py
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('你好')
+```
+
+### 扩展子类
+
+#### HttpResponseRedirect
+
+HttpResponseRedirect 是 HttpResponse 的子类，作用是用来对请求进行重定向。
+
+```py
+from django.http import HttpResponseRedirect
+
+def index(request):
+    # 重定向到其他连接
+    return HttpResponseRedirect('booktest/test1/')
+```
+
+HttpResponseRedirect 比较长。同样，Django 也给他设置了一个简写方式：redirect
+
+```py
+from django.shortcuts import redirect
+
+def index(request):
+    return redirect('booktest/test1/')
+```
+
+#### JsonResponse
+
+用来返回 json 数据，一般用于异步请求
+
+JsonResponse 的默认 Content-Type 为 application/json
+
+```py
+from django.http import JsonResponse
+
+def index2(requeset):
+    return JsonResponse({'list': 'abc'})
+```
+
 ## 五、保持Http状态
 
+Http 是一种无状态的协议，而我们在日常的应用交互过程中又希望能够保存用户访问的状态，也就是将用户的信息记录下来。这里就需要用到两种机制：**cookie、session**。
+
+这两种机制本质上都是一个**字典**类型的数据结构，用来将一些数据以键值对的形式保存起来。区别在于保存的位置已经保存的时间。
+
+### cookie
+
+cookie 是 HttpResponse 对象中的的字典类型对象，可以通过如下的方式进行设置：
+
+- set_cookie(key, value='', max_age=None, expires=None)：设置Cookie
+    - key、value 都是字符串类型
+    - max_age 是一个整数，表示在指定秒数后过期
+    - expires是一个 datetime 或 timedelta 对象，会话将在这个指定的日期/时间过期，注意 datetime 和 timedelta 值只有在使用 PickleSerializer 时才可序列化
+    - max_age 与 expires 二选一
+    - 如果不指定过期时间，则两个星期后过期
+    - 注意：cookie 在每次请求服务器时会自动加入到请求头中
+- delete_cookie(key)：删除指定的 key 的 Cookie，如果 key 不存在则什么也不发生
+
+而设置的 cookie 会被保存在客户端的浏览器中，当客户端的浏览器要再次向服务器的该接口发送请求是会自动将保存的 cookie 放到请求头中发送过去。
+
+注意：
+
+- cookie 保存时间较短
+- 只可以保存一些不重要的信息
+
+而如果需要保存一些重要的信息的时候便需要用到下一个机制：**session**
+
+### session
+
+不像 cookie 保存在客户端的浏览器一样，session 是保存在服务器端的。并且为了指定某一用户特定的 session 会将用户的 sessionid 同时保存到 cookie 当中。这样便可以保证不同的请求者之间不会共享 session 数据，session 数据是与请求者一一对应的。
+
+#### 启用 session
+
+在使用 django-admin startproject 创建的项目会默认启用 session 从而无须手动配置。
+
+如果想要手动配置启用 session 的话：
+
+- 在 settings.py 文件中的 INSTALLED_APPS 列表中添加：
+
+```py
+'django.contrib.sessions',
+```
+
+- 在 settings.py 文件中的 MIDDLEWARE_CLASSES 列表中添加：
+
+```py
+'django.contrib.sessions.middleware.SessionMiddleware',
+```
+
+#### 使用 session 保存数据
+
+在启用 session 之后，每个 HttpRequest 对象将具有一个 session 属性，它是一个类字典对象。可以通过如下的方法来修改 session 中保存的数据：
+
+- get(key, default=None)：根据键获取会话的值，key为空时可以设置默认值
+- clear()：清除所有会话
+- flush()：删除当前的会话数据并删除会话的Cookie
+- del request.session['member_id']：删除会话
+
+通过 session 的使用便可以实现用户登录网站之后记录用户的登录状态。
+
+#### 设置 session 过期时间
+
+可以通过 set_expiry(value) 方法来设置 session 的过期时间
+
+- 如果没有指定，则两个星期后过期
+- 如果 value 是一个整数，会话将在 value 秒没有活动后过期
+- 若果 value 是一个 timedelta 对象，会话将在当前时间加上这个指定的日期/时间过期
+- 如果 value 为 0，那么用户会话将在用户的浏览器关闭时过期
+- 如果 value 为 None，那么会话永不过期
+
+#### 设置 session 的存储
+
+##### 保存在数据库中
+
+session 默认是存储在数据库中的。
+
+使用 settings.py 中的 SESSION_ENGINE 项来指定 session 的存储位置：
+
+```py
+SESSION_ENGINE='django.contrib.sessions.backends.db'
+```
+
+这是 django 默认的 session 存储方式，需要添加 django.contrib.sessions 到 INSTALLED_APPS 列表中。并且还得运行 manage.py migrate 迁移到数据库中的，因为 session 是保存在数据库中的，必须先得有数据库表的结构。
+
+##### 保存在缓存中
+
+只存在本地内存中，如果丢失则不能找回，比数据库的方式读写更快
+
+使用 settings.py 中的 SESSION_ENGINE 项来指定 session 的存储位置：
+
+```py
+SESSION_ENGINE='django.contrib.sessions.backends.cache'
+```
+
+##### 在缓存和数据库中都进行保存
+
+可以将缓存和数据库同时保存，但会优先从本地缓存中获取，如果没有则从数据库中获取
+
+使用 settings.py 中的 SESSION_ENGINE 项来指定 session 的存储位置：
+
+```py
+SESSION_ENGINE='django.contrib.sessions.backends.cached_db'
+```
+
+##### 保存在 redis 中
+
+Django 中的 session 还支持 **文件、纯cookie、Memcached、Redis** 等方式存储。
+
+下面演示使用 redis 存储
+
+首先安装对应的模块：
+
+```shell
+$ pip install django-redis-sessions
+```
+
+然后修改 settings 中的配置，增加如下项
+
+```py
+SESSION_ENGINE = 'redis_sessions.session'
+SESSION_REDIS_HOST = 'localhost'
+SESSION_REDIS_PORT = 6379
+SESSION_REDIS_DB = 0
+SESSION_REDIS_PASSWORD = ''
+SESSION_REDIS_PREFIX = 'session'
+```
+
+接着就可以将 session 保存到 redis 中了。
+
 ## 六、总结
+
+Django 中的视图是作为 MVT 结构中最重要的连接模版和模型的中间层，主要功能是负责对来自客户端的请求进行处理并返回对应的响应。
+
+阅读完本小节之后需要重点掌握以下的内容：
+
+- 配置 urls，将指定 url 与 views 中的函数相对应
+- 编写 views 中的请求处理函数
+- 熟悉 HttpRequest 对象的基本操作以及数据的接收方式
+- 熟悉 HttpResponse 对象的基本操作
+- 熟悉 Http 保持连接状态的两种机制
+- 了解 session 和 cookie 实现 http 状态保存的机理
