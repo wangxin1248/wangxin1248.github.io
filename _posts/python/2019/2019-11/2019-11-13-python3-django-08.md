@@ -353,4 +353,4 @@ def csrf2(request):
 
 当提交请求时，中间件 'django.middleware.csrf.CsrfViewMiddleware' 会对提交的 cookie及隐藏域的内容进行验证，如果失败则返回403错误
 
-但是这种方式并不能防止手动在请求 form 中添加一个 hidden 来伪造 cookie ，所以说 Django 自带的 CSRF 效果并不好。可以考虑使用验证码等高级的 CSRF 防护方法。
+但是这种方式并不能防止手动在请求 form 中添加一个 hidden 来伪造 cookie ，所以说 Django 自带的 CSRF 效果并不好。可以考虑使用验证码等高级的 CSRF 防护方法，比如验证码等。
