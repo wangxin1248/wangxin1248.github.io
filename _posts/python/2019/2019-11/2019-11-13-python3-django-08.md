@@ -28,18 +28,13 @@ Django 中的变量就是从视图中传递过来的上下文字典中的键。D
 
 变量的使用方式如下所示：
 
-```html
-
-{{ variable }}
-```
+![2](/assets/images/2019/2019-11/4.jpg)
 
 除了直接输出变量的值，Django还支持使用 **.** （点）来进行多级查询
 
 比如：
 
-```html
-{{foo.bar}}
-```
+![2](/assets/images/2019/2019-11/5.jpg)
 
 其在 Django 引擎执行时的查询路径如下：
 
@@ -64,64 +59,41 @@ Django 中的变量就是从视图中传递过来的上下文字典中的键。D
 
 for 循环负责处理循环逻辑，基本格式如下：
 
-```py
-{ %for ... in ...%}
-{ %endfor%}
-```
+![2](/assets/images/2019/2019-11/6.jpg)
 
 其中在 for 循环中除了可以进行变量的控制，还可以对当前的循环进行一些相应的处理：
 
 - 获取当前的循环次数
 
-```py
-{{ forloop.counter }}
-```
+![2](/assets/images/2019/2019-11/7.jpg)
 
 - 给出的列表为或列表不存在时，执行此处
 
-```py
-{ % empty %}
-```
+![2](/assets/images/2019/2019-11/8.jpg)
 
 #### if标签
 
 if标签用来对逻辑进行判断，基本格式如下：
 
-```py
-{ %if ...%}
-# 逻辑1
-{ %elif ...%}
-# 逻辑2
-{ %else%}
-# 逻辑3
-{ %endif%}
-```
+![2](/assets/images/2019/2019-11/9.jpg)
 
 #### comment标签
 
 comment标签用来在代码中书写注释信息
 
-```py
-{ % comment % }
-# 多行注释
-{ % endcomment % }
-```
+![2](/assets/images/2019/2019-11/10.jpg)
 
 #### include标签
 
 include标签负责加载模板并以标签内的参数渲染
 
-```py
-{ %include "foo/bar.html" % }
-```
+![2](/assets/images/2019/2019-11/11.jpg)
 
 #### url标签
 
 url：反向解析，用于配合 url 中的 name 使用
 
-```py
-{ % url 'name' p1 p2 %}
-```
+![2](/assets/images/2019/2019-11/12.jpg)
 
 #### csrf_token标签
 
@@ -139,55 +111,37 @@ csrf_token：这个标签用于跨站请求伪造保护
 
 过滤器用来对变量执行相应的高级操作，语法格式为：
 
-```py
-{ { 变量|过滤器 }}
-```
+![2](/assets/images/2019/2019-11/13.jpg)
 
 过滤器使用管道符号 (|) 来使用过滤器，通过使用过滤器可以来改变变量的计算结果
 
-例如
-
-- { { name|lower }}：表示将变量name的值变为小写输出
-
 同时也可以在if标签中使用过滤器结合运算符
 
-```py
-if list1|length > 1
-```
+![2](/assets/images/2019/2019-11/14.jpg)
 
 并且过滤器能够被“串联”，构成过滤器链
 
-```py
-name|lower|upper
-```
+![2](/assets/images/2019/2019-11/15.jpg)
 
 过滤器也可以传递参数，参数使用引号包起来
 
-```py
-list|join:", "
-```
+![2](/assets/images/2019/2019-11/16.jpg)
 
 一些其他的过滤器：
 
 - default：如果一个变量没有被提供，或者值为false或空，则使用默认值，否则使用变量的值
 
-```py
-value|default:"什么也没有"
-```
+![2](/assets/images/2019/2019-11/17.jpg)
 
 - date：根据给定格式对一个date变量格式化
 
-```py
-value|date:'Y-m-d'
-```
+![2](/assets/images/2019/2019-11/18.jpg)
 
 ### 注释
 
 单行注释
 
-```py
-{#...#}
-```
+![2](/assets/images/2019/2019-11/19.jpg)
 
 注释可以包含任何模版代码，有效的或者无效的都可以
 
@@ -208,27 +162,15 @@ Django 提供了 block 标签来在页面中实现模版继承操作。通过在
 
 1.定义父类模版 base.html
 
-```html
-\{\%block block_name\%\}
-<!-- 这里可以定义默认值
-如果不定义默认值，则表示空字符串 -->
-\{\%endblock block_name\%\}
-```
+![2](/assets/images/2019/2019-11/20.jpg)
 
 2.在子类中继承父类模版
 
-```html
-\{\% extends "base.html" \%\}
-<!-- 注意必须得定义在子类文件中的第一行  -->
-```
+![2](/assets/images/2019/2019-11/21.jpg)
 
 3.在子类模版中定义 block 中的内容
 
-```html
-\{\%block block_name\%\}
-<!-- 实际填充内容 -->
-\{\%endblock block_name\%\}
-```
+![2](/assets/images/2019/2019-11/22.jpg)
 
 ### 注意事项
 
@@ -254,9 +196,7 @@ def index(request):
 
 而在模版中显示 t1 的内容：
 
-```html
-{{t1}}
-```
+![2](/assets/images/2019/2019-11/23.jpg)
 
 则在浏览器页面中显示的结果如下：
 
@@ -288,17 +228,11 @@ def index(request):
 
 - 对于变量使用safe过滤器
 
-```
-{{ data|safe }}
-```
+![2](/assets/images/2019/2019-11/24.jpg)
 
 - 对于代码块使用 autoescape 标签（标签 autoescape 接受 on 或者 off 参数）
 
-```
-\{\% autoescape off \%\}
-{{ body }}
-\{\% endautoescape \%\}
-```
+![2](/assets/images/2019/2019-11/25.jpg)
 
 自动转义标签在 base 模板中关闭，在 child 模板中也是关闭的
 
@@ -314,12 +248,7 @@ Django 中默认启用了防止 CSRF 的中间件：
 
 使用的时候只需要在需要进行 CSRF 保护的页面模版中的表单中加入 csrf_token 标签即可。这样，通过当前页面源码在其他地方进行数据提交便会被拦截住。
 
-```html
-<form>
-\{\% csrf_token \%\}
-...
-</form>
-```
+![2](/assets/images/2019/2019-11/26.jpg)
 
 而如果某些视图不需要保护，则可以在视图上使用装饰器 csrf_exempt，模板中也不需要写标签：
 
