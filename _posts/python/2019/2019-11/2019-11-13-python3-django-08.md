@@ -127,9 +127,7 @@ url：反向解析，用于配合 url 中的 name 使用
 
 csrf_token：这个标签用于跨站请求伪造保护
 
-```py
-{ % csrf_token %}
-```
+![2](/assets/images/2019/2019-11/3.jpg)
 
 #### 其余标签
 
@@ -193,9 +191,6 @@ value|date:'Y-m-d'
 
 注释可以包含任何模版代码，有效的或者无效的都可以
 
-```py
-{# { % if foo % }bar{ % else % } #}
-```
 
 而使用 comment 标签可以注释模版中的多行内容
 
@@ -214,25 +209,25 @@ Django 提供了 block 标签来在页面中实现模版继承操作。通过在
 1.定义父类模版 base.html
 
 ```html
-{ %block block_name%}
+\{\%block block_name\%\}
 <!-- 这里可以定义默认值
 如果不定义默认值，则表示空字符串 -->
-{ %endblock block_name%}
+\{\%endblock block_name\%\}
 ```
 
 2.在子类中继承父类模版
 
 ```html
-{ % extends "base.html" %}
+\{\% extends "base.html" \%\}
 <!-- 注意必须得定义在子类文件中的第一行  -->
 ```
 
 3.在子类模版中定义 block 中的内容
 
 ```html
-{ %block block_name%}
+\{\%block block_name\%\}
 <!-- 实际填充内容 -->
-{ %endblock block_name%}
+\{\%endblock block_name\%\}
 ```
 
 ### 注意事项
@@ -300,9 +295,9 @@ def index(request):
 - 对于代码块使用 autoescape 标签（标签 autoescape 接受 on 或者 off 参数）
 
 ```
-{ % autoescape off %}
+\{\% autoescape off \%\}
 {{ body }}
-{ % endautoescape %}
+\{\% endautoescape \%\}
 ```
 
 自动转义标签在 base 模板中关闭，在 child 模板中也是关闭的
@@ -321,7 +316,7 @@ Django 中默认启用了防止 CSRF 的中间件：
 
 ```html
 <form>
-{% csrf_token %}
+\{\% csrf_token \%\}
 ...
 </form>
 ```
