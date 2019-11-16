@@ -53,7 +53,7 @@ mysite/static/myapp/
 
 ```py
 \{\% load static from staticfiles \%\}
-<img src="{% static "myapp/myexample.jpg" \%\}" alt="My image"/>
+<img src="\{\% static "myapp/myexample.jpg" \%\}" alt="My image"/>
 ```
 
 而使用 static 编码的好处在于向外界屏蔽了静态文件的真实存放路径，通过对网页源代码进行检测可以发现，通过设置 STATIC_URL 便可以自定义 static 的值，这样别人就无法通过网页源代码获取到网站上真实存放的静态文件的路径了。
