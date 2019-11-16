@@ -52,7 +52,7 @@ mysite/static/myapp/
 而 static 编码就是使用在 setting 文件中设置的 STATIC_URL
 
 ```py
-{ % load static from staticfiles %}
+\{\% load static from staticfiles \%\}
 <img src="{% static "myapp/myexample.jpg" \%\}" alt="My image"/>
 ```
 
