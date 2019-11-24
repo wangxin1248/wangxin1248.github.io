@@ -217,3 +217,98 @@ page 对象的方法：
 因此便提出了改进方案：即通过 ajax 的方式获取数据，然后通过 dom 操作将数据呈现到界面上
 
 推荐使用 jquery 框架，因为框架中提供了 \$.ajax、\$.get、\$.post 方法用于进行异步交互，但是由于 csrf 的约束，推荐使用 \$.get
+
+## 六、缓存
+
+对于规模较大、流量较多的网站来说，尽可能地减少网站的开销是非常必要的。其中一种降低网站的开销的方式就是：将常用的，更新不及时的数据进行缓存，使得下一次访问可以直接获取该缓存数据，而不用去执行具体的业务逻辑。缓存数据就是为了保存那些需要很多计算资源的结果，这样的话就不必在下次重复消耗计算资源。
+
+Django 自带了一个健壮的缓存系统来保存动态页面，避免对于每次请求都重新计算。并且 Django 提供了不同级别的缓存粒度：
+
+- 可以缓存特定视图的输出；
+- 可以仅仅缓存部分模版；
+- 可以缓存整个网站。
+
+### 1.设置缓存
+
+可以通过 setting 文件中的 CACHES 配置设置来决定把数据缓存在哪里，是数据库中、文件系统还是在内存中
+
+其中的参数 TIMEOUT 决定缓存的默认过期时间，以秒为单位，这个参数默认是300秒，即5分钟。设置 TIMEOUT 为 None 则表示永远不会过期，值设置成0造成缓存立即失效
+
+- 设置缓存存储在内存中：
+
+```python
+CACHES={
+    'default': {
+        'BACKEND': 'django.core.cache.backends.locmem.LocMemCache',
+        'TIMEOUT': 60,
+    }
+}
+```
+
+- 设置缓存存储在 redis 中：
+
+首先得安装包：pip install django-redis-cache
+
+然后在 settings 中设置：
+
+```py
+CACHES = {
+    "default": {
+        "BACKEND": "redis_cache.cache.RedisCache",
+        "LOCATION": "localhost:6379",
+        'TIMEOUT': 60,
+    },
+}
+```
+
+之后可以连接 redis 查看所存的数据：
+
+```
+连接：redis-cli
+切换数据库：select 1
+查看键：keys *
+查看值：get 键
+```
+
+### 2.缓存单个 view
+
+django.views.decorators.cache 定义了 cache_page 装饰器，用于对视图的输出进行缓存
+
+示例代码如下：
+
+```py
+from django.views.decorators.cache import cache_page
+
+@cache_page(60 * 15)
+def index(request):
+    return HttpResponse('hello1')
+```
+
+其中 cache_page 接受一个参数：timeout，秒为单位，上例中缓存了15分钟
+
+视图缓存与 URL 无关，如果多个 URL 指向同一视图，每个 URL 将会分别缓存
+
+### 3.缓存部分模版
+
+使用 cache 模板标签来缓存模板的一个片段，需要两个参数：
+
+- 缓存时间，以秒为单位
+- 给缓存片段起的名称
+
+示例代码如下：
+
+```html
+\{\% load cache \%\}
+\{\% cache 500 hello \%\}
+hello1
+\{\% endcache \%}\
+```
+
+### 4.缓存底层实现接口
+
+from django.core.cache import cache
+
+- 设置：cache.set(键,值,有效时间)
+- 获取：cache.get(键)
+- 删除：cache.delete(键)
+- 清空：cache.clear()
