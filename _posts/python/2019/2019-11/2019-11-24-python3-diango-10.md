@@ -160,9 +160,9 @@ urlpatterns = [
 <body>
 姓名：{{hero.hname}}
 <hr>
-{%autoescape off%}
-{{hero.hcontent}}
-{%endautoescape%}
+\{\% autoescape off \%\}
+{{ hero.hcontent }}
+\{\% endautoescape \%\}
 </body>
 </html>
 ```
@@ -250,22 +250,22 @@ class GoodsInfoIndex(indexes.SearchIndex, indexes.Indexable):
     <title></title>
 </head>
 <body>
-{% if query %}
+\{\% if query \%\}
     <h3>搜索结果如下：</h3>
-    {% for result in page.object_list %}
+    \{\% for result in page.object_list \%\}
         <a href="/{{ result.object.id }}/">{{ result.object.gName }}</a><br/>
-    {% empty %}
+    \{\% empty \%\}
         <p>啥也没找到</p>
-    {% endfor %}
+    \{\% endfor \%\}
 
-    {% if page.has_previous or page.has_next %}
+    \{\% if page.has_previous or page.has_next \%\}
         <div>
-            {% if page.has_previous %}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">{% endif %}&laquo; 上一页{% if page.has_previous %}</a>{% endif %}
+            \{\% if page.has_previous \%\}<a href="?q={{ query }}&amp;page={{ page.previous_page_number }}">\{\% endif \%\}&laquo; 上一页\{\% if page.has_previous \%\}</a>\{\% endif \%\}
         |
-            {% if page.has_next %}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">{% endif %}下一页 &raquo;{% if page.has_next %}</a>{% endif %}
+            \{\% if page.has_next \%\}<a href="?q={{ query }}&amp;page={{ page.next_page_number }}">\{\% endif \%\}下一页 &raquo;\{\% if page.has_next \%\}</a>\{\% endif \%\}
         </div>
-    {% endif %}
-{% endif %}
+    \{\% endif \%\}
+\{\% endif \%\}
 </body>
 </html>
 ```
