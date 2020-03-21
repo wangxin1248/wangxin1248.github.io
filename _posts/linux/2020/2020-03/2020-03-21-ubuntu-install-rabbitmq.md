@@ -2,7 +2,7 @@
 layout: post
 title:  "Ubuntu 18.04 安装 RabbitMQ"
 date:  2020-03-21
-desc: "Ubuntu 16.04 服务器中安装 RabbitMQ 并进行配置"
+desc: "Ubuntu 18.04 服务器中安装 RabbitMQ 并进行配置"
 keywords: "Ubuntu,RabbitMQ,服务器,安装"
 categories: [Linux]
 tags: [Ubuntu]
