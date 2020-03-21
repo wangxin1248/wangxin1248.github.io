@@ -42,10 +42,10 @@ sudo apt-get install rabbitmq-server
 安装完之后 RabbitMQ 便已经自动启动了，可以使用如下的命令对 RabbitMQ 进行操作：
 
 ```shell
-sudo rabbitmq-server start # 启动
-sudo rabbitmq-server stop # 停止
-sudo rabbitmq-server restart # 重启
-sudo rabbitmqctl status # 查看当前状态
+sudo service rabbitmq-server start # 启动
+sudo service rabbitmq-server stop # 停止
+sudo service rabbitmq-server restart # 重启
+sudo service rabbitmq-server status # 查看当前状态
 ```
 
 ## 配置 RabbitMQ
