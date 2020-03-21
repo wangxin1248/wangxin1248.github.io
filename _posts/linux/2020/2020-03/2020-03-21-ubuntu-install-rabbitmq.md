@@ -17,14 +17,25 @@ RabbitMQ的下载地址：[http://www.rabbitmq.com/download.html](http://www.rab
 
 由于 RabbitMQ 需要 erlang 语言的支持，在安装 RabbitMQ 之前需要安装erlang
 
+首先配置源
+
+```shell
+echo "deb https://dl.bintray.com/rabbitmq/debian trusty main" | sudo tee /etc/apt/sources.list.d/bintray.rabbitmq.list
+echo "deb http://packages.erlang-solutions.com/ubuntu trusty contrib" | sudo tee -a /etc/apt/sources.list.d/erlang_solutions.list
+```
+
+导入对应的 key
+
+```shell
+wget -c -O- http://packages.erlang-solutions.com/ubuntu/erlang_solutions.asc | sudo apt-key add -
+wget -O- https://dl.bintray.com/rabbitmq/Keys/rabbitmq-release-signing-key.asc |sudo apt-key add -
+```
+
+开始安装 erlang 和 RabbitMQ
+
 ```shell
 sudo apt-get update
 sudo apt-get install erlang-nox
-```
-
-安装 RabbitMQ
-
-```shell
 sudo apt-get install rabbitmq-server
 ```
 
@@ -62,8 +73,7 @@ sudo rabbitmqctl  set_permissions -p / admin '.*' '.*' '.*'
 RabbitMQ 提供了一个 web 管理工具（rabbitmq_management），方便在浏览器端管理 RabbitMQ
 
 ```shell
-cd /etc/rabbitmq/
-sudo  rabbitmq-plugins enable rabbitmq_management
+sudo rabbitmq-plugins enable rabbitmq_management
 ```
 
 之后在浏览器访问 [http://server-ip:15672/]，账号与密码都是刚才设置的 admin
