@@ -155,6 +155,26 @@ ps aux|grep dfs
 
 ![15](/assets/images/2020/2020-03/15.png)
 
+### FastDFS控制
+
+fdfs_trackerd：tracker脚本，通过此脚本对 tracker进行启动和停止 
+
+```shell
+# 重启
+sudo /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf restart
+# 停止
+sudo /usr/bin/fdfs_trackerd /etc/fdfs/tracker.conf stop
+```
+
+fdfs_storaged：storage脚本，通过此脚本对 storage进行启动和停止 
+
+```shell
+# 重启
+sudo /usr/bin/fdfs_storaged /etc/fdfs/storage.conf restart
+# 停止
+sudo /usr/bin/fdfs_storaged /etc/fdfs/storage.conf stop
+```
+
 ### 上传文件测试
 
 复制 client.conf.sample
