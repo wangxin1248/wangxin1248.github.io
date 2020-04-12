@@ -153,6 +153,28 @@ path.logs: /var/log/elasticsearch
 - discovery.zen.minimum_master_nodes：主结点数量的最少值 ,此值的公式为：`(master_eligible_nodes / 2) + 1` ，比如：有3个符合要求的主结点，那么这里要设置为2。 
 - node.max_local_storage_nodes：单机允许的最大存储结点数，通常单机启动一个结点建议设置为1，开发环境如果单机启动多个节点可设置大于1.
 
+下面贴上我自己的配置：
+
+```yml
+path.data: /var/lib/elasticsearch
+path.logs: /var/log/elasticsearch
+cluster.name: xedu
+node.name: xedu_node_1
+network.host: 0.0.0.0
+http.port: 9200
+transport.tcp.port: 9300
+node.master: true
+cluster.initial_master_nodes: xedu_node_1
+node.data: true
+discovery.zen.ping.unicast.hosts: ["0.0.0.0:9300", "0.0.0.0:9301"]
+discovery.zen.minimum_master_nodes: 1
+node.ingest: true
+bootstrap.memory_lock: false
+node.max_local_storage_nodes: 2
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+```
+
 ### jvm.options
 
 设置最小及最大的JVM堆内存大小： 
@@ -226,6 +248,17 @@ npm run start
 ```
 
 然后打开 http://localhost:9100/ 来查看是否安装成功。
+
+![3](/assets/images/2020/2020-04/3.png)
+
+这里得连接到对应的 Elasticsearch url 上才可以对 ES 的状态进行监控。
+
+注意这里由于连接的服务运行在 9100 端口，因此去连接 9200 端口的 Elasticsearch 会出现跨域问题，得在配置文件中添加：
+
+```yml
+http.cors.enabled: true
+http.cors.allow-origin: "*"
+```
 
 ### 中文分词插件
 
