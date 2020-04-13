@@ -1,6 +1,6 @@
 ---
 layout: post
-title:  "Elasticsearch 入门教程"
+title:  "Elasticsearch(一) 入门教程"
 date:  2020-04-12
 desc: "详细对 Elasticsearch 的使用进行了介绍，可以作为初学者进行入门的参考"
 keywords: "Java,SpringBoot,Elasticsearch"
