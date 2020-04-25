@@ -32,7 +32,7 @@ Django 在开发过程中除了使用 MVC 架构来实现基本的业务功能�
 使用 pip 来下载对应的包：
 
 ```shell
-pip install tinymce
+pip install django-tinymce
 ```
 
 在 settings.py 中为 INSTALLED_APPS 添加编辑器应用
