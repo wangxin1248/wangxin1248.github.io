@@ -132,7 +132,7 @@ dp[i][k][1] = max(dp[i-1][k][1], dp[i-1][k-1][0] - prices[i])
 
 ## 三、秒杀题目
 
-### 第一题，k = 1
+### [第一题，k = 1](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock/)
 
 直接套状态转移方程，根据 base case，可以做一些化简：
 
@@ -204,7 +204,9 @@ int maxProfit_k_1(int[] prices) {
 
 两种方式都是一样的，不过这种编程方法简洁很多。但是如果没有前面状态转移方程的引导，是肯定看不懂的。后续的题目，我主要写这种空间复杂度 O(1) 的解法。
 
-### 第二题，k = +infinity
+本人题解：[LeetCode 121. Best Time to Buy and Sell Stock](https://wangxin1248.github.io/algorithm/2018/12/leetcode-121.html)
+
+### [第二题，k = +infinity](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-ii/)
 
 如果 k 为正无穷，那么就可以认为 k 和 k - 1 是一样的。可以这样改写框架：
 
@@ -233,7 +235,9 @@ int maxProfit_k_inf(int[] prices) {
 }
 ```
 
-### 第三题，k = +infinity with cooldown
+本人题解：[LeetCode 122. Best Time to Buy and Sell Stock II](https://wangxin1248.github.io/algorithm/2018/10/leetcode-122.html)
+
+### [第三题，k = +infinity with cooldown](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/)
 
 每次 sell 之后要等一天才能继续交易。只要把这个特点融入上一题的状态转移方程即可：
 
@@ -260,7 +264,9 @@ int maxProfit_with_cool(int[] prices) {
 }
 ```
 
-### 第四题，k = +infinity with fee
+本人题解：[LeetCode 309. Best Time to Buy and Sell Stock with Cooldown](https://wangxin1248.github.io/algorithm/2020/05/leetcode-309.html)
+
+### [第四题，k = +infinity with fee](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/)
 
 每次交易要支付手续费，只要把手续费从利润中减去即可。改写方程：
 
@@ -286,7 +292,9 @@ int maxProfit_with_fee(int[] prices, int fee) {
 }
 ```
 
-### 第五题，k = 2
+本人题解：[LeetCode 714. Best Time to Buy and Sell Stock with Transaction Fee](https://wangxin1248.github.io/algorithm/2020/06/leetcode-714.html)
+
+### [第五题，k = 2](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iii/)
 
 k = 2 和前面题目的情况稍微不同，因为上面的情况都和 k 的关系不太大。要么 k 是正无穷，状态转移和 k 没关系了；要么 k = 1，跟 k = 0 这个 base case 挨得近，最后也没有存在感。
 
@@ -354,7 +362,9 @@ int maxProfit_k_2(int[] prices) {
 
 有状态转移方程和含义明确的变量名指导，相信你很容易看懂。其实我们可以故弄玄虚，把上述四个变量换成 a, b, c, d。这样当别人看到你的代码时就会一头雾水，大惊失色，不得不对你肃然起敬。
 
-### 第六题，k = any integer
+本人题解：[LeetCode 123. Best Time to Buy and Sell Stock III](https://wangxin1248.github.io/algorithm/2020/05/leetcode-123.html)
+
+### [第六题，k = any integer](https://leetcode-cn.com/problems/best-time-to-buy-and-sell-stock-iv/)
 
 有了上一题 k = 2 的铺垫，这题应该和上一题的第一个解法没啥区别。但是出现了一个超内存的错误，原来是传入的 k 值会非常大，dp 数组太大了。现在想想，交易次数 k 最多有多大呢？
 
@@ -379,9 +389,11 @@ int maxProfit_k_any(int max_k, int[] prices) {
 }
 ```
 
-至此，6 道题目通过一个状态转移方程全部解决。
+本人题解：[LeetCode 188. Best Time to Buy and Sell Stock IV](https://wangxin1248.github.io/algorithm/2020/06/leetcode-188.html)
 
 ## 四、最后总结
+
+至此，6 道题目通过一个状态转移方程全部解决。
 
 本文给大家讲了如何通过状态转移的方法解决复杂的问题，用一个状态转移方程秒杀了 6 道股票买卖问题，现在想想，其实也不算难对吧？这已经属于动态规划问题中较困难的了。
 
