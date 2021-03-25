@@ -11,6 +11,7 @@ tags: [Centos]
 
 - 安装系统：CentOS 8
 - Go版本：1.15.7
+- 用户身份：root
 
 ## 下载安装包
 
@@ -29,23 +30,24 @@ sudo tar -C /usr/local -xzf go1.15.7.linux-amd64.tar.gz
 设置环境变量
 
 ```shell
-cd ~
-vi .bashrc
+vi /etc/profile
 ```
 
-在里面添加如下的内容：
+在里面添加如下的内容（其中GOROOT为安装包解压路径；GOPATH为go项目所在的工作目录）：
 
 ```shell
-export PATH=$PATH:/usr/local/go/bin
+export GOROOT=/usr/local/go
+export PATH=$PATH:$GOROOT/bin
+export GOPATH=$HOME/goproject
 ```
 
-更新环境变量：
+注销当前用户然后重启登陆
 
 ```shell
-source .bashrc
+exit
 ```
 
-然后重启终端，输入如下命令查看所安装的 Go 的版本：
+输入如下命令查看所安装的 Go 的版本：
 
 ```shell
 go version
