@@ -276,8 +276,9 @@ span {
   font-weight: inherit;
 }
 
+/* 字体加粗显示效果 */
 strong {
-  color: #ce3d3d;
+  color: #000000;
   font-weight: 700;
 }
 
