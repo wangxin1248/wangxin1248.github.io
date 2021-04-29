@@ -119,3 +119,43 @@ html, body {
 a {
     color: #57A3E8;
 }
+
+/* 显示目录 */
+.scroll-nav {
+    @media screen and (min-width: 800px) {
+      float: right;
+    }
+    
+    @media screen and (max-width: 799px) {
+      text-align: center;
+    }
+  }
+  
+  .scroll-nav__list {
+    @include cf();
+    
+    margin: 0 auto;
+    padding: 0;
+    list-style-type: none;
+    
+    @media screen and (max-width: 799px) {
+      display: inline-block;
+    }
+  }
+  
+  .scroll-nav__item {
+    margin-bottom: 5px;
+    float: left;
+    margin-right: 15px;
+    border-bottom: 1px solid transparent;
+  }
+  
+  .scroll-nav__item--active {
+    font-weight: 600;
+    border-bottom-color: white;
+  }
+  
+  .scroll-nav__link {
+    color: white;
+    text-decoration: none;
+  }
