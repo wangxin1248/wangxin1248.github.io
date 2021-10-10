@@ -238,10 +238,10 @@ func eval(expr ast.Expr, data map[string]interface{}) interface{} {
 使用基于 go parser 实现的规则引擎对比其他常见的规则引擎（YQL、govaluate、gval）的性能：
 
 ```go
-BenchmarkGoParser_Match-8   	      127189	      8912   ns/op     // 基于 go parser 实现的规则引擎
-BenchmarkGval_Match-8   	          63584	          18358  ns/op     // gval
-BenchmarkGovaluateParser_Match-8   	  13628	          86955  ns/op     // govaluate
-BenchmarkYqlParser_Match-8   	      10364	          112481 ns/op     // yql
+BenchmarkGoParser_Match-8        127189   8912     ns/op // 基于 go parser 实现的规则引擎
+BenchmarkGval_Match-8            63584    18358    ns/op // gval
+BenchmarkGovaluateParser_Match-8 13628    86955    ns/op // govaluate
+BenchmarkYqlParser_Match-8       10364    112481   ns/op // yql
 ```
 
 ### 总结
