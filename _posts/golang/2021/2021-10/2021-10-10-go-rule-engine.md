@@ -45,7 +45,7 @@ Golang语言实现的主要规则引擎框架：
 | ---- | ---- | ---- | ---- | ---- |
 | YQL(Yet another-Query-Language) | https://github.com/caibirdme/yql | 类SQL | 表达式解析 | 低 |
 | govaluate	| https://github.com/Knetic/govaluate |	类Golang | 表达式解析 | 低 |
-| Gval | https://github.com/gval | 类Golang | 表达式解析	 | 低 |
+| Gval | https://github.com/PaesslerAG/gval | 类Golang | 表达式解析	 | 低 |
 | Grule-Rule-Engine | https://github.com/hyperjumptech/grule-rule-engine | 自定义DSL（Domain-Specific Language）	| 规则执行 | 中 |
 | Gengine | https://github.com/bilibili/gengine | 自定义DSL（Domain-Specific Language）	 | 规则执行 | 中 |
 | Common Expression Language | https://github.com/google/cel-go#evaluate | 类C | 通用表达式语言 | 中 |
