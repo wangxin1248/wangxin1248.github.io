@@ -34,6 +34,11 @@ group: resume
 
 # 个人著作
 
+## 发明专利
+
+- 於志文，**王鑫**，梁韵基，郭斌，一种基于深度学习的异构传感器潜在相关性学习方法。专利公开号：CN113298265A
+- 於志文，**王鑫**，梁韵基，郭斌，一种基于多传感器协同感知的移动智能终端能耗优化方法。专利公开号：CN113411765A
+
 ## 学术论文
 
 - **Xin Wang**, Yunji Liang, Zhiwen Yu and Bin Guo, "Learning Latent Correlation of Heterogeneous Sensors Using Attention based Temporal Convolutional Network," 2020 International Conference on Data Mining Workshops (ICDMW), Sorrento, Italy, 2020, pp. 526-534, doi: 10.1109/ICDMW51313.2020.00076.[查看原文](https://ieeexplore.ieee.org/document/9346425)
