@@ -123,5 +123,4 @@ kramdown:
     - autolink
     - footnotes
     - smart
-  use_coderay: true
-  syntax_highlighter: coderay
+  syntax_highlighter: rouge
