@@ -127,5 +127,5 @@ kramdown:
     - smart
   use_coderay: true
   syntax_highlighter: rouge
-  coderay:
-    coderay_line_numbers:  nil
+  # coderay:
+  #   coderay_line_numbers:  nil
