@@ -57,7 +57,7 @@ Golang语言实现的主要规则引擎框架：
 比如想使用规则引擎实现如下的规则，例如如上的这些框架来实现解析的话会大量消耗 CPU 的资源，在请求量较大的系统当中就有可能成为系统的性能屏障。
 
 ```go
-if type == 1 && product_id = 3{
+if type == 1 && a = 3{
     //...
 }
 ```
@@ -74,7 +74,7 @@ Go 内置的 parser 库提供了 golang 底层语法分析的相关操作，并�
 
 ```go
 // 使用go语法表示的bool表达式，in_array为函数调用
-expr := `product_id == "3" && order_type == "0" && in_array(capacity_level, []string{"900","1100"}) && carpool_type == "0"`
+expr := `a == "3" && b == "0" && in_array(c, []string{"900","1100"}) && d == "0"`
 
 // 使用go parser解析上述表达式，返回结果为一颗ast
 parseResult, err := parser.ParseExpr(expr)
@@ -96,7 +96,7 @@ ast.Print(nil, parseResult)
 3  .  .  .  X: *ast.BinaryExpr {
 4  .  .  .  .  X: *ast.Ident {
 5  .  .  .  .  .  NamePos: 1
-6  .  .  .  .  .  Name: "product_id"
+6  .  .  .  .  .  Name: "a"
 7  .  .  .  .  }
 8  .  .  .  .  OpPos: 12
 9  .  .  .  .  Op: ==
@@ -111,7 +111,7 @@ ast.Print(nil, parseResult)
 18  .  .  .  Y: *ast.BinaryExpr {
 19  .  .  .  .  X: *ast.Ident {
 20  .  .  .  .  .  NamePos: 22
-21  .  .  .  .  .  Name: "order_type"
+21  .  .  .  .  .  Name: "b"
 22  .  .  .  .  }
 23  .  .  .  .  OpPos: 33
 24  .  .  .  .  Op: ==
@@ -133,7 +133,7 @@ ast.Print(nil, parseResult)
 40  .  .  .  Args: []ast.Expr (len = 2) {
 41  .  .  .  .  0: *ast.Ident {
 42  .  .  .  .  .  NamePos: 52
-43  .  .  .  .  .  Name: "capacity_level"
+43  .  .  .  .  .  Name: "c"
 44  .  .  .  .  }
 45  .  .  .  .  1: *ast.CompositeLit {
 46  .  .  .  .  .  Type: *ast.ArrayType {
@@ -169,7 +169,7 @@ ast.Print(nil, parseResult)
 76  .  Y: *ast.BinaryExpr {
 77  .  .  X: *ast.Ident {
 78  .  .  .  NamePos: 95
-79  .  .  .  Name: "carpool_type"
+79  .  .  .  Name: "d"
 80  .  .  }
 81  .  .  OpPos: 108
 82  .  .  Op: ==
@@ -231,14 +231,14 @@ func eval(expr ast.Expr, data map[string]interface{}) interface{} {
 }
 ```
 
-完整的实现代码在这里：[go_parser](https://github.com/wangxin1248/go_parser)
+完整的实现代码在这里：[gparser](https://github.com/wangxin1248/gparser)
 
 ### 性能对比
 
 使用基于 go parser 实现的规则引擎对比其他常见的规则引擎（YQL、govaluate、gval）的性能：
 
 ```go
-BenchmarkGoParser_Match-8        127189   8912     ns/op // 基于 go parser 实现的规则引擎
+BenchmarkGParser_Match-8         127189   8912     ns/op // 基于 go parser 实现的规则引擎
 BenchmarkGval_Match-8            63584    18358    ns/op // gval
 BenchmarkGovaluateParser_Match-8 13628    86955    ns/op // govaluate
 BenchmarkYqlParser_Match-8       10364    112481   ns/op // yql
