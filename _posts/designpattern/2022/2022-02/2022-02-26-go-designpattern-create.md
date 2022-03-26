@@ -7,6 +7,10 @@ keywords: "设计模式,设计原则,Go"
 categories: [Design Pattern]
 tags: [设计模式]
 ---
+
+目录：
+- 目录
+{:toc #markdown-toc}
 # 创建型设计模式
 
 本文将介绍常见的创建型设计模式在 go 语言上的实现，包括如下几个设计模式：

@@ -7,6 +7,10 @@ keywords: "设计模式,设计原则,Go"
 categories: [Design Pattern]
 tags: [设计模式]
 ---
+
+目录：
+- 目录
+{:toc #markdown-toc}
 # 设计原则&设计模式介绍
 
 学习设计模式的关键点：

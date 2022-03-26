@@ -7,7 +7,7 @@ keywords: "设计模式,设计原则,Go"
 categories: [Design Pattern]
 tags: [设计模式]
 ---
-
+目录：
 - 目录
 {:toc #markdown-toc}
 

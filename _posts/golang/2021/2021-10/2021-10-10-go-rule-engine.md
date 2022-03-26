@@ -7,6 +7,11 @@ keywords: "Golang,规则引擎,go,parser,rule engine"
 categories: [Golang]
 tags: [Golang,rule engine]
 ---
+
+目录：
+- 目录
+{:toc #markdown-toc}
+
 # Golang 规则引擎原理及实战
 
 本文主要介绍规则引擎在 golang 中的使用，将首先介绍 golang 中主要的规则引擎框架，然后利用 golang 原生的 parser 搭建一个简单的规则引擎实现基本的 bool 表达式解析工作。

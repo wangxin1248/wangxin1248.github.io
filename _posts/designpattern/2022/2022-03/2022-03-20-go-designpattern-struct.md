@@ -7,6 +7,10 @@ keywords: "设计模式,设计原则,Go"
 categories: [Design Pattern]
 tags: [设计模式]
 ---
+
+目录：
+- 目录
+{:toc #markdown-toc}
 # 结构型设计模式
 
 本文将介绍设计模式中的结构型设计模式，主要介绍如下几种常见的设计模式：
