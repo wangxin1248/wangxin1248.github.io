@@ -189,10 +189,6 @@ ast.Print(nil, parseResult)
 
 ### 打造基于parser库的规则引擎
 
-将 parser 解析出来的这颗二叉树画出来：
-
-![ast](/assets/images/2021/2021-10/01-ast.png)
-
 可以看到，有了 Golang 原生的语法解析器，我们只需要后序遍历这棵二叉树，然后实现一套 AST 与对应数据map的映射关系即可实现一个简单的规则引擎。
 
 其中，AST 与对应数据map的映射关系的实现代码的主要结构如下：
